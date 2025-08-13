@@ -112,7 +112,7 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
           </div>
         </div>
-        <Card className="shadow-sm border-0">
+        <Card className="bg-white shadow-md border-0">
           <CardContent className="p-6">
             <div className="space-y-4">
               {[...Array(5)].map((_, i) => (
@@ -150,7 +150,7 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
         </div>
       </div>
       
-      <Card className="shadow-sm border-0">
+      <Card className="bg-white shadow-md border-0">
         <CardContent className="p-6">
           {filteredCases.length === 0 ? (
             <div className="text-center py-8">
