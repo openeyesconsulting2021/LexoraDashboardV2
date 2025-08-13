@@ -5,7 +5,8 @@ import Header from "@/components/layout/header";
 import CaseForm from "@/components/cases/case-form";
 import CaseList from "@/components/cases/case-list";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Card, CardContent } from "@/components/ui/card";
 import { Plus } from "lucide-react";
 
 export default function Cases() {
@@ -53,17 +54,24 @@ export default function Cases() {
           />
 
           <Dialog open={showForm} onOpenChange={setShowForm}>
-            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto" dir="rtl">
+            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-white" dir="rtl">
               <DialogHeader>
                 <DialogTitle className="text-xl font-bold">
                   {editingCase ? "تعديل القضية" : "إضافة قضية جديدة"}
                 </DialogTitle>
+                <DialogDescription className="sr-only">
+                  {editingCase ? "نموذج تعديل بيانات القضية" : "نموذج إضافة قضية جديدة"}
+                </DialogDescription>
               </DialogHeader>
-              <CaseForm 
-                case={editingCase} 
-                onClose={handleFormClose}
-                onSuccess={handleFormClose}
-              />
+              <Card className="border-0 shadow-none">
+                <CardContent className="p-0">
+                  <CaseForm 
+                    case={editingCase} 
+                    onClose={handleFormClose}
+                    onSuccess={handleFormClose}
+                  />
+                </CardContent>
+              </Card>
             </DialogContent>
           </Dialog>
         </main>
