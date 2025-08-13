@@ -5,6 +5,7 @@ import Header from "@/components/layout/header";
 import CaseForm from "@/components/cases/case-form";
 import CaseList from "@/components/cases/case-list";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
 
 export default function Cases() {
@@ -45,19 +46,26 @@ export default function Cases() {
             </Button>
           </div>
 
-          {showForm ? (
-            <CaseForm 
-              case={editingCase} 
-              onClose={handleFormClose}
-              onSuccess={handleFormClose}
-            />
-          ) : (
-            <CaseList 
-              cases={cases} 
-              isLoading={isLoading}
-              onEdit={handleEdit}
-            />
-          )}
+          <CaseList 
+            cases={cases} 
+            isLoading={isLoading}
+            onEdit={handleEdit}
+          />
+
+          <Dialog open={showForm} onOpenChange={setShowForm}>
+            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto" dir="rtl">
+              <DialogHeader>
+                <DialogTitle className="text-xl font-bold">
+                  {editingCase ? "تعديل القضية" : "إضافة قضية جديدة"}
+                </DialogTitle>
+              </DialogHeader>
+              <CaseForm 
+                case={editingCase} 
+                onClose={handleFormClose}
+                onSuccess={handleFormClose}
+              />
+            </DialogContent>
+          </Dialog>
         </main>
       </div>
     </div>

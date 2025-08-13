@@ -5,14 +5,14 @@ import { insertCaseSchema } from "@shared/schema";
 import { apiRequest } from "@/lib/queryClient";
 import { useAuth } from "@/hooks/use-auth";
 import { useToast } from "@/hooks/use-toast";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { X, Loader2 } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { z } from "zod";
 
 const caseFormSchema = insertCaseSchema.extend({
@@ -104,16 +104,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
   const isLoading = createMutation.isPending || updateMutation.isPending;
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>
-          {editCase ? "تعديل القضية" : "إضافة قضية جديدة"}
-        </CardTitle>
-        <Button variant="ghost" size="icon" onClick={onClose} data-testid="button-close-form">
-          <X className="h-4 w-4" />
-        </Button>
-      </CardHeader>
-      <CardContent>
+    <div className="space-y-6">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -342,7 +333,6 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
             </div>
           </form>
         </Form>
-      </CardContent>
-    </Card>
+    </div>
   );
 }
