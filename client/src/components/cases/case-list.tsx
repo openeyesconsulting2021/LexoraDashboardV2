@@ -107,7 +107,7 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
             <Input
               placeholder="البحث في القضايا..."
               disabled
-              className="pl-10"
+              className="pl-10 bg-white border-0 shadow-md"
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
           </div>
@@ -143,7 +143,7 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
             placeholder="البحث في القضايا..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
+            className="pl-10 bg-white border-0 shadow-md"
             data-testid="input-search-cases"
           />
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
