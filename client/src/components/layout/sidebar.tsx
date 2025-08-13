@@ -129,9 +129,9 @@ export default function Sidebar() {
             
             return (
               <Link key={item.href} href={item.href}>
-                <a
+                <div
                   className={cn(
-                    "group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors",
+                    "group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors cursor-pointer",
                     isActive
                       ? "text-white bg-primary-600"
                       : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
@@ -148,7 +148,7 @@ export default function Sidebar() {
                       {item.badge}
                     </Badge>
                   )}
-                </a>
+                </div>
               </Link>
             );
           })}
@@ -165,9 +165,9 @@ export default function Sidebar() {
                 
                 return (
                   <Link key={item.href} href={item.href}>
-                    <a
+                    <div
                       className={cn(
-                        "group flex items-center px-3 py-2 mt-2 text-sm font-medium rounded-lg transition-colors",
+                        "group flex items-center px-3 py-2 mt-2 text-sm font-medium rounded-lg transition-colors cursor-pointer",
                         isActive
                           ? "text-white bg-primary-600"
                           : "text-slate-700 hover:bg-slate-100 hover:text-slate-900"
@@ -176,7 +176,7 @@ export default function Sidebar() {
                     >
                       <Icon className="ml-3 w-4 h-4" />
                       {item.name}
-                    </a>
+                    </div>
                   </Link>
                 );
               })}
