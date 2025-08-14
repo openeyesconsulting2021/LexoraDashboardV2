@@ -279,7 +279,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                   <FormItem>
                     <FormLabel>المحكمة</FormLabel>
                     <FormControl>
-                      <Input placeholder="المحكمة التجارية" {...field} data-testid="input-court" className="bg-white border-0 shadow-md focus:shadow-lg transition-shadow" />
+                      <Input placeholder="المحكمة التجارية" {...field} data-testid="input-court" className="bg-white border border-gray-200 shadow-md focus:shadow-lg focus:border-primary-300 transition-all" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -295,7 +295,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                   <FormItem>
                     <FormLabel>القاضي</FormLabel>
                     <FormControl>
-                      <Input placeholder="اسم القاضي" {...field} data-testid="input-judge" className="bg-white border-0 shadow-md focus:shadow-lg transition-shadow" />
+                      <Input placeholder="اسم القاضي" {...field} data-testid="input-judge" className="bg-white border border-gray-200 shadow-md focus:shadow-lg focus:border-primary-300 transition-all" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -309,7 +309,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                   <FormItem>
                     <FormLabel>الطرف المقابل</FormLabel>
                     <FormControl>
-                      <Input placeholder="اسم الطرف المقابل" {...field} data-testid="input-opposing-party" className="bg-white border-0 shadow-md focus:shadow-lg transition-shadow" />
+                      <Input placeholder="اسم الطرف المقابل" {...field} data-testid="input-opposing-party" className="bg-white border border-gray-200 shadow-md focus:shadow-lg focus:border-primary-300 transition-all" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
