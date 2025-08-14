@@ -56,7 +56,7 @@ export default function QuickActions() {
               <Button
                 key={action.path}
                 variant="outline"
-                className={`${action.color} text-white border-0 rounded-lg h-auto p-4 flex flex-col items-center space-y-2 hover:scale-105 transition-all duration-200`}
+                className={`${action.color} text-white border-0 rounded-lg h-auto p-4 flex flex-col items-center space-y-2 hover:scale-105 hover:text-white transition-all duration-200`}
                 onClick={() => setLocation(action.path)}
                 data-testid={action.testId}
               >
