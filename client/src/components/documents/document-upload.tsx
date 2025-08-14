@@ -238,7 +238,7 @@ export default function DocumentUpload({ onClose, onSuccess }: DocumentUploadPro
             </div>
 
             <div className="flex justify-end space-x-2 space-x-reverse">
-              <Button type="button" variant="outline" onClick={onClose} data-testid="button-cancel">
+              <Button type="button" variant="outline" onClick={onClose} data-testid="button-cancel" className="border-gray-300 text-gray-700 hover:bg-gray-50 rounded-lg">
                 إلغاء
               </Button>
               <Button 
