@@ -115,7 +115,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                   <FormItem>
                     <FormLabel>رقم القضية</FormLabel>
                     <FormControl>
-                      <Input placeholder="C-2024-001" {...field} data-testid="input-case-number" className="bg-white border-0 shadow-md focus:shadow-lg transition-shadow" />
+                      <Input placeholder="C-2024-001" {...field} data-testid="input-case-number" className="bg-white border border-gray-200 shadow-md focus:shadow-lg focus:border-primary-300 transition-all" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -130,7 +130,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                     <FormLabel>العميل</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger data-testid="select-client" className="bg-white border-0 shadow-md focus:shadow-lg transition-shadow">
+                        <SelectTrigger data-testid="select-client" className="bg-white border border-gray-200 shadow-md focus:shadow-lg focus:border-primary-300 transition-all">
                           <SelectValue placeholder="اختر العميل" />
                         </SelectTrigger>
                       </FormControl>
@@ -155,7 +155,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                 <FormItem>
                   <FormLabel>عنوان القضية</FormLabel>
                   <FormControl>
-                    <Input placeholder="عنوان القضية" {...field} data-testid="input-case-title" className="bg-white border-0 shadow-md focus:shadow-lg transition-shadow" />
+                    <Input placeholder="عنوان القضية" {...field} data-testid="input-case-title" className="bg-white border border-gray-200 shadow-md focus:shadow-lg focus:border-primary-300 transition-all" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -174,7 +174,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                       rows={3}
                       {...field} 
                       data-testid="textarea-case-description"
-                      className="bg-white border-0 shadow-md focus:shadow-lg transition-shadow"
+                      className="bg-white border border-gray-200 shadow-md focus:shadow-lg focus:border-primary-300 transition-all"
                     />
                   </FormControl>
                   <FormMessage />
@@ -190,7 +190,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                   <FormItem>
                     <FormLabel>نوع القضية</FormLabel>
                     <FormControl>
-                      <Input placeholder="نزاع تجاري" {...field} data-testid="input-case-type" className="bg-white border-0 shadow-md focus:shadow-lg transition-shadow" />
+                      <Input placeholder="نزاع تجاري" {...field} data-testid="input-case-type" className="bg-white border border-gray-200 shadow-md focus:shadow-lg focus:border-primary-300 transition-all" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -205,7 +205,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                     <FormLabel>الحالة</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger data-testid="select-status" className="bg-white border-0 shadow-md focus:shadow-lg transition-shadow">
+                        <SelectTrigger data-testid="select-status" className="bg-white border border-gray-200 shadow-md focus:shadow-lg focus:border-primary-300 transition-all">
                           <SelectValue />
                         </SelectTrigger>
                       </FormControl>
@@ -229,7 +229,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                     <FormLabel>الأولوية</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger data-testid="select-priority" className="bg-white border-0 shadow-md focus:shadow-lg transition-shadow">
+                        <SelectTrigger data-testid="select-priority" className="bg-white border border-gray-200 shadow-md focus:shadow-lg focus:border-primary-300 transition-all">
                           <SelectValue />
                         </SelectTrigger>
                       </FormControl>
@@ -255,7 +255,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                     <FormLabel>المحامي المسؤول</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger data-testid="select-lawyer" className="bg-white border-0 shadow-md focus:shadow-lg transition-shadow">
+                        <SelectTrigger data-testid="select-lawyer" className="bg-white border border-gray-200 shadow-md focus:shadow-lg focus:border-primary-300 transition-all">
                           <SelectValue placeholder="اختر المحامي" />
                         </SelectTrigger>
                       </FormControl>
