@@ -134,7 +134,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                           <SelectValue placeholder="اختر العميل" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-white border shadow-lg">
                         {clients?.map((client: any) => (
                           <SelectItem key={client.id} value={client.id}>
                             {client.name}
@@ -209,7 +209,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                           <SelectValue />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-white border shadow-lg">
                         <SelectItem value="active">نشطة</SelectItem>
                         <SelectItem value="pending">معلقة</SelectItem>
                         <SelectItem value="closed">مغلقة</SelectItem>
@@ -233,7 +233,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                           <SelectValue />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-white border shadow-lg">
                         <SelectItem value="low">منخفضة</SelectItem>
                         <SelectItem value="medium">متوسطة</SelectItem>
                         <SelectItem value="high">عالية</SelectItem>
@@ -259,7 +259,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                           <SelectValue placeholder="اختر المحامي" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-white border shadow-lg">
                         {lawyers?.map((lawyer: any) => (
                           <SelectItem key={lawyer.id} value={lawyer.id}>
                             {lawyer.fullName}
