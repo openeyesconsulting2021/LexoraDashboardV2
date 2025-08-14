@@ -64,14 +64,14 @@ export default function RecentCases({ cases, isLoading }: RecentCasesProps) {
 
   if (isLoading) {
     return (
-      <Card className="shadow-sm border border-slate-200">
-        <CardHeader className="border-b border-slate-200">
-          <CardTitle>القضايا الحديثة</CardTitle>
+      <Card className="shadow-md hover:shadow-lg transition-shadow duration-200 border-0 bg-white dark:bg-gray-800 rounded-xl">
+        <CardHeader className="border-b border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-700/50 rounded-t-xl">
+          <CardTitle className="text-slate-900 dark:text-white">القضايا الحديثة</CardTitle>
         </CardHeader>
         <CardContent className="p-0">
           <div className="space-y-4 p-6">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="flex items-center justify-between p-4 border border-slate-100 rounded-lg">
+              <div key={i} className="flex items-center justify-between p-4 border border-slate-100 dark:border-gray-600 rounded-lg bg-slate-50 dark:bg-gray-700/30">
                 <div className="space-y-2">
                   <Skeleton className="h-4 w-32" />
                   <Skeleton className="h-3 w-24" />
@@ -91,12 +91,12 @@ export default function RecentCases({ cases, isLoading }: RecentCasesProps) {
   const recentCases = cases?.slice(0, 5) || [];
 
   return (
-    <Card className="shadow-sm border border-slate-200">
-      <CardHeader className="border-b border-slate-200">
+    <Card className="shadow-md hover:shadow-lg transition-shadow duration-200 border-0 bg-white dark:bg-gray-800 rounded-xl">
+      <CardHeader className="border-b border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-700/50 rounded-t-xl">
         <div className="flex items-center justify-between">
-          <CardTitle>القضايا الحديثة</CardTitle>
+          <CardTitle className="text-slate-900 dark:text-white">القضايا الحديثة</CardTitle>
           <Link href="/cases">
-            <Button variant="ghost" size="sm" data-testid="button-view-all-cases">
+            <Button variant="ghost" size="sm" className="text-primary-600 hover:text-primary-700 hover:bg-primary-50 dark:text-primary-400 dark:hover:text-primary-300 dark:hover:bg-primary-900/20" data-testid="button-view-all-cases">
               عرض الكل
             </Button>
           </Link>
@@ -113,32 +113,32 @@ export default function RecentCases({ cases, isLoading }: RecentCasesProps) {
         <CardContent className="p-0">
           <div className="overflow-x-auto">
             <table className="w-full">
-              <thead className="bg-slate-50">
+              <thead className="bg-slate-50 dark:bg-gray-700/50">
                 <tr>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     رقم القضية
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     العنوان
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     الحالة
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     الأولوية
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
+                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     إجراءات
                   </th>
                 </tr>
               </thead>
-              <tbody className="bg-white divide-y divide-slate-200">
+              <tbody className="bg-white dark:bg-gray-800 divide-y divide-slate-200 dark:divide-gray-700">
                 {recentCases.map((caseItem) => (
-                  <tr key={caseItem.id} className="hover:bg-slate-50" data-testid={`case-row-${caseItem.id}`}>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
+                  <tr key={caseItem.id} className="hover:bg-slate-50 dark:hover:bg-gray-700/50 transition-colors" data-testid={`case-row-${caseItem.id}`}>
+                    <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900 dark:text-white">
                       {caseItem.caseNumber}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-700">
+                    <td className="px-6 py-4 whitespace-nowrap text-sm text-slate-700 dark:text-slate-300">
                       {caseItem.title}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap">

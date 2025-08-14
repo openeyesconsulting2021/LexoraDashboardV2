@@ -70,21 +70,21 @@ export default function StatsCards({ stats, isLoading }: StatsCardsProps) {
       {statsData.map((stat, index) => {
         const Icon = stat.icon;
         return (
-          <Card key={index} className="shadow-sm border border-slate-200">
+          <Card key={index} className="shadow-md hover:shadow-lg transition-shadow duration-200 border-0 bg-white dark:bg-gray-800 rounded-xl">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-slate-600" data-testid={`stat-label-${index}`}>
+                  <p className="text-sm font-medium text-slate-600 dark:text-slate-400" data-testid={`stat-label-${index}`}>
                     {stat.label}
                   </p>
-                  <p className="text-3xl font-bold text-slate-900 mt-2" data-testid={`stat-value-${index}`}>
+                  <p className="text-3xl font-bold text-slate-900 dark:text-white mt-2" data-testid={`stat-value-${index}`}>
                     {stat.value}
                   </p>
-                  <p className="text-sm text-emerald-600 mt-1" data-testid={`stat-change-${index}`}>
+                  <p className="text-sm text-emerald-600 dark:text-emerald-400 mt-1" data-testid={`stat-change-${index}`}>
                     {stat.change}
                   </p>
                 </div>
-                <div className={`w-12 h-12 ${stat.color} rounded-lg flex items-center justify-center`}>
+                <div className={`w-12 h-12 ${stat.color} rounded-xl flex items-center justify-center shadow-sm`}>
                   <Icon className="w-6 h-6" />
                 </div>
               </div>

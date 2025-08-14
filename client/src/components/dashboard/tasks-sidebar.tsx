@@ -53,9 +53,9 @@ export default function TasksSidebar({ tasks, isLoading }: TasksSidebarProps) {
   const upcomingTasks = tasks?.filter(task => task.status === "pending").slice(0, 5) || [];
 
   return (
-    <Card className="shadow-sm border border-slate-200">
-      <CardHeader className="border-b border-slate-200">
-        <CardTitle>المهام القادمة</CardTitle>
+    <Card className="shadow-md hover:shadow-lg transition-shadow duration-200 border-0 bg-white dark:bg-gray-800 rounded-xl">
+      <CardHeader className="border-b border-slate-200 dark:border-gray-700 bg-slate-50 dark:bg-gray-700/50 rounded-t-xl">
+        <CardTitle className="text-slate-900 dark:text-white">المهام القادمة</CardTitle>
       </CardHeader>
       <CardContent className="p-6 space-y-4">
         {upcomingTasks.length === 0 ? (
@@ -68,11 +68,11 @@ export default function TasksSidebar({ tasks, isLoading }: TasksSidebarProps) {
               <div key={task.id} className="flex items-start space-x-3 space-x-reverse" data-testid={`task-${task.id}`}>
                 <div className={`w-2 h-2 ${getPriorityColor(task.priority)} rounded-full mt-2 flex-shrink-0`} />
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium text-slate-900" data-testid={`task-title-${task.id}`}>
+                  <p className="text-sm font-medium text-slate-900 dark:text-white" data-testid={`task-title-${task.id}`}>
                     {task.title}
                   </p>
                   {task.dueDate && (
-                    <p className="text-xs text-slate-500 mt-1" data-testid={`task-date-${task.id}`}>
+                    <p className="text-xs text-slate-500 dark:text-slate-400 mt-1" data-testid={`task-date-${task.id}`}>
                       {format(new Date(task.dueDate), "PPP", { locale: ar })}
                     </p>
                   )}
@@ -83,7 +83,7 @@ export default function TasksSidebar({ tasks, isLoading }: TasksSidebarProps) {
             <Link href="/tasks">
               <Button 
                 variant="ghost" 
-                className="w-full text-center text-sm font-medium pt-4 border-t border-slate-100"
+                className="w-full text-center text-sm font-medium pt-4 border-t border-slate-100 dark:border-gray-700 text-primary-600 hover:text-primary-700 hover:bg-primary-50 dark:text-primary-400 dark:hover:text-primary-300 dark:hover:bg-primary-900/20"
                 data-testid="button-view-all-tasks"
               >
                 عرض جميع المهام
