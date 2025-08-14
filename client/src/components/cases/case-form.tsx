@@ -136,7 +136,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                       </FormControl>
                       <SelectContent className="bg-white border border-gray-200 shadow-lg">
                         {clients?.map((client: any) => (
-                          <SelectItem key={client.id} value={client.id}>
+                          <SelectItem key={client.id} value={client.id} className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">
                             {client.name}
                           </SelectItem>
                         ))}
@@ -210,10 +210,10 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="bg-white border border-gray-200 shadow-lg">
-                        <SelectItem value="active">نشطة</SelectItem>
-                        <SelectItem value="pending">معلقة</SelectItem>
-                        <SelectItem value="closed">مغلقة</SelectItem>
-                        <SelectItem value="archived">مؤرشفة</SelectItem>
+                        <SelectItem value="active" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">نشطة</SelectItem>
+                        <SelectItem value="pending" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">معلقة</SelectItem>
+                        <SelectItem value="closed" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">مغلقة</SelectItem>
+                        <SelectItem value="archived" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">مؤرشفة</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -234,10 +234,10 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                         </SelectTrigger>
                       </FormControl>
                       <SelectContent className="bg-white border border-gray-200 shadow-lg">
-                        <SelectItem value="low">منخفضة</SelectItem>
-                        <SelectItem value="medium">متوسطة</SelectItem>
-                        <SelectItem value="high">عالية</SelectItem>
-                        <SelectItem value="urgent">عاجلة</SelectItem>
+                        <SelectItem value="low" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">منخفضة</SelectItem>
+                        <SelectItem value="medium" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">متوسطة</SelectItem>
+                        <SelectItem value="high" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">عالية</SelectItem>
+                        <SelectItem value="urgent" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">عاجلة</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -261,7 +261,7 @@ export default function CaseForm({ case: editCase, onClose, onSuccess }: CaseFor
                       </FormControl>
                       <SelectContent className="bg-white border border-gray-200 shadow-lg">
                         {lawyers?.map((lawyer: any) => (
-                          <SelectItem key={lawyer.id} value={lawyer.id}>
+                          <SelectItem key={lawyer.id} value={lawyer.id} className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">
                             {lawyer.fullName}
                           </SelectItem>
                         ))}
