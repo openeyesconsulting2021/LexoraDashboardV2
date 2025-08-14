@@ -5,6 +5,8 @@ import Header from "@/components/layout/header";
 import DocumentUpload from "@/components/documents/document-upload";
 import DocumentList from "@/components/documents/document-list";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Card, CardContent } from "@/components/ui/card";
 import { Upload } from "lucide-react";
 
 export default function Documents() {
@@ -38,17 +40,31 @@ export default function Documents() {
             </Button>
           </div>
 
-          {showUpload ? (
-            <DocumentUpload 
-              onClose={handleUploadClose}
-              onSuccess={handleUploadClose}
-            />
-          ) : (
-            <DocumentList 
-              documents={documents} 
-              isLoading={isLoading}
-            />
-          )}
+          <DocumentList 
+            documents={documents} 
+            isLoading={isLoading}
+          />
+
+          <Dialog open={showUpload} onOpenChange={setShowUpload}>
+            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-white" dir="rtl">
+              <DialogHeader>
+                <DialogTitle className="text-xl font-bold">
+                  رفع مستند جديد
+                </DialogTitle>
+                <DialogDescription className="sr-only">
+                  نموذج رفع مستند جديد
+                </DialogDescription>
+              </DialogHeader>
+              <Card className="border-0 shadow-none">
+                <CardContent className="p-0">
+                  <DocumentUpload 
+                    onClose={handleUploadClose}
+                    onSuccess={handleUploadClose}
+                  />
+                </CardContent>
+              </Card>
+            </DialogContent>
+          </Dialog>
         </main>
       </div>
     </div>

@@ -101,14 +101,6 @@ export default function DocumentUpload({ onClose, onSuccess }: DocumentUploadPro
   const isLoading = uploadMutation.isPending;
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>رفع مستند جديد</CardTitle>
-        <Button variant="ghost" size="icon" onClick={onClose} data-testid="button-close-upload">
-          <X className="h-4 w-4" />
-        </Button>
-      </CardHeader>
-      <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             {/* File Upload Area */}
@@ -253,15 +245,16 @@ export default function DocumentUpload({ onClose, onSuccess }: DocumentUploadPro
                 type="submit" 
                 disabled={isLoading || !selectedFile} 
                 data-testid="button-upload"
+                className="bg-primary-600 hover:bg-primary-700 text-white rounded-lg"
               >
                 {isLoading ? (
                   <>
-                    <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="ml-2 h-4 w-4 animate-spin text-white" />
                     جاري الرفع...
                   </>
                 ) : (
                   <>
-                    <Upload className="ml-2 h-4 w-4" />
+                    <Upload className="ml-2 h-4 w-4 text-white" />
                     رفع المستند
                   </>
                 )}
@@ -269,7 +262,5 @@ export default function DocumentUpload({ onClose, onSuccess }: DocumentUploadPro
             </div>
           </form>
         </Form>
-      </CardContent>
-    </Card>
   );
 }

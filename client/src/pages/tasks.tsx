@@ -5,6 +5,8 @@ import Header from "@/components/layout/header";
 import TaskForm from "@/components/tasks/task-form";
 import TaskList from "@/components/tasks/task-list";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Card, CardContent } from "@/components/ui/card";
 import { Plus } from "lucide-react";
 
 export default function Tasks() {
@@ -45,19 +47,33 @@ export default function Tasks() {
             </Button>
           </div>
 
-          {showForm ? (
-            <TaskForm 
-              task={editingTask} 
-              onClose={handleFormClose}
-              onSuccess={handleFormClose}
-            />
-          ) : (
-            <TaskList 
-              tasks={tasks} 
-              isLoading={isLoading}
-              onEdit={handleEdit}
-            />
-          )}
+          <TaskList 
+            tasks={tasks} 
+            isLoading={isLoading}
+            onEdit={handleEdit}
+          />
+
+          <Dialog open={showForm} onOpenChange={setShowForm}>
+            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-white" dir="rtl">
+              <DialogHeader>
+                <DialogTitle className="text-xl font-bold">
+                  {editingTask ? "تعديل المهمة" : "إضافة مهمة جديدة"}
+                </DialogTitle>
+                <DialogDescription className="sr-only">
+                  {editingTask ? "نموذج تعديل بيانات المهمة" : "نموذج إضافة مهمة جديدة"}
+                </DialogDescription>
+              </DialogHeader>
+              <Card className="border-0 shadow-none">
+                <CardContent className="p-0">
+                  <TaskForm 
+                    task={editingTask} 
+                    onClose={handleFormClose}
+                    onSuccess={handleFormClose}
+                  />
+                </CardContent>
+              </Card>
+            </DialogContent>
+          </Dialog>
         </main>
       </div>
     </div>

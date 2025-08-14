@@ -105,16 +105,6 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
   const isLoading = createMutation.isPending || updateMutation.isPending;
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>
-          {editTask ? "تعديل المهمة" : "إضافة مهمة جديدة"}
-        </CardTitle>
-        <Button variant="ghost" size="icon" onClick={onClose} data-testid="button-close-form">
-          <X className="h-4 w-4" />
-        </Button>
-      </CardHeader>
-      <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <FormField
@@ -280,10 +270,10 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
               <Button type="button" variant="outline" onClick={onClose} data-testid="button-cancel">
                 إلغاء
               </Button>
-              <Button type="submit" disabled={isLoading} data-testid="button-save-task">
+              <Button type="submit" disabled={isLoading} data-testid="button-save-task" className="bg-primary-600 hover:bg-primary-700 text-white rounded-lg">
                 {isLoading ? (
                   <>
-                    <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="ml-2 h-4 w-4 animate-spin text-white" />
                     جاري الحفظ...
                   </>
                 ) : (
@@ -293,7 +283,5 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
             </div>
           </form>
         </Form>
-      </CardContent>
-    </Card>
   );
 }

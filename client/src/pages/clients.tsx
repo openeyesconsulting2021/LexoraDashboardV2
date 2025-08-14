@@ -5,6 +5,8 @@ import Header from "@/components/layout/header";
 import ClientForm from "@/components/clients/client-form";
 import ClientList from "@/components/clients/client-list";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Card, CardContent } from "@/components/ui/card";
 import { Plus } from "lucide-react";
 
 export default function Clients() {
@@ -45,19 +47,33 @@ export default function Clients() {
             </Button>
           </div>
 
-          {showForm ? (
-            <ClientForm 
-              client={editingClient} 
-              onClose={handleFormClose}
-              onSuccess={handleFormClose}
-            />
-          ) : (
-            <ClientList 
-              clients={clients} 
-              isLoading={isLoading}
-              onEdit={handleEdit}
-            />
-          )}
+          <ClientList 
+            clients={clients} 
+            isLoading={isLoading}
+            onEdit={handleEdit}
+          />
+
+          <Dialog open={showForm} onOpenChange={setShowForm}>
+            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-white" dir="rtl">
+              <DialogHeader>
+                <DialogTitle className="text-xl font-bold">
+                  {editingClient ? "تعديل العميل" : "إضافة عميل جديد"}
+                </DialogTitle>
+                <DialogDescription className="sr-only">
+                  {editingClient ? "نموذج تعديل بيانات العميل" : "نموذج إضافة عميل جديد"}
+                </DialogDescription>
+              </DialogHeader>
+              <Card className="border-0 shadow-none">
+                <CardContent className="p-0">
+                  <ClientForm 
+                    client={editingClient} 
+                    onClose={handleFormClose}
+                    onSuccess={handleFormClose}
+                  />
+                </CardContent>
+              </Card>
+            </DialogContent>
+          </Dialog>
         </main>
       </div>
     </div>

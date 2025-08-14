@@ -84,16 +84,6 @@ export default function ClientForm({ client: editClient, onClose, onSuccess }: C
   const isLoading = createMutation.isPending || updateMutation.isPending;
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>
-          {editClient ? "تعديل العميل" : "إضافة عميل جديد"}
-        </CardTitle>
-        <Button variant="ghost" size="icon" onClick={onClose} data-testid="button-close-form">
-          <X className="h-4 w-4" />
-        </Button>
-      </CardHeader>
-      <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -206,10 +196,10 @@ export default function ClientForm({ client: editClient, onClose, onSuccess }: C
               <Button type="button" variant="outline" onClick={onClose} data-testid="button-cancel">
                 إلغاء
               </Button>
-              <Button type="submit" disabled={isLoading} data-testid="button-save-client">
+              <Button type="submit" disabled={isLoading} data-testid="button-save-client" className="bg-primary-600 hover:bg-primary-700 text-white rounded-lg">
                 {isLoading ? (
                   <>
-                    <Loader2 className="ml-2 h-4 w-4 animate-spin" />
+                    <Loader2 className="ml-2 h-4 w-4 animate-spin text-white" />
                     جاري الحفظ...
                   </>
                 ) : (
@@ -219,7 +209,5 @@ export default function ClientForm({ client: editClient, onClose, onSuccess }: C
             </div>
           </form>
         </Form>
-      </CardContent>
-    </Card>
   );
 }
