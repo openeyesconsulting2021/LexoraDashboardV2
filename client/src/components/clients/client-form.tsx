@@ -193,7 +193,7 @@ export default function ClientForm({ client: editClient, onClose, onSuccess }: C
             />
 
             <div className="flex justify-end space-x-2 space-x-reverse">
-              <Button type="button" variant="outline" onClick={onClose} data-testid="button-cancel" className="border-red-300 text-red-700 hover:bg-red-50 rounded-lg">
+              <Button type="button" onClick={onClose} data-testid="button-cancel" className="bg-red-500 hover:bg-red-600 text-white border-0 rounded-lg">
                 إلغاء
               </Button>
               <Button type="submit" disabled={isLoading} data-testid="button-save-client" className="bg-primary-600 hover:bg-primary-700 text-white rounded-lg">
