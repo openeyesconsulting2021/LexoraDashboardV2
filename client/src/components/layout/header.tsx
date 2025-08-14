@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
-import { Menu, Search, Bell, Plus } from "lucide-react";
+import { Menu, Search, Bell } from "lucide-react";
 import Sidebar from "./sidebar";
 
 export default function Header() {
@@ -48,12 +48,6 @@ export default function Header() {
           <Button variant="ghost" size="icon" className="relative" data-testid="button-notifications">
             <Bell className="h-5 w-5" />
             <Badge className="absolute -top-1 -right-1 w-2 h-2 p-0 bg-red-500" />
-          </Button>
-
-          {/* Quick Actions */}
-          <Button className="hidden md:flex" data-testid="button-quick-actions">
-            <Plus className="ml-2 w-4 h-4" />
-            إجراء سريع
           </Button>
         </div>
       </div>

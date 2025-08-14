@@ -4,6 +4,7 @@ import Header from "@/components/layout/header";
 import StatsCards from "@/components/dashboard/stats-cards";
 import RecentCases from "@/components/dashboard/recent-cases";
 import TasksSidebar from "@/components/dashboard/tasks-sidebar";
+import QuickActions from "@/components/dashboard/quick-actions";
 import { useAuth } from "@/hooks/use-auth";
 
 export default function Dashboard() {
@@ -42,6 +43,11 @@ export default function Dashboard() {
 
           {/* Stats Cards */}
           <StatsCards stats={stats} isLoading={statsLoading} />
+
+          {/* Quick Actions */}
+          <div className="mb-6">
+            <QuickActions />
+          </div>
 
           {/* Content Grid */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
