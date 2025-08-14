@@ -120,96 +120,108 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
 
   if (isLoading) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>قائمة المهام</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="space-y-4">
-            {[...Array(5)].map((_, i) => (
-              <div key={i} className="border border-slate-100 rounded-lg p-4 space-y-3">
-                <div className="flex items-center justify-between">
-                  <Skeleton className="h-5 w-48" />
-                  <div className="flex space-x-2 space-x-reverse">
-                    <Skeleton className="h-6 w-16" />
-                    <Skeleton className="h-6 w-16" />
-                  </div>
-                </div>
-                <Skeleton className="h-4 w-full" />
-                <div className="flex justify-between">
-                  <Skeleton className="h-4 w-24" />
-                  <div className="flex space-x-2 space-x-reverse">
-                    <Skeleton className="h-8 w-16" />
-                    <Skeleton className="h-8 w-16" />
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  return (
-    <Card>
-      <CardHeader>
-        <div className="flex items-center justify-between mb-4">
-          <CardTitle>قائمة المهام</CardTitle>
+      <div>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-semibold text-slate-900">قائمة المهام</h2>
           <div className="flex space-x-4 space-x-reverse">
             <div className="relative w-80">
               <Input
                 placeholder="البحث في المهام..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
-                data-testid="input-search-tasks"
+                disabled
+                className="pl-10 bg-white border-0 shadow-md"
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
             </div>
           </div>
         </div>
-        
-        <div className="flex space-x-4 space-x-reverse">
-          <Select value={statusFilter} onValueChange={setStatusFilter}>
-            <SelectTrigger className="w-40" data-testid="select-filter-status">
-              <SelectValue placeholder="تصفية الحالة" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">جميع الحالات</SelectItem>
-              <SelectItem value="pending">معلقة</SelectItem>
-              <SelectItem value="in_progress">قيد التنفيذ</SelectItem>
-              <SelectItem value="completed">مكتملة</SelectItem>
-              <SelectItem value="cancelled">ملغية</SelectItem>
-            </SelectContent>
-          </Select>
+        <Card className="bg-white shadow-md border-0">
+          <CardContent className="p-6">
+            <div className="space-y-4">
+              {[...Array(5)].map((_, i) => (
+                <div key={i} className="border border-slate-100 rounded-lg p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <Skeleton className="h-5 w-48" />
+                    <div className="flex space-x-2 space-x-reverse">
+                      <Skeleton className="h-6 w-16" />
+                      <Skeleton className="h-6 w-16" />
+                    </div>
+                  </div>
+                  <Skeleton className="h-4 w-full" />
+                  <div className="flex justify-between">
+                    <Skeleton className="h-4 w-24" />
+                    <div className="flex space-x-2 space-x-reverse">
+                      <Skeleton className="h-8 w-16" />
+                      <Skeleton className="h-8 w-16" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
-          <Select value={priorityFilter} onValueChange={setPriorityFilter}>
-            <SelectTrigger className="w-40" data-testid="select-filter-priority">
-              <SelectValue placeholder="تصفية الأولوية" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="all">جميع الأولويات</SelectItem>
-              <SelectItem value="low">منخفضة</SelectItem>
-              <SelectItem value="medium">متوسطة</SelectItem>
-              <SelectItem value="high">عالية</SelectItem>
-              <SelectItem value="urgent">عاجلة</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-      </CardHeader>
-      <CardContent>
-        {filteredTasks.length === 0 ? (
-          <div className="text-center py-8">
-            <p className="text-slate-500">
-              {searchQuery || statusFilter !== "all" || priorityFilter !== "all" 
-                ? "لا توجد مهام مطابقة للفلاتر المحددة" 
-                : "لا توجد مهام"}
-            </p>
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-xl font-semibold text-slate-900">قائمة المهام</h2>
+        <div className="flex space-x-4 space-x-reverse">
+          <div className="relative w-80">
+            <Input
+              placeholder="البحث في المهام..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="pl-10 bg-white border-0 shadow-md"
+              data-testid="input-search-tasks"
+            />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
           </div>
-        ) : (
-          <div className="space-y-4">
-            {filteredTasks.map((task) => (
+        </div>
+      </div>
+      
+      <Card className="bg-white shadow-md border-0">
+        <CardContent className="p-6">
+          <div className="flex space-x-4 space-x-reverse mb-6">
+            <Select value={statusFilter} onValueChange={setStatusFilter}>
+              <SelectTrigger className="w-40 bg-white border border-gray-200 focus:border-primary-300 transition-all" data-testid="select-filter-status">
+                <SelectValue placeholder="تصفية الحالة" />
+              </SelectTrigger>
+              <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                <SelectItem value="all" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">جميع الحالات</SelectItem>
+                <SelectItem value="pending" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">معلقة</SelectItem>
+                <SelectItem value="in_progress" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">قيد التنفيذ</SelectItem>
+                <SelectItem value="completed" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">مكتملة</SelectItem>
+                <SelectItem value="cancelled" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">ملغية</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Select value={priorityFilter} onValueChange={setPriorityFilter}>
+              <SelectTrigger className="w-40 bg-white border border-gray-200 focus:border-primary-300 transition-all" data-testid="select-filter-priority">
+                <SelectValue placeholder="تصفية الأولوية" />
+              </SelectTrigger>
+              <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                <SelectItem value="all" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">جميع الأولويات</SelectItem>
+                <SelectItem value="low" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">منخفضة</SelectItem>
+                <SelectItem value="medium" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">متوسطة</SelectItem>
+                <SelectItem value="high" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">عالية</SelectItem>
+                <SelectItem value="urgent" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">عاجلة</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+          
+          {filteredTasks.length === 0 ? (
+            <div className="text-center py-8">
+              <p className="text-slate-500">
+                {searchQuery || statusFilter !== "all" || priorityFilter !== "all" 
+                  ? "لا توجد مهام مطابقة للفلاتر المحددة" 
+                  : "لا توجد مهام"}
+              </p>
+            </div>
+          ) : (
+            <div className="space-y-4">
+              {filteredTasks.map((task) => (
               <div
                 key={task.id}
                 className="border border-slate-200 rounded-lg p-6 hover:shadow-md transition-shadow"
@@ -301,8 +313,9 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
               </div>
             ))}
           </div>
-        )}
-      </CardContent>
-    </Card>
+          )}
+        </CardContent>
+      </Card>
+    </div>
   );
 }

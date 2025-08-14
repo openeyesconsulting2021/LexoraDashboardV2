@@ -53,49 +53,58 @@ export default function ClientList({ clients, isLoading, onEdit }: ClientListPro
 
   if (isLoading) {
     return (
-      <Card>
-        <CardHeader>
-          <CardTitle>قائمة العملاء</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="border border-slate-100 rounded-lg p-4 space-y-3">
-                <Skeleton className="h-5 w-3/4" />
-                <Skeleton className="h-4 w-1/2" />
-                <Skeleton className="h-4 w-2/3" />
-                <div className="flex space-x-2 space-x-reverse">
-                  <Skeleton className="h-8 w-16" />
-                  <Skeleton className="h-8 w-16" />
-                  <Skeleton className="h-8 w-16" />
-                </div>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  return (
-    <Card>
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle>قائمة العملاء</CardTitle>
+      <div>
+        <div className="flex items-center justify-between mb-6">
+          <h2 className="text-xl font-semibold text-slate-900">قائمة العملاء</h2>
           <div className="relative w-80">
             <Input
               placeholder="البحث في العملاء..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
-              data-testid="input-search-clients"
+              disabled
+              className="pl-10 bg-white border-0 shadow-md"
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
           </div>
         </div>
-      </CardHeader>
-      <CardContent>
-        {filteredClients.length === 0 ? (
+        <Card className="bg-white shadow-md border-0">
+          <CardContent className="p-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[...Array(6)].map((_, i) => (
+                <div key={i} className="border border-slate-100 rounded-lg p-4 space-y-3">
+                  <Skeleton className="h-5 w-3/4" />
+                  <Skeleton className="h-4 w-1/2" />
+                  <Skeleton className="h-4 w-2/3" />
+                  <div className="flex space-x-2 space-x-reverse">
+                    <Skeleton className="h-8 w-16" />
+                    <Skeleton className="h-8 w-16" />
+                    <Skeleton className="h-8 w-16" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-6">
+        <h2 className="text-xl font-semibold text-slate-900">قائمة العملاء</h2>
+        <div className="relative w-80">
+          <Input
+            placeholder="البحث في العملاء..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10 bg-white border-0 shadow-md"
+            data-testid="input-search-clients"
+          />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
+        </div>
+      </div>
+      <Card className="bg-white shadow-md border-0">
+        <CardContent className="p-6">
+          {filteredClients.length === 0 ? (
           <div className="text-center py-8">
             <p className="text-slate-500">
               {searchQuery ? "لا يوجد عملاء مطابقون لبحثك" : "لا يوجد عملاء"}
@@ -191,8 +200,9 @@ export default function ClientList({ clients, isLoading, onEdit }: ClientListPro
               </div>
             ))}
           </div>
-        )}
-      </CardContent>
-    </Card>
+          )}
+        </CardContent>
+      </Card>
+    </div>
   );
 }
