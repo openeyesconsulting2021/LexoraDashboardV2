@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Menu, Search, Bell, Globe } from "lucide-react";
 import Sidebar from "./sidebar";
 
@@ -46,32 +46,33 @@ export default function Header() {
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
           </div>
 
-          {/* Language Dropdown */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" data-testid="button-language">
-                <Globe className="h-5 w-5" />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-48">
-              <DropdownMenuItem 
-                onClick={() => setCurrentLanguage("ar")}
-                className={`cursor-pointer ${currentLanguage === "ar" ? "bg-primary-50 text-primary-600" : ""}`}
-                data-testid="menu-language-arabic"
-              >
-                <span className="ml-2">🇸🇦</span>
-                العربية
-              </DropdownMenuItem>
-              <DropdownMenuItem 
-                onClick={() => setCurrentLanguage("en")}
-                className={`cursor-pointer ${currentLanguage === "en" ? "bg-primary-50 text-primary-600" : ""}`}
-                data-testid="menu-language-english"
-              >
-                <span className="ml-2">🇺🇸</span>
-                English
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          {/* Language Select */}
+          <div className="w-32">
+            <Select value={currentLanguage} onValueChange={setCurrentLanguage}>
+              <SelectTrigger className="bg-white border border-gray-200 focus:border-primary-300 transition-all h-9" data-testid="select-language">
+                <Globe className="h-4 w-4 ml-2" />
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                <SelectItem 
+                  value="ar" 
+                  className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                  data-testid="option-language-arabic"
+                >
+                  <span className="ml-2">🇸🇦</span>
+                  العربية
+                </SelectItem>
+                <SelectItem 
+                  value="en" 
+                  className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                  data-testid="option-language-english"
+                >
+                  <span className="ml-2">🇺🇸</span>
+                  English
+                </SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
 
           {/* Notifications */}
           <Button variant="ghost" size="icon" className="relative" data-testid="button-notifications">
