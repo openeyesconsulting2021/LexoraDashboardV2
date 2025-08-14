@@ -161,7 +161,7 @@ export default function DocumentUpload({ onClose, onSuccess }: DocumentUploadPro
                 <FormItem>
                   <FormLabel>عنوان المستند</FormLabel>
                   <FormControl>
-                    <Input placeholder="عنوان المستند" {...field} data-testid="input-document-title" />
+                    <Input placeholder="عنوان المستند" {...field} data-testid="input-document-title" className="bg-white border border-gray-200 focus:border-primary-300 transition-all" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -176,16 +176,16 @@ export default function DocumentUpload({ onClose, onSuccess }: DocumentUploadPro
                   <FormLabel>نوع المستند</FormLabel>
                   <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
-                      <SelectTrigger data-testid="select-document-type">
+                      <SelectTrigger data-testid="select-document-type" className="bg-white border border-gray-200 focus:border-primary-300 transition-all">
                         <SelectValue placeholder="اختر نوع المستند" />
                       </SelectTrigger>
                     </FormControl>
-                    <SelectContent>
-                      <SelectItem value="case_file">مستندات القضية</SelectItem>
-                      <SelectItem value="client_correspondence">مراسلات العميل</SelectItem>
-                      <SelectItem value="court_document">أوراق المحكمة</SelectItem>
-                      <SelectItem value="contract">عقود واتفاقيات</SelectItem>
-                      <SelectItem value="other">أخرى</SelectItem>
+                    <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                      <SelectItem value="case_file" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">مستندات القضية</SelectItem>
+                      <SelectItem value="client_correspondence" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">مراسلات العميل</SelectItem>
+                      <SelectItem value="court_document" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">أوراق المحكمة</SelectItem>
+                      <SelectItem value="contract" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">عقود واتفاقيات</SelectItem>
+                      <SelectItem value="other" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">أخرى</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -202,13 +202,13 @@ export default function DocumentUpload({ onClose, onSuccess }: DocumentUploadPro
                     <FormLabel>ربط بقضية (اختياري)</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger data-testid="select-case">
+                        <SelectTrigger data-testid="select-case" className="bg-white border border-gray-200 focus:border-primary-300 transition-all">
                           <SelectValue placeholder="اختر القضية" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
                         {cases?.map((caseItem: any) => (
-                          <SelectItem key={caseItem.id} value={caseItem.id}>
+                          <SelectItem key={caseItem.id} value={caseItem.id} className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">
                             {caseItem.caseNumber} - {caseItem.title}
                           </SelectItem>
                         ))}
@@ -227,13 +227,13 @@ export default function DocumentUpload({ onClose, onSuccess }: DocumentUploadPro
                     <FormLabel>ربط بعميل (اختياري)</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger data-testid="select-client">
+                        <SelectTrigger data-testid="select-client" className="bg-white border border-gray-200 focus:border-primary-300 transition-all">
                           <SelectValue placeholder="اختر العميل" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
                         {clients?.map((client: any) => (
-                          <SelectItem key={client.id} value={client.id}>
+                          <SelectItem key={client.id} value={client.id} className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">
                             {client.name}
                           </SelectItem>
                         ))}

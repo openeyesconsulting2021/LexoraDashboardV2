@@ -124,7 +124,7 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
                 <FormItem>
                   <FormLabel>عنوان المهمة</FormLabel>
                   <FormControl>
-                    <Input placeholder="مراجعة مستندات القضية" {...field} data-testid="input-task-title" />
+                    <Input placeholder="مراجعة مستندات القضية" {...field} data-testid="input-task-title" className="bg-white border border-gray-200 focus:border-primary-300 transition-all" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -143,6 +143,7 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
                       rows={3}
                       {...field} 
                       data-testid="textarea-task-description"
+                      className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                     />
                   </FormControl>
                   <FormMessage />
@@ -159,15 +160,15 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
                     <FormLabel>الحالة</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger data-testid="select-status">
+                        <SelectTrigger data-testid="select-status" className="bg-white border border-gray-200 focus:border-primary-300 transition-all">
                           <SelectValue />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
-                        <SelectItem value="pending">معلقة</SelectItem>
-                        <SelectItem value="in_progress">قيد التنفيذ</SelectItem>
-                        <SelectItem value="completed">مكتملة</SelectItem>
-                        <SelectItem value="cancelled">ملغية</SelectItem>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                        <SelectItem value="pending" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">معلقة</SelectItem>
+                        <SelectItem value="in_progress" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">قيد التنفيذ</SelectItem>
+                        <SelectItem value="completed" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">مكتملة</SelectItem>
+                        <SelectItem value="cancelled" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">ملغية</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -183,15 +184,15 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
                     <FormLabel>الأولوية</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger data-testid="select-priority">
+                        <SelectTrigger data-testid="select-priority" className="bg-white border border-gray-200 focus:border-primary-300 transition-all">
                           <SelectValue />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
-                        <SelectItem value="low">منخفضة</SelectItem>
-                        <SelectItem value="medium">متوسطة</SelectItem>
-                        <SelectItem value="high">عالية</SelectItem>
-                        <SelectItem value="urgent">عاجلة</SelectItem>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                        <SelectItem value="low" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">منخفضة</SelectItem>
+                        <SelectItem value="medium" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">متوسطة</SelectItem>
+                        <SelectItem value="high" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">عالية</SelectItem>
+                        <SelectItem value="urgent" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">عاجلة</SelectItem>
                       </SelectContent>
                     </Select>
                     <FormMessage />
@@ -211,6 +212,7 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
                           type="date"
                           {...field} 
                           data-testid="input-due-date"
+                          className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                         />
                         <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none" />
                       </div>
@@ -230,13 +232,13 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
                     <FormLabel>المكلف بالمهمة</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger data-testid="select-assigned-to">
+                        <SelectTrigger data-testid="select-assigned-to" className="bg-white border border-gray-200 focus:border-primary-300 transition-all">
                           <SelectValue placeholder="اختر المكلف" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
                         {users?.map((user: any) => (
-                          <SelectItem key={user.id} value={user.id}>
+                          <SelectItem key={user.id} value={user.id} className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">
                             {user.fullName} ({user.role === "admin" ? "مدير" : 
                              user.role === "lawyer" ? "محامي" : "سكرتير"})
                           </SelectItem>
@@ -256,13 +258,13 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
                     <FormLabel>ربط بقضية (اختياري)</FormLabel>
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger data-testid="select-case">
+                        <SelectTrigger data-testid="select-case" className="bg-white border border-gray-200 focus:border-primary-300 transition-all">
                           <SelectValue placeholder="اختر القضية" />
                         </SelectTrigger>
                       </FormControl>
-                      <SelectContent>
+                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
                         {cases?.map((caseItem: any) => (
-                          <SelectItem key={caseItem.id} value={caseItem.id}>
+                          <SelectItem key={caseItem.id} value={caseItem.id} className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">
                             {caseItem.caseNumber} - {caseItem.title}
                           </SelectItem>
                         ))}

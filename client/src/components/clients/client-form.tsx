@@ -104,7 +104,7 @@ export default function ClientForm({ client: editClient, onClose, onSuccess }: C
                   <FormItem>
                     <FormLabel>اسم العميل</FormLabel>
                     <FormControl>
-                      <Input placeholder="محمد أحمد السالم" {...field} data-testid="input-client-name" />
+                      <Input placeholder="محمد أحمد السالم" {...field} data-testid="input-client-name" className="bg-white border border-gray-200 focus:border-primary-300 transition-all" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -118,7 +118,7 @@ export default function ClientForm({ client: editClient, onClose, onSuccess }: C
                   <FormItem>
                     <FormLabel>رقم الهاتف</FormLabel>
                     <FormControl>
-                      <Input placeholder="0501234567" {...field} data-testid="input-client-phone" />
+                      <Input placeholder="0501234567" {...field} data-testid="input-client-phone" className="bg-white border border-gray-200 focus:border-primary-300 transition-all" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -139,6 +139,7 @@ export default function ClientForm({ client: editClient, onClose, onSuccess }: C
                         placeholder="mohammed@example.com" 
                         {...field} 
                         data-testid="input-client-email"
+                        className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                       />
                     </FormControl>
                     <FormMessage />
@@ -153,7 +154,7 @@ export default function ClientForm({ client: editClient, onClose, onSuccess }: C
                   <FormItem>
                     <FormLabel>رقم الهوية</FormLabel>
                     <FormControl>
-                      <Input placeholder="1234567890" {...field} data-testid="input-client-national-id" />
+                      <Input placeholder="1234567890" {...field} data-testid="input-client-national-id" className="bg-white border border-gray-200 focus:border-primary-300 transition-all" />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -173,6 +174,7 @@ export default function ClientForm({ client: editClient, onClose, onSuccess }: C
                       rows={3}
                       {...field} 
                       data-testid="textarea-client-address"
+                      className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                     />
                   </FormControl>
                   <FormMessage />
@@ -192,6 +194,7 @@ export default function ClientForm({ client: editClient, onClose, onSuccess }: C
                       rows={3}
                       {...field} 
                       data-testid="textarea-client-notes"
+                      className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                     />
                   </FormControl>
                   <FormMessage />

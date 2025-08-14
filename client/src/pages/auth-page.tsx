@@ -78,6 +78,7 @@ export default function AuthPage() {
                         onChange={(e) => setLoginData({ ...loginData, email: e.target.value })}
                         required
                         data-testid="input-email"
+                        className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                       />
                     </div>
                     <div className="space-y-2">
@@ -89,6 +90,7 @@ export default function AuthPage() {
                         onChange={(e) => setLoginData({ ...loginData, password: e.target.value })}
                         required
                         data-testid="input-password"
+                        className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                       />
                     </div>
                     <Button 
@@ -130,6 +132,7 @@ export default function AuthPage() {
                         onChange={(e) => setRegisterData({ ...registerData, fullName: e.target.value })}
                         required
                         data-testid="input-fullname"
+                        className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                       />
                     </div>
                     <div className="space-y-2">
@@ -141,6 +144,7 @@ export default function AuthPage() {
                         onChange={(e) => setRegisterData({ ...registerData, username: e.target.value })}
                         required
                         data-testid="input-username"
+                        className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                       />
                     </div>
                     <div className="space-y-2">
@@ -153,6 +157,7 @@ export default function AuthPage() {
                         onChange={(e) => setRegisterData({ ...registerData, email: e.target.value })}
                         required
                         data-testid="input-register-email"
+                        className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                       />
                     </div>
                     <div className="space-y-2">
@@ -164,6 +169,7 @@ export default function AuthPage() {
                         onChange={(e) => setRegisterData({ ...registerData, password: e.target.value })}
                         required
                         data-testid="input-register-password"
+                        className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                       />
                     </div>
                     <div className="space-y-2">
@@ -175,13 +181,13 @@ export default function AuthPage() {
                         }
                         data-testid="select-role"
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="bg-white border border-gray-200 focus:border-primary-300 transition-all">
                           <SelectValue />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="secretary">سكرتير</SelectItem>
-                          <SelectItem value="lawyer">محامي</SelectItem>
-                          <SelectItem value="admin">مدير</SelectItem>
+                        <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                          <SelectItem value="secretary" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">سكرتير</SelectItem>
+                          <SelectItem value="lawyer" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">محامي</SelectItem>
+                          <SelectItem value="admin" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">مدير</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
