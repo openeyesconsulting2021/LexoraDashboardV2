@@ -36,7 +36,7 @@ export default function Header() {
             <Input
               type="text"
               placeholder="البحث في القضايا والعملاء..."
-              className="w-80 pl-10 pr-4 bg-white border-0 shadow-md"
+              className="w-80 pl-10 pr-4 bg-white border border-gray-200"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               data-testid="input-search"
