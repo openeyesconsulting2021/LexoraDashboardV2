@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import Sidebar from "@/components/layout/sidebar";
-import Header from "@/components/layout/header";
+import MainLayout from "@/components/layout/main-layout";
 import StatsCards from "@/components/dashboard/stats-cards";
 import RecentCases from "@/components/dashboard/recent-cases";
 import TasksSidebar from "@/components/dashboard/tasks-sidebar";
@@ -10,7 +9,7 @@ import { useLanguage } from "@/contexts/language-context";
 
 export default function Dashboard() {
   const { user } = useAuth();
-  const { t, isRTL } = useLanguage();
+  const { t } = useLanguage();
 
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ["/api/dashboard/stats"],
@@ -26,45 +25,39 @@ export default function Dashboard() {
   });
 
   return (
-    <div className="flex h-screen overflow-hidden" dir={isRTL ? "rtl" : "ltr"}>
-      <Sidebar />
-      
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <Header />
-        
-        <main className="flex-1 overflow-y-auto p-6">
-          {/* Dashboard Header */}
-          <div className="mb-8">
-            <h2 className="text-2xl font-bold text-slate-900" data-testid="text-welcome">
-              {t('dashboard.welcome', { name: user?.fullName })}
-            </h2>
-            <p className="text-slate-600 mt-1">
-              {t('dashboard.overview')}
-            </p>
+    <MainLayout>
+      <div className="p-6">
+        {/* Dashboard Header */}
+        <div className="mb-8">
+          <h2 className="text-2xl font-bold text-slate-900" data-testid="text-welcome">
+            {t('dashboard.welcome', { name: user?.fullName })}
+          </h2>
+          <p className="text-slate-600 mt-1">
+            {t('dashboard.overview')}
+          </p>
+        </div>
+
+        {/* Stats Cards */}
+        <StatsCards stats={stats} isLoading={statsLoading} />
+
+        {/* Quick Actions */}
+        <div className="mb-6">
+          <QuickActions />
+        </div>
+
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          {/* Recent Cases */}
+          <div className="lg:col-span-2">
+            <RecentCases cases={recentCases} isLoading={casesLoading} />
           </div>
 
-          {/* Stats Cards */}
-          <StatsCards stats={stats} isLoading={statsLoading} />
-
-          {/* Quick Actions */}
-          <div className="mb-6">
-            <QuickActions />
+          {/* Tasks and Notifications */}
+          <div className="space-y-6">
+            <TasksSidebar tasks={userTasks} isLoading={tasksLoading} />
           </div>
-
-          {/* Content Grid */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Recent Cases */}
-            <div className="lg:col-span-2">
-              <RecentCases cases={recentCases} isLoading={casesLoading} />
-            </div>
-
-            {/* Tasks and Notifications */}
-            <div className="space-y-6">
-              <TasksSidebar tasks={userTasks} isLoading={tasksLoading} />
-            </div>
-          </div>
-        </main>
+        </div>
       </div>
-    </div>
+    </MainLayout>
   );
 }

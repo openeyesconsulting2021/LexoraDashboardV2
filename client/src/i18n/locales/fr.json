@@ -62,7 +62,11 @@
     "notifications": "Notifications"
   },
   "cases": {
-    "title": "Dossiers",
+    "title": "Gestion des Dossiers",
+    "addNew": "Ajouter un Nouveau Dossier",
+    "edit": "Modifier le Dossier",
+    "addForm": "Formulaire d'ajout d'un nouveau dossier",
+    "editForm": "Formulaire de modification de dossier",
     "list": "Liste des dossiers",
     "add": "Ajouter un nouveau dossier",
     "edit": "Modifier le dossier",
@@ -109,7 +113,11 @@
     }
   },
   "clients": {
-    "title": "Clients",
+    "title": "Gestion des Clients",
+    "addNew": "Ajouter un Nouveau Client",
+    "edit": "Modifier le Client",
+    "addForm": "Formulaire d'ajout d'un nouveau client",
+    "editForm": "Formulaire de modification de client",
     "list": "Liste des clients",
     "add": "Ajouter un nouveau client",
     "edit": "Modifier le client",
@@ -131,7 +139,8 @@
     "updateError": "Erreur lors de la mise à jour du client"
   },
   "documents": {
-    "title": "Documents",
+    "title": "Gestion des Documents",
+    "uploadForm": "Formulaire de téléchargement de nouveau document",
     "list": "Liste des documents",
     "upload": "Télécharger un nouveau document",
     "download": "Télécharger",
@@ -164,7 +173,11 @@
     }
   },
   "tasks": {
-    "title": "Tâches",
+    "title": "Gestion des Tâches",
+    "addNew": "Ajouter une Nouvelle Tâche",
+    "edit": "Modifier la Tâche",
+    "addForm": "Formulaire d'ajout d'une nouvelle tâche",
+    "editForm": "Formulaire de modification de tâche",
     "list": "Liste des tâches",
     "add": "Ajouter une nouvelle tâche",
     "edit": "Modifier la tâche",

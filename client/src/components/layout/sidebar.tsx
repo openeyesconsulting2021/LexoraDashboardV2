@@ -23,7 +23,7 @@ import { Badge } from "@/components/ui/badge";
 export default function Sidebar() {
   const [location] = useLocation();
   const { user, logoutMutation } = useAuth();
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
 
   const navigationItems = [
     {
@@ -82,15 +82,15 @@ export default function Sidebar() {
   };
 
   return (
-    <div className="hidden md:flex md:w-64 md:flex-col">
-      <div className="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-l border-slate-200">
+    <div className={`hidden md:flex md:w-64 md:flex-col ${isRTL ? 'order-last' : 'order-first'}`}>
+      <div className={`flex flex-col flex-grow pt-5 overflow-y-auto bg-white ${isRTL ? 'border-l border-slate-200' : 'border-r border-slate-200'}`}>
         {/* Logo and Brand */}
         <div className="flex items-center px-6 pb-4">
           <div className="flex items-center">
             <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
               <Scale className="text-white w-4 h-4" />
             </div>
-            <div className="mr-3">
+            <div className={isRTL ? "ml-3" : "mr-3"}>
               <h1 className="text-lg font-bold text-slate-900">Lexora</h1>
               <p className="text-xs text-slate-500">{t('auth.description')}</p>
             </div>
@@ -105,7 +105,7 @@ export default function Sidebar() {
                 {user.fullName.charAt(0)}
               </span>
             </div>
-            <div className="mr-3">
+            <div className={isRTL ? "ml-3" : "mr-3"}>
               <p className="text-sm font-medium text-slate-900" data-testid="text-username">
                 {user.fullName}
               </p>
@@ -136,12 +136,12 @@ export default function Sidebar() {
                   )}
                   data-testid={`nav-${item.href.slice(1) || 'dashboard'}`}
                 >
-                  <Icon className="ml-3 w-4 h-4" />
+                  <Icon className={`${isRTL ? "mr-3" : "ml-3"} w-4 h-4`} />
                   {item.name}
                   {item.badge && (
                     <Badge 
                       variant={isActive ? "secondary" : "outline"} 
-                      className="mr-auto text-xs"
+                      className={`${isRTL ? "ml-auto" : "mr-auto"} text-xs`}
                     >
                       {item.badge}
                     </Badge>
@@ -172,7 +172,7 @@ export default function Sidebar() {
                       )}
                       data-testid={`nav-${item.href.slice(1)}`}
                     >
-                      <Icon className="ml-3 w-4 h-4" />
+                      <Icon className={`${isRTL ? "mr-3" : "ml-3"} w-4 h-4`} />
                       {item.name}
                     </div>
                   </Link>
@@ -189,7 +189,7 @@ export default function Sidebar() {
               className="group flex items-center px-3 py-2 text-sm font-medium text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 mb-2"
               data-testid="nav-settings"
             >
-              <Settings className="ml-3 w-4 h-4" />
+              <Settings className={`${isRTL ? "mr-3" : "ml-3"} w-4 h-4`} />
               {t('common.settings')}
             </a>
           </Link>
@@ -200,7 +200,7 @@ export default function Sidebar() {
             disabled={logoutMutation.isPending}
             data-testid="button-logout"
           >
-            <LogOut className="ml-3 w-4 h-4" />
+            <LogOut className={`${isRTL ? "mr-3" : "ml-3"} w-4 h-4`} />
             {t('auth.logout')}
           </Button>
         </div>

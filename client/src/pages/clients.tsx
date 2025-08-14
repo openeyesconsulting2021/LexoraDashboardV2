@@ -1,17 +1,18 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import Sidebar from "@/components/layout/sidebar";
-import Header from "@/components/layout/header";
+import MainLayout from "@/components/layout/main-layout";
 import ClientForm from "@/components/clients/client-form";
 import ClientList from "@/components/clients/client-list";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
 import { Plus } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function Clients() {
   const [showForm, setShowForm] = useState(false);
   const [editingClient, setEditingClient] = useState(null);
+  const { t, isRTL } = useLanguage();
 
   const { data: clients, isLoading } = useQuery({
     queryKey: ["/api/clients"],
@@ -28,54 +29,48 @@ export default function Clients() {
   };
 
   return (
-    <div className="flex h-screen overflow-hidden" dir="rtl">
-      <Sidebar />
-      
-      <div className="flex flex-col flex-1 overflow-hidden">
-        <Header />
-        
-        <main className="flex-1 overflow-y-auto p-6">
-          <div className="flex items-center justify-between mb-6">
-            <h1 className="text-2xl font-bold text-slate-900">إدارة العملاء</h1>
-            <Button 
-              onClick={() => setShowForm(true)} 
-              className="bg-primary-600 hover:bg-primary-700 text-white rounded-lg"
-              data-testid="button-add-client"
-            >
-              <Plus className="ml-2 w-4 h-4 text-white" />
-              إضافة عميل جديد
-            </Button>
-          </div>
+    <MainLayout>
+      <div className="p-6">
+        <div className="flex items-center justify-between mb-6">
+          <h1 className="text-2xl font-bold text-slate-900">{t('clients.title')}</h1>
+          <Button 
+            onClick={() => setShowForm(true)} 
+            className="bg-primary-600 hover:bg-primary-700 text-white rounded-lg"
+            data-testid="button-add-client"
+          >
+            <Plus className={`${isRTL ? "mr-2" : "ml-2"} w-4 h-4 text-white`} />
+            {t('clients.addNew')}
+          </Button>
+        </div>
 
-          <ClientList 
-            clients={clients} 
-            isLoading={isLoading}
-            onEdit={handleEdit}
-          />
+        <ClientList 
+          clients={clients} 
+          isLoading={isLoading}
+          onEdit={handleEdit}
+        />
 
-          <Dialog open={showForm} onOpenChange={setShowForm}>
-            <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-white" dir="rtl">
-              <DialogHeader>
-                <DialogTitle className="text-xl font-bold">
-                  {editingClient ? "تعديل العميل" : "إضافة عميل جديد"}
-                </DialogTitle>
-                <DialogDescription className="sr-only">
-                  {editingClient ? "نموذج تعديل بيانات العميل" : "نموذج إضافة عميل جديد"}
-                </DialogDescription>
-              </DialogHeader>
-              <Card className="border-0 shadow-none">
-                <CardContent className="p-0">
-                  <ClientForm 
-                    client={editingClient} 
-                    onClose={handleFormClose}
-                    onSuccess={handleFormClose}
-                  />
-                </CardContent>
-              </Card>
-            </DialogContent>
-          </Dialog>
-        </main>
+        <Dialog open={showForm} onOpenChange={setShowForm}>
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto bg-white">
+            <DialogHeader>
+              <DialogTitle className="text-xl font-bold">
+                {editingClient ? t('clients.edit') : t('clients.addNew')}
+              </DialogTitle>
+              <DialogDescription className="sr-only">
+                {editingClient ? t('clients.editForm') : t('clients.addForm')}
+              </DialogDescription>
+            </DialogHeader>
+            <Card className="border-0 shadow-none">
+              <CardContent className="p-0">
+                <ClientForm 
+                  client={editingClient} 
+                  onClose={handleFormClose}
+                  onSuccess={handleFormClose}
+                />
+              </CardContent>
+            </Card>
+          </DialogContent>
+        </Dialog>
       </div>
-    </div>
+    </MainLayout>
   );
 }
