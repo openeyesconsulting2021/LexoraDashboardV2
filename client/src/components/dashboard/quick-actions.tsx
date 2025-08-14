@@ -2,39 +2,41 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { UserPlus, Scale, CheckSquare, FileText } from "lucide-react";
 import { useLocation } from "wouter";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function QuickActions() {
   const [, setLocation] = useLocation();
+  const { t } = useLanguage();
 
   const quickActions = [
     {
       icon: UserPlus,
-      label: "إضافة عميل",
-      description: "إضافة عميل جديد للنظام",
+      label: t('quickActions.addClient'),
+      description: t('quickActions.addClientDesc'),
       path: "/clients",
       color: "bg-blue-500 hover:bg-blue-600",
       testId: "button-add-client"
     },
     {
       icon: Scale,
-      label: "إضافة قضية",
-      description: "إنشاء قضية جديدة",
+      label: t('quickActions.addCase'),
+      description: t('quickActions.addCaseDesc'),
       path: "/cases",
       color: "bg-green-500 hover:bg-green-600",
       testId: "button-add-case"
     },
     {
       icon: CheckSquare,
-      label: "إضافة مهمة",
-      description: "إنشاء مهمة جديدة",
+      label: t('quickActions.addTask'),
+      description: t('quickActions.addTaskDesc'),
       path: "/tasks",
       color: "bg-purple-500 hover:bg-purple-600",
       testId: "button-add-task"
     },
     {
       icon: FileText,
-      label: "إضافة وثيقة",
-      description: "رفع وثيقة جديدة",
+      label: t('quickActions.addDocument'),
+      description: t('quickActions.addDocumentDesc'),
       path: "/documents",
       color: "bg-orange-500 hover:bg-orange-600",
       testId: "button-add-document"
@@ -45,7 +47,7 @@ export default function QuickActions() {
     <Card className="shadow-md hover:shadow-lg rounded-xl border-0 transition-shadow duration-200">
       <CardHeader>
         <CardTitle className="text-lg font-semibold text-slate-900">
-          الإجراءات السريعة
+          {t('quickActions.title')}
         </CardTitle>
       </CardHeader>
       <CardContent>

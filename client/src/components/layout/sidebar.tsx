@@ -1,6 +1,7 @@
 import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth";
+import { useLanguage } from "@/contexts/language-context";
 import { 
   Scale, 
   LayoutDashboard, 
@@ -17,65 +18,62 @@ import {
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 
-const navigationItems = [
-  {
-    name: "لوحة التحكم",
-    href: "/",
-    icon: LayoutDashboard,
-    roles: ["admin", "lawyer", "secretary"],
-  },
-  {
-    name: "القضايا",
-    href: "/cases",
-    icon: Briefcase,
-    roles: ["admin", "lawyer", "secretary"],
-    badge: "12",
-  },
-  {
-    name: "العملاء",
-    href: "/clients",
-    icon: Users,
-    roles: ["admin", "lawyer", "secretary"],
-  },
-  {
-    name: "المستندات",
-    href: "/documents",
-    icon: FileText,
-    roles: ["admin", "lawyer", "secretary"],
-  },
-  {
-    name: "المهام",
-    href: "/tasks",
-    icon: CheckSquare,
-    roles: ["admin", "lawyer", "secretary"],
-    badge: "5",
-  },
-  {
-    name: "التقارير",
-    href: "/reports",
-    icon: BarChart3,
-    roles: ["admin", "lawyer"],
-  },
-];
 
-const adminItems = [
-  {
-    name: "المستخدمين",
-    href: "/users",
-    icon: ShieldQuestion,
-    roles: ["admin"],
-  },
-  {
-    name: "سجل الأنشطة",
-    href: "/audit",
-    icon: History,
-    roles: ["admin"],
-  },
-];
 
 export default function Sidebar() {
   const [location] = useLocation();
   const { user, logoutMutation } = useAuth();
+  const { t } = useLanguage();
+
+  const navigationItems = [
+    {
+      name: t("navigation.dashboard"),
+      href: "/",
+      icon: LayoutDashboard,
+      roles: ["admin", "lawyer", "secretary"],
+    },
+    {
+      name: t("navigation.cases"),
+      href: "/cases",
+      icon: Briefcase,
+      roles: ["admin", "lawyer", "secretary"],
+      badge: "12",
+    },
+    {
+      name: t("navigation.clients"),
+      href: "/clients",
+      icon: Users,
+      roles: ["admin", "lawyer", "secretary"],
+    },
+    {
+      name: t("navigation.documents"),
+      href: "/documents",
+      icon: FileText,
+      roles: ["admin", "lawyer", "secretary"],
+    },
+    {
+      name: t("navigation.tasks"),
+      href: "/tasks",
+      icon: CheckSquare,
+      roles: ["admin", "lawyer", "secretary"],
+      badge: "5",
+    },
+  ];
+
+  const adminItems = [
+    {
+      name: t("navigation.users"),
+      href: "/users",
+      icon: ShieldQuestion,
+      roles: ["admin"],
+    },
+    {
+      name: t("navigation.audit"),
+      href: "/audit",
+      icon: History,
+      roles: ["admin"],
+    },
+  ];
 
   if (!user) return null;
 
@@ -94,7 +92,7 @@ export default function Sidebar() {
             </div>
             <div className="mr-3">
               <h1 className="text-lg font-bold text-slate-900">Lexora</h1>
-              <p className="text-xs text-slate-500">نظام إدارة قانوني</p>
+              <p className="text-xs text-slate-500">{t('auth.description')}</p>
             </div>
           </div>
         </div>
@@ -112,8 +110,8 @@ export default function Sidebar() {
                 {user.fullName}
               </p>
               <p className="text-xs text-slate-500" data-testid="text-user-role">
-                {user.role === "admin" ? "مدير" : 
-                 user.role === "lawyer" ? "محامي" : "سكرتير"}
+                {user.role === "admin" ? t('auth.admin') : 
+                 user.role === "lawyer" ? t('auth.lawyer') : t('auth.secretary')}
               </p>
             </div>
           </div>
@@ -157,7 +155,7 @@ export default function Sidebar() {
           {user.role === "admin" && (
             <div className="pt-4 border-t border-slate-100">
               <p className="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">
-                الإدارة
+                {t('auth.admin')}
               </p>
               {adminItems.map((item) => {
                 const isActive = location === item.href;
@@ -192,7 +190,7 @@ export default function Sidebar() {
               data-testid="nav-settings"
             >
               <Settings className="ml-3 w-4 h-4" />
-              الإعدادات
+              {t('common.settings')}
             </a>
           </Link>
           <Button
@@ -203,7 +201,7 @@ export default function Sidebar() {
             data-testid="button-logout"
           >
             <LogOut className="ml-3 w-4 h-4" />
-            تسجيل الخروج
+            {t('auth.logout')}
           </Button>
         </div>
       </div>

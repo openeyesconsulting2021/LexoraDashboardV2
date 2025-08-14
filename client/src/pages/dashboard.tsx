@@ -6,9 +6,11 @@ import RecentCases from "@/components/dashboard/recent-cases";
 import TasksSidebar from "@/components/dashboard/tasks-sidebar";
 import QuickActions from "@/components/dashboard/quick-actions";
 import { useAuth } from "@/hooks/use-auth";
+import { useLanguage } from "@/contexts/language-context";
 
 export default function Dashboard() {
   const { user } = useAuth();
+  const { t, isRTL } = useLanguage();
 
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ["/api/dashboard/stats"],
@@ -24,7 +26,7 @@ export default function Dashboard() {
   });
 
   return (
-    <div className="flex h-screen overflow-hidden" dir="rtl">
+    <div className="flex h-screen overflow-hidden" dir={isRTL ? "rtl" : "ltr"}>
       <Sidebar />
       
       <div className="flex flex-col flex-1 overflow-hidden">
@@ -34,10 +36,10 @@ export default function Dashboard() {
           {/* Dashboard Header */}
           <div className="mb-8">
             <h2 className="text-2xl font-bold text-slate-900" data-testid="text-welcome">
-              مرحباً، {user?.fullName}
+              {t('dashboard.welcome', { name: user?.fullName })}
             </h2>
             <p className="text-slate-600 mt-1">
-              إليك نظرة عامة على نشاط مكتبك القانوني اليوم
+              {t('dashboard.overview')}
             </p>
           </div>
 

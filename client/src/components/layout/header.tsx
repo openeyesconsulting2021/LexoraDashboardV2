@@ -5,11 +5,12 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Menu, Search, Bell, Globe } from "lucide-react";
+import { useLanguage } from "@/contexts/language-context";
 import Sidebar from "./sidebar";
 
 export default function Header() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [currentLanguage, setCurrentLanguage] = useState("ar");
+  const { language, changeLanguage, t } = useLanguage();
 
   return (
     <header className="bg-white border-b border-slate-200 px-6 py-4">
@@ -28,7 +29,7 @@ export default function Header() {
 
         {/* Breadcrumbs */}
         <div className="hidden md:flex items-center space-x-2 space-x-reverse">
-          <span className="text-sm text-slate-500">لوحة التحكم</span>
+          <span className="text-sm text-slate-500">{t('navigation.dashboard')}</span>
         </div>
 
         {/* Header Actions */}
@@ -37,7 +38,7 @@ export default function Header() {
           <div className="relative hidden md:block">
             <Input
               type="text"
-              placeholder="البحث في القضايا والعملاء..."
+              placeholder={t('header.search')}
               className="w-80 pl-10 pr-4 bg-white border border-gray-200"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -47,7 +48,7 @@ export default function Header() {
           </div>
 
           {/* Language Select */}
-          <Select value={currentLanguage} onValueChange={setCurrentLanguage}>
+          <Select value={language} onValueChange={changeLanguage}>
             <SelectTrigger className="w-10 h-10 p-0 border-0 bg-transparent hover:bg-gray-100 transition-colors" data-testid="select-language">
               <Globe className="h-5 w-5" />
             </SelectTrigger>
@@ -58,7 +59,15 @@ export default function Header() {
                 data-testid="option-language-arabic"
               >
                 <span className="ml-2">🇸🇦</span>
-                العربية
+                {t('languages.ar')}
+              </SelectItem>
+              <SelectItem 
+                value="fr" 
+                className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                data-testid="option-language-french"
+              >
+                <span className="ml-2">🇫🇷</span>
+                {t('languages.fr')}
               </SelectItem>
               <SelectItem 
                 value="en" 
@@ -66,7 +75,7 @@ export default function Header() {
                 data-testid="option-language-english"
               >
                 <span className="ml-2">🇺🇸</span>
-                English
+                {t('languages.en')}
               </SelectItem>
             </SelectContent>
           </Select>
