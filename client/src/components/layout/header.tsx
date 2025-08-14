@@ -47,32 +47,29 @@ export default function Header() {
           </div>
 
           {/* Language Select */}
-          <div className="w-32">
-            <Select value={currentLanguage} onValueChange={setCurrentLanguage}>
-              <SelectTrigger className="bg-white border border-gray-200 focus:border-primary-300 transition-all h-9" data-testid="select-language">
-                <Globe className="h-4 w-4 ml-2" />
-                <SelectValue />
-              </SelectTrigger>
-              <SelectContent className="bg-white border border-gray-200 shadow-lg">
-                <SelectItem 
-                  value="ar" 
-                  className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
-                  data-testid="option-language-arabic"
-                >
-                  <span className="ml-2">🇸🇦</span>
-                  العربية
-                </SelectItem>
-                <SelectItem 
-                  value="en" 
-                  className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
-                  data-testid="option-language-english"
-                >
-                  <span className="ml-2">🇺🇸</span>
-                  English
-                </SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+          <Select value={currentLanguage} onValueChange={setCurrentLanguage}>
+            <SelectTrigger className="w-10 h-10 p-0 border-0 bg-transparent hover:bg-gray-100 transition-colors" data-testid="select-language">
+              <Globe className="h-5 w-5" />
+            </SelectTrigger>
+            <SelectContent className="bg-white border border-gray-200 shadow-lg">
+              <SelectItem 
+                value="ar" 
+                className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                data-testid="option-language-arabic"
+              >
+                <span className="ml-2">🇸🇦</span>
+                العربية
+              </SelectItem>
+              <SelectItem 
+                value="en" 
+                className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                data-testid="option-language-english"
+              >
+                <span className="ml-2">🇺🇸</span>
+                English
+              </SelectItem>
+            </SelectContent>
+          </Select>
 
           {/* Notifications */}
           <Button variant="ghost" size="icon" className="relative" data-testid="button-notifications">
