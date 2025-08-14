@@ -28,8 +28,12 @@ export default function Documents() {
         <main className="flex-1 overflow-y-auto p-6">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-bold text-slate-900">إدارة المستندات</h1>
-            <Button onClick={() => setShowUpload(true)} data-testid="button-upload-document">
-              <Upload className="ml-2 w-4 h-4" />
+            <Button 
+              onClick={() => setShowUpload(true)} 
+              className="bg-primary-600 hover:bg-primary-700 text-white rounded-lg"
+              data-testid="button-upload-document"
+            >
+              <Upload className="ml-2 w-4 h-4 text-white" />
               رفع مستند جديد
             </Button>
           </div>

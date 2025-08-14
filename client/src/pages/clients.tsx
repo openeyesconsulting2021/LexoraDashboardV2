@@ -35,8 +35,12 @@ export default function Clients() {
         <main className="flex-1 overflow-y-auto p-6">
           <div className="flex items-center justify-between mb-6">
             <h1 className="text-2xl font-bold text-slate-900">إدارة العملاء</h1>
-            <Button onClick={() => setShowForm(true)} data-testid="button-add-client">
-              <Plus className="ml-2 w-4 h-4" />
+            <Button 
+              onClick={() => setShowForm(true)} 
+              className="bg-primary-600 hover:bg-primary-700 text-white rounded-lg"
+              data-testid="button-add-client"
+            >
+              <Plus className="ml-2 w-4 h-4 text-white" />
               إضافة عميل جديد
             </Button>
           </div>
