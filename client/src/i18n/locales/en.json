@@ -349,5 +349,9 @@
     "ar": "العربية",
     "fr": "Français",
     "en": "English"
+  },
+  "pageConstruction": {
+    "title": "Page under construction",
+    "description": "This page will be available soon"
   }
 }

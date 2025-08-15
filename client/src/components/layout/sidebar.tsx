@@ -210,7 +210,7 @@ export default function Sidebar() {
 
         {/* Settings and Logout */}
         <div className="px-4 py-4 border-t border-slate-100">
-          <Link href="/settings">
+          <Link href="/coming-soon">
             <a
               className="group flex items-center px-3 py-2 text-sm font-medium text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 mb-2"
               data-testid="nav-settings"

@@ -15,6 +15,7 @@ import Documents from "@/pages/documents";
 import Tasks from "@/pages/tasks";
 import Users from "@/pages/users";
 import Audit from "@/pages/audit";
+import ComingSoonPage from "@/pages/coming-soon";
 
 function Router() {
   return (
@@ -26,6 +27,7 @@ function Router() {
       <ProtectedRoute path="/tasks" component={Tasks} />
       <ProtectedRoute path="/users" component={Users} />
       <ProtectedRoute path="/audit" component={Audit} />
+      <ProtectedRoute path="/coming-soon" component={ComingSoonPage} />
       <Route path="/auth" component={AuthPage} />
       <Route component={NotFound} />
     </Switch>
