@@ -13,6 +13,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { X, Loader2, Calendar } from "lucide-react";
 import { z } from "zod";
+import { useLanguage } from "@/contexts/language-context";
 
 const taskFormSchema = insertTaskSchema.extend({
   title: z.string().min(1, "عنوان المهمة مطلوب"),
@@ -30,6 +31,7 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
   const { user } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const { isRTL } = useLanguage();
 
   const { data: cases } = useQuery({
     queryKey: ["/api/cases"],
@@ -266,7 +268,7 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
               />
             </div>
 
-            <div className="flex justify-end space-x-2 space-x-reverse">
+            <div className={`flex justify-end space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
               <Button type="button" onClick={onClose} data-testid="button-cancel" className="bg-red-500 hover:bg-red-600 text-white border-0 rounded-lg">
                 إلغاء
               </Button>

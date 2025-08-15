@@ -12,6 +12,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { X, Loader2 } from "lucide-react";
 import { z } from "zod";
+import { useLanguage } from "@/contexts/language-context";
 
 const clientFormSchema = insertClientSchema.extend({
   name: z.string().min(1, "اسم العميل مطلوب"),
@@ -29,7 +30,7 @@ export default function ClientForm({ client: editClient, onClose, onSuccess }: C
   const { user } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-
+  const { isRTL } = useLanguage();
   const form = useForm({
     resolver: zodResolver(clientFormSchema),
     defaultValues: {
@@ -192,7 +193,7 @@ export default function ClientForm({ client: editClient, onClose, onSuccess }: C
               )}
             />
 
-            <div className="flex justify-end space-x-2 space-x-reverse">
+          <div className={`flex justify-end space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
               <Button type="button" onClick={onClose} data-testid="button-cancel" className="bg-red-500 hover:bg-red-600 text-white border-0 rounded-lg">
                 إلغاء
               </Button>

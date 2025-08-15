@@ -11,7 +11,7 @@ import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";
-
+import { useLanguage } from "@/contexts/language-context";
 interface Document {
   id: string;
   title: string;
@@ -33,7 +33,7 @@ export default function DocumentList({ documents, isLoading }: DocumentListProps
   const [searchQuery, setSearchQuery] = useState("");
   const { toast } = useToast();
   const queryClient = useQueryClient();
-
+  const { isRTL } = useLanguage();
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       await apiRequest("DELETE", `/api/documents/${id}`);
@@ -222,11 +222,11 @@ export default function DocumentList({ documents, isLoading }: DocumentListProps
                           هل أنت متأكد من حذف المستند "{document.title}"؟ لا يمكن التراجع عن هذا الإجراء.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <AlertDialogCancel>إلغاء</AlertDialogCancel>
+                      <AlertDialogFooter >
+                        <AlertDialogCancel className="bg-red-500 hover:bg-red-600 text-white ml-2">إلغاء</AlertDialogCancel>
                         <AlertDialogAction
                           onClick={() => deleteMutation.mutate(document.id)}
-                          className="bg-red-600 hover:bg-red-700"
+                          className="bg-primary-600 hover:bg-primary-700 text-white"
                         >
                           حذف
                         </AlertDialogAction>
