@@ -5,11 +5,11 @@ import { storage } from "./storage";
 import multer from "multer";
 import path from "path";
 import fs from "fs";
-import { 
-  insertClientSchema, 
-  insertCaseSchema, 
-  insertTaskSchema, 
-  insertDocumentSchema 
+import {
+  insertClientSchema,
+  insertCaseSchema,
+  insertTaskSchema,
+  insertDocumentSchema,
 } from "@shared/schema";
 
 // Ensure uploads directory exists
@@ -24,12 +24,15 @@ const storage_multer = multer.diskStorage({
     cb(null, uploadsDir);
   },
   filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-  }
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    cb(
+      null,
+      file.fieldname + "-" + uniqueSuffix + path.extname(file.originalname)
+    );
+  },
 });
 
-const upload = multer({ 
+const upload = multer({
   storage: storage_multer,
   limits: { fileSize: 10 * 1024 * 1024 }, // 10MB limit
   fileFilter: (req, file, cb) => {
@@ -38,9 +41,9 @@ const upload = multer({
     if (allowedTypes.test(file.originalname)) {
       cb(null, true);
     } else {
-      cb(new Error('نوع الملف غير مدعوم'));
+      cb(new Error("نوع الملف غير مدعوم"));
     }
-  }
+  },
 });
 
 // Authentication middleware
@@ -81,7 +84,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/clients", requireAuth, async (req, res) => {
     try {
       const { search } = req.query;
-      const clients = search 
+      const clients = search
         ? await storage.searchClients(search as string)
         : await storage.getClients();
       res.json(clients);
@@ -107,13 +110,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (!req.user) {
         return res.status(401).json({ message: "غير مخول" });
       }
-      
+
       const clientData = insertClientSchema.parse({
         ...req.body,
-        createdBy: req.user.id
+        createdBy: req.user.id,
       });
       const client = await storage.createClient(clientData);
-      
+
       await storage.createAuditLog({
         userId: req.user.id,
         action: "client_created",
@@ -138,8 +141,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       const clientData = insertClientSchema.partial().parse(req.body);
-      const updatedClient = await storage.updateClient(req.params.id, clientData);
-      
+      const updatedClient = await storage.updateClient(
+        req.params.id,
+        clientData
+      );
+
       if (!req.user) {
         return res.status(401).json({ message: "غير مخول" });
       }
@@ -169,7 +175,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       await storage.deleteClient(req.params.id);
-      
+
       if (!req.user) {
         return res.status(401).json({ message: "غير مخول" });
       }
@@ -195,7 +201,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { search, client, lawyer } = req.query;
       let cases;
-      
+
       if (search) {
         cases = await storage.searchCases(search as string);
       } else if (client) {
@@ -205,7 +211,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } else {
         cases = await storage.getCases();
       }
-      
+
       res.json(cases);
     } catch (error) {
       res.status(500).json({ message: "خطأ في جلب القضايا" });
@@ -229,13 +235,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (!req.user) {
         return res.status(401).json({ message: "غير مخول" });
       }
-      
+
       const caseData = insertCaseSchema.parse({
         ...req.body,
-        createdBy: req.user.id
+        createdBy: req.user.id,
       });
       const newCase = await storage.createCase(caseData);
-      
+
       await storage.createAuditLog({
         userId: req.user.id,
         action: "case_created",
@@ -261,7 +267,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       const caseData = insertCaseSchema.partial().parse(req.body);
       const updatedCase = await storage.updateCase(req.params.id, caseData);
-      
+
       if (!req.user) {
         return res.status(401).json({ message: "غير مخول" });
       }
@@ -291,7 +297,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       await storage.deleteCase(req.params.id);
-      
+
       if (!req.user) {
         return res.status(401).json({ message: "غير مخول" });
       }
@@ -317,7 +323,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { caseId, userId } = req.query;
       let tasks;
-      
+
       if (caseId) {
         tasks = await storage.getTasksByCase(caseId as string);
       } else if (userId) {
@@ -325,7 +331,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } else {
         tasks = await storage.getTasks();
       }
-      
+
       res.json(tasks);
     } catch (error) {
       res.status(500).json({ message: "خطأ في جلب المهام" });
@@ -337,13 +343,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
       if (!req.user) {
         return res.status(401).json({ message: "غير مخول" });
       }
-      
+      console.log(
+        "Due Date:",
+        new Date(req.body.dueDate),
+        new Date(req.body.dueDate)
+      );
       const taskData = insertTaskSchema.parse({
         ...req.body,
-        createdBy: req.user.id
+        dueDate: new Date(req.body.dueDate),
+        createdBy: req.user.id,
       });
       const task = await storage.createTask(taskData);
-      
+
       await storage.createAuditLog({
         userId: req.user.id,
         action: "task_created",
@@ -356,6 +367,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
       res.status(201).json(task);
     } catch (error) {
+      console.log("Error:", error);
       res.status(400).json({ message: "بيانات المهمة غير صحيحة" });
     }
   });
@@ -367,9 +379,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         return res.status(404).json({ message: "المهمة غير موجودة" });
       }
 
-      const taskData = insertTaskSchema.partial().parse(req.body);
+      const taskData = insertTaskSchema.partial().parse({
+        ...req.body,
+        dueDate: new Date(req.body.dueDate),
+      });
       const updatedTask = await storage.updateTask(req.params.id, taskData);
-      
+
       if (!req.user) {
         return res.status(401).json({ message: "غير مخول" });
       }
@@ -399,7 +414,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       await storage.deleteTask(req.params.id);
-      
+
       if (!req.user) {
         return res.status(401).json({ message: "غير مخول" });
       }
@@ -425,7 +440,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { caseId, clientId } = req.query;
       let documents;
-      
+
       if (caseId) {
         documents = await storage.getDocumentsByCase(caseId as string);
       } else if (clientId) {
@@ -433,54 +448,59 @@ export async function registerRoutes(app: Express): Promise<Server> {
       } else {
         documents = await storage.getDocuments();
       }
-      
+
       res.json(documents);
     } catch (error) {
       res.status(500).json({ message: "خطأ في جلب المستندات" });
     }
   });
 
-  app.post("/api/documents/upload", requireAuth, upload.single('file'), async (req, res) => {
-    try {
-      if (!req.file) {
-        return res.status(400).json({ message: "لم يتم رفع أي ملف" });
+  app.post(
+    "/api/documents/upload",
+    requireAuth,
+    upload.single("file"),
+    async (req, res) => {
+      try {
+        if (!req.file) {
+          return res.status(400).json({ message: "لم يتم رفع أي ملف" });
+        }
+
+        const { title, documentType, caseId, clientId } = req.body;
+
+        const documentData = insertDocumentSchema.parse({
+          title: title || req.file.originalname,
+          filename: req.file.originalname,
+          fileSize: req.file.size,
+          mimeType: req.file.mimetype,
+          filePath: req.file.path,
+          documentType,
+          caseId: caseId || null,
+          clientId: clientId || null,
+          uploadedBy: req.user?.id || "",
+        });
+
+        const document = await storage.createDocument(documentData);
+
+        if (!req.user) {
+          return res.status(401).json({ message: "غير مخول" });
+        }
+
+        await storage.createAuditLog({
+          userId: req.user.id,
+          action: "document_uploaded",
+          tableName: "documents",
+          recordId: document.id,
+          newValues: JSON.stringify(document),
+          ipAddress: req.ip,
+          userAgent: req.get("User-Agent"),
+        });
+
+        res.status(201).json(document);
+      } catch (error) {
+        res.status(400).json({ message: "خطأ في رفع المستند" });
       }
-
-      const { title, documentType, caseId, clientId } = req.body;
-      
-      const documentData = insertDocumentSchema.parse({
-        title: title || req.file.originalname,
-        filename: req.file.originalname,
-        fileSize: req.file.size,
-        mimeType: req.file.mimetype,
-        filePath: req.file.path,
-        documentType,
-        caseId: caseId || null,
-        clientId: clientId || null,
-        uploadedBy: req.user?.id || '',
-      });
-
-      const document = await storage.createDocument(documentData);
-      
-      if (!req.user) {
-        return res.status(401).json({ message: "غير مخول" });
-      }
-
-      await storage.createAuditLog({
-        userId: req.user.id,
-        action: "document_uploaded",
-        tableName: "documents",
-        recordId: document.id,
-        newValues: JSON.stringify(document),
-        ipAddress: req.ip,
-        userAgent: req.get("User-Agent"),
-      });
-
-      res.status(201).json(document);
-    } catch (error) {
-      res.status(400).json({ message: "خطأ في رفع المستند" });
     }
-  });
+  );
 
   app.get("/api/documents/:id/download", requireAuth, async (req, res) => {
     try {
@@ -512,7 +532,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
       }
 
       await storage.deleteDocument(req.params.id);
-      
+
       if (!req.user) {
         return res.status(401).json({ message: "غير مخول" });
       }
@@ -537,16 +557,18 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/users", requireRole(["admin"]), async (req, res) => {
     try {
       const users = await storage.getUsers();
-      res.json(users.map(user => ({
-        id: user.id,
-        email: user.email,
-        fullName: user.fullName,
-        username: user.username,
-        role: user.role,
-        isActive: user.isActive,
-        createdAt: user.createdAt,
-        updatedAt: user.updatedAt,
-      })));
+      res.json(
+        users.map((user) => ({
+          id: user.id,
+          email: user.email,
+          fullName: user.fullName,
+          username: user.username,
+          role: user.role,
+          isActive: user.isActive,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+        }))
+      );
     } catch (error) {
       res.status(500).json({ message: "خطأ في جلب المستخدمين" });
     }
@@ -565,7 +587,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         role,
         isActive,
       });
-      
+
       if (!req.user) {
         return res.status(401).json({ message: "غير مخول" });
       }
@@ -600,7 +622,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   app.get("/api/audit-logs", requireRole(["admin"]), async (req, res) => {
     try {
       const { userId } = req.query;
-      const logs = userId 
+      const logs = userId
         ? await storage.getAuditLogsByUser(userId as string)
         : await storage.getAuditLogs();
       res.json(logs);

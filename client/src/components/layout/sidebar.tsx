@@ -17,11 +17,22 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Sidebar() {
   const [location] = useLocation();
   const { user, logoutMutation } = useAuth();
   const { t, isRTL } = useLanguage();
+
+  const { data: recentCases, isLoading: casesLoading } = useQuery({
+    queryKey: ["/api/cases"],
+  }) as { data: any; isLoading: boolean };
+
+  const { data: userTasks, isLoading: tasksLoading } = useQuery({
+    queryKey: ["/api/tasks"],
+    queryFn: () =>
+      fetch(`/api/tasks?userId=${user?.id}`).then((res) => res.json()),
+  });
 
   const navigationItems = [
     {
@@ -35,7 +46,7 @@ export default function Sidebar() {
       href: "/cases",
       icon: Briefcase,
       roles: ["admin", "lawyer", "secretary"],
-      badge: "12",
+      badge: `${recentCases?.length}`,
     },
     {
       name: t("navigation.clients"),
@@ -54,7 +65,7 @@ export default function Sidebar() {
       href: "/tasks",
       icon: CheckSquare,
       roles: ["admin", "lawyer", "secretary"],
-      badge: "5",
+      badge: `${userTasks?.length}`,
     },
   ];
 
@@ -204,7 +215,7 @@ export default function Sidebar() {
               className="group flex items-center px-3 py-2 text-sm font-medium text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900 mb-2"
               data-testid="nav-settings"
             >
-              <Settings className={`${isRTL ? "mr-3" : "ml-3"} w-4 h-4`} />
+              <Settings className={`${isRTL ? "ml-3" : "mr-3"} w-4 h-4`} />
               {t("common.settings")}
             </a>
           </Link>
@@ -215,7 +226,7 @@ export default function Sidebar() {
             disabled={logoutMutation.isPending}
             data-testid="button-logout"
           >
-            <LogOut className={`${isRTL ? "mr-3" : "ml-3"} w-4 h-4`} />
+            <LogOut className={`${isRTL ? "ml-3" : "mr-3"} w-4 h-4`} />
             {t("auth.logout")}
           </Button>
         </div>

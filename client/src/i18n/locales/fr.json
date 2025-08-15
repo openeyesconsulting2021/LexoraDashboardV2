@@ -33,9 +33,31 @@
       "pendingTasks": "Tâches en attente",
       "totalDocuments": "Total des documents"
     },
+    "underStats": {
+      "monthlyChange": "+12 % par rapport au mois précédent",
+      "weeklyChange": "+3 cette semaine",
+      "dueToday": "5 dues aujourd’hui",
+      "submittedToday": "15 soumises aujourd’hui"
+    },
     "quickActions": "Actions rapides",
     "recentCases": "Dossiers récents",
-    "upcomingTasks": "Tâches à venir"
+    "upcomingTasks": "Tâches à venir",
+    "newCases": "Il y a des affaires récentes"
+  },
+  "recentsCases": {
+    "ShowAll": "Afficher tout",
+    "newCases": "Il y a des affaires récentes",
+    "caseNumber": "Numéro de l'affaire",
+    "title": "Titre",
+    "status": "Statut",
+    "priority": "Priorité",
+    "actions": "Actions",
+    "view": "Afficher",
+    "edit": "Modifier"
+  },
+  "tasksSidebar": {
+    "noPendingTasks": "Il n'y a pas de tâches en attente",
+    "viewAllTasks": "Afficher toutes les tâches"
   },
   "quickActions": {
     "title": "Actions rapides",
@@ -136,7 +158,34 @@
     "addSuccess": "Client ajouté avec succès",
     "addError": "Erreur lors de l'ajout du client",
     "updateSuccess": "Client mis à jour avec succès",
-    "updateError": "Erreur lors de la mise à jour du client"
+    "updateError": "Erreur lors de la mise à jour du client",
+    "clientName": "Mohamed Ahmed Salem",
+    "clientAddress": "Adresse détaillée du client",
+    "notes": "Notes",
+    "notesPlaceholder": "Notes supplémentaires sur le client"
+  },
+  "clientList": {
+    "id": "Identifiant",
+    "view": "Afficher",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "confirmDelete": "Confirmer la suppression",
+    "deleteConfirmationMessage": "Êtes-vous sûr(e) de vouloir supprimer le client {{name}} ? Cette action est irréversible."
+  },
+  "clientForm": {
+    "create": {
+      "success": "Client créé avec succès",
+      "error": "Erreur lors de la création du client"
+    },
+    "update": {
+      "success": "Client mis à jour avec succès",
+      "error": "Erreur lors de la mise à jour du client"
+    },
+    "name": "Le nom du client est requis",
+    "email": "L'email est invalide",
+    "phone": "Le numéro de téléphone est requis",
+    "updateClient": "Modifier le client",
+    "createClient": "Créer le client"
   },
   "documents": {
     "title": "Gestion des Documents",
