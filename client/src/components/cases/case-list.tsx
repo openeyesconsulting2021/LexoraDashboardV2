@@ -5,10 +5,21 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import { Eye, Edit, Trash2, Search } from "lucide-react";
 import { apiRequest } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/language-context";
 
 interface Case {
   id: string;
@@ -34,28 +45,31 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const { toast } = useToast();
   const queryClient = useQueryClient();
-
+  const { t } = useLanguage();
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       await apiRequest("DELETE", `/api/cases/${id}`);
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/cases"] });
-      toast({ title: "تم حذف القضية بنجاح" });
+      toast({ title: t("cases.deleteSuccess") });
     },
     onError: () => {
-      toast({ title: "خطأ في حذف القضية", variant: "destructive" });
+      toast({ title: t("cases.deleteError"), variant: "destructive" });
     },
   });
 
   const getStatusBadge = (status: string) => {
-    const variants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
+    const variants: Record<
+      string,
+      "default" | "secondary" | "destructive" | "outline"
+    > = {
       active: "default",
       pending: "secondary",
       closed: "outline",
       archived: "destructive",
     };
-    
+
     const labels: Record<string, string> = {
       active: "نشطة",
       pending: "معلقة",
@@ -71,13 +85,16 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
   };
 
   const getPriorityBadge = (priority: string) => {
-    const variants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
+    const variants: Record<
+      string,
+      "default" | "secondary" | "destructive" | "outline"
+    > = {
       high: "destructive",
       medium: "secondary",
       low: "outline",
       urgent: "destructive",
     };
-    
+
     const labels: Record<string, string> = {
       high: "عالية",
       medium: "متوسطة",
@@ -92,20 +109,24 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
     );
   };
 
-  const filteredCases = cases?.filter(caseItem =>
-    caseItem.caseNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    caseItem.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    caseItem.caseType.toLowerCase().includes(searchQuery.toLowerCase())
-  ) || [];
+  const filteredCases =
+    cases?.filter(
+      (caseItem) =>
+        caseItem.caseNumber.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        caseItem.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        caseItem.caseType.toLowerCase().includes(searchQuery.toLowerCase())
+    ) || [];
 
   if (isLoading) {
     return (
       <div>
         <div className="flex items-center justify-between mb-6">
-          <h2 className="text-xl font-semibold text-slate-900">قائمة القضايا</h2>
+          <h2 className="text-xl font-semibold text-slate-900">
+            {t("cases.list")}
+          </h2>
           <div className="relative w-80">
             <Input
-              placeholder="البحث في القضايا..."
+              placeholder={t("cases.search")}
               disabled
               className="pl-10 bg-white border-0 shadow-md"
             />
@@ -116,7 +137,10 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
           <CardContent className="p-6">
             <div className="space-y-4">
               {[...Array(5)].map((_, i) => (
-                <div key={i} className="flex items-center justify-between p-4 border border-slate-100 rounded-lg">
+                <div
+                  key={i}
+                  className="flex items-center justify-between p-4 border border-slate-100 rounded-lg"
+                >
                   <div className="space-y-2">
                     <Skeleton className="h-4 w-32" />
                     <Skeleton className="h-3 w-48" />
@@ -137,10 +161,13 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
   return (
     <div>
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-semibold text-slate-900">قائمة القضايا</h2>
+        <h2 className="text-xl font-semibold text-slate-900">
+          {" "}
+          {t("cases.list")}{" "}
+        </h2>
         <div className="relative w-80">
           <Input
-            placeholder="البحث في القضايا..."
+            placeholder={t("cases.search")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="pl-10 bg-white border-0 shadow-md"
@@ -149,13 +176,13 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4" />
         </div>
       </div>
-      
+
       <Card className="bg-white shadow-md border-0">
         <CardContent className="p-6">
           {filteredCases.length === 0 ? (
             <div className="text-center py-8">
               <p className="text-slate-500">
-                {searchQuery ? "لا توجد قضايا مطابقة لبحثك" : "لا توجد قضايا"}
+                {searchQuery ? t("cases.noResults") : t("cases.noCases")}
               </p>
             </div>
           ) : (
@@ -164,31 +191,35 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
                 <thead className="bg-slate-50">
                   <tr>
                     <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
-                      رقم القضية
+                      {t("cases.caseNumber")}
                     </th>
                     <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
-                      العنوان
+                      {t("cases.titleCase")}{" "}
                     </th>
                     <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
-                      النوع
+                      {t("cases.type")}{" "}
                     </th>
                     <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
-                      الحالة
+                      {t("cases.status")}{" "}
                     </th>
                     <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
-                      الأولوية
+                      {t("cases.priority")}{" "}
                     </th>
                     <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
-                      المحكمة
+                      {t("cases.court")}{" "}
                     </th>
                     <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">
-                      إجراءات
+                      {t("cases.actions")}{" "}
                     </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-slate-200">
                   {filteredCases.map((caseItem) => (
-                    <tr key={caseItem.id} className="hover:bg-slate-50" data-testid={`case-row-${caseItem.id}`}>
+                    <tr
+                      key={caseItem.id}
+                      className="hover:bg-slate-50"
+                      data-testid={`case-row-${caseItem.id}`}
+                    >
                       <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">
                         {caseItem.caseNumber}
                       </td>
@@ -209,40 +240,59 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm">
                         <div className="flex space-x-2 space-x-reverse">
-                          <Button variant="ghost" size="sm" data-testid={`button-view-case-${caseItem.id}`}>
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            data-testid={`button-view-case-${caseItem.id}`}
+                          >
                             <Eye className="w-4 h-4 ml-1" />
-                            عرض
+                            {t("cases.view")}{" "}
                           </Button>
-                          <Button 
-                            variant="ghost" 
-                            size="sm" 
+                          <Button
+                            variant="ghost"
+                            size="sm"
                             onClick={() => onEdit(caseItem)}
                             data-testid={`button-edit-case-${caseItem.id}`}
                           >
                             <Edit className="w-4 h-4 ml-1" />
-                            تعديل
+                            {t("cases.edit")}{" "}
                           </Button>
                           <AlertDialog>
                             <AlertDialogTrigger asChild>
-                              <Button variant="ghost" size="sm" className="text-red-600 hover:text-red-700 hover:bg-red-50" data-testid={`button-delete-case-${caseItem.id}`}>
+                              <Button
+                                variant="ghost"
+                                size="sm"
+                                className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                data-testid={`button-delete-case-${caseItem.id}`}
+                              >
                                 <Trash2 className="w-4 h-4 ml-1" />
-                                حذف
+                                {t("cases.delete")}
                               </Button>
                             </AlertDialogTrigger>
                             <AlertDialogContent>
                               <AlertDialogHeader>
-                                <AlertDialogTitle>تأكيد الحذف</AlertDialogTitle>
+                                <AlertDialogTitle>
+                                  {" "}
+                                  {t("cases.confirmDelete")}
+                                </AlertDialogTitle>
                                 <AlertDialogDescription>
-                                  هل أنت متأكد من حذف القضية "{caseItem.title}"؟ لا يمكن التراجع عن هذا الإجراء.
+                                  {t("cases.confirmDelete", {
+                                    name: caseItem.title,
+                                  })}
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
-                                <AlertDialogCancel className="bg-red-500 hover:bg-red-600 text-white ml-2">إلغاء</AlertDialogCancel>
+                                <AlertDialogCancel>
+                                  {" "}
+                                  {t("cases.cancel")}
+                                </AlertDialogCancel>
                                 <AlertDialogAction
-                                  onClick={() => deleteMutation.mutate(caseItem.id)}
-                                  className="bg-primary-600 hover:bg-primary-700 text-white"
+                                  onClick={() =>
+                                    deleteMutation.mutate(caseItem.id)
+                                  }
+                                  className="bg-red-600 hover:bg-red-700"
                                 >
-                                  حذف
+                                  {t("cases.delete")}{" "}
                                 </AlertDialogAction>
                               </AlertDialogFooter>
                             </AlertDialogContent>
