@@ -91,7 +91,6 @@
     "editForm": "نموذج تعديل بيانات القضية",
     "list": "قائمة القضايا",
     "add": "إضافة قضية جديدة",
-    "edit": "تعديل القضية",
     "delete": "حذف القضية",
     "view": "عرض تفاصيل القضية",
     "caseNumber": "رقم القضية",
@@ -100,6 +99,7 @@
     "status": "الحالة",
     "priority": "الأولوية",
     "caseType": "نوع القضية",
+    "caseTypePlaceholder": "نزاع تجاري",
     "assignedLawyer": "المحامي المسؤول",
     "court": "المحكمة",
     "description": "الوصف",
@@ -113,6 +113,10 @@
     "addError": "خطأ في إضافة القضية",
     "updateSuccess": "تم تحديث القضية بنجاح",
     "updateError": "خطأ في تحديث القضية",
+    "createSuccess": "تم إنشاء القضية بنجاح",
+    "createError": "خطأ في إنشاء القضية",
+    "caseShortDescription": "وصف القضية",
+    "caseDetailedDescription": "وصف تفصيلي للقضية",
     "statuses": {
       "active": "نشطة",
       "pending": "معلقة",
@@ -132,7 +136,29 @@
       "labor": "عمالية",
       "family": "أحوال شخصية",
       "administrative": "إدارية"
-    }
+    },
+    "assignedToLawyer": "اختر المحامي",
+    "exemplecourt": "المحكمة التجارية",
+    "judge": {
+      "label": "القاضي",
+      "placeholder": "اسم القاضي"
+    },
+    "opponent": {
+      "label": "الطرف المقابل",
+      "placeholder": "اسم الطرف المقابل"
+    },
+    "buttons": {
+      "saving": "جاري الحفظ...",
+      "updateCase": "تحديث القضية",
+      "createCase": "إنشاء القضية"
+    },
+    "titleCase": "العنوان",
+    "type": "النوع",
+    "actions": "إجراءات",
+    "confirmDelete": "تأكيد الحذف",
+    "deleteConfirmationMessage": "هل أنت متأكد من حذف القضية {{name}} ؟ لا يمكن التراجع عن هذا الإجراء.",
+    "selectClientPlaceholder": "اختر العميل",
+    "selectLawyerPlaceholder": " اختر المحامي"
   },
   "clients": {
     "title": "إدارة العملاء",
@@ -162,6 +188,8 @@
     "addError": "خطأ في إضافة العميل",
     "updateSuccess": "تم تحديث العميل بنجاح",
     "updateError": "خطأ في تحديث العميل",
+    "createSuccess": "تم إنشاء العميل بنجاح",
+    "errorCreate": "خطأ في إنشاء العميل",
     "clientName": "محمد أحمد السالم"
   },
   "clientList": {
@@ -173,20 +201,19 @@
     "deleteConfirmationMessage": "هل أنت متأكد من حذف العميل {{name}} ؟ لا يمكن التراجع عن هذا الإجراء."
   },
   "clientForm": {
-    "create": {
-      "success": "تم إنشاء العميل بنجاح",
-      "error": "خطأ في إنشاء العميل"
-    },
-    "update": {
-      "success": "تم تحديث العميل بنجاح",
-      "error": "خطأ في تحديث العميل"
-    },
     "name": "اسم العميل مطلوب",
     "email": "البريد الإلكتروني غير صحيح",
     "phone": "رقم الهاتف مطلوب",
     "saving": "جاري الحفظ...",
     "updateClient": "تحديث العميل",
     "createClient": "إنشاء العميل"
+  },
+  "caseForm": {
+    "caseNumber": "رقم القضية مطلوب",
+    "title": "عنوان القضية مطلوب",
+    "caseType": "نوع القضية مطلوب",
+    "clientId": "العميل مطلوب",
+    "assignedLawyerId": "المحامي المسؤول مطلوب"
   },
   "documents": {
     "title": "إدارة المستندات",
@@ -214,13 +241,64 @@
     "uploadError": "خطأ في رفع الوثيقة",
     "deleteSuccess": "تم حذف الوثيقة بنجاح",
     "deleteError": "خطأ في حذف الوثيقة",
+    "deleteDocumentSuccess": "تم حذف المستند بنجاح",
+    "deleteDocumentError": "خطأ في حذف المستند",
     "types": {
       "case_file": "مستندات القضية",
       "client_correspondence": "مراسلات العميل",
       "court_document": "أوراق المحكمة",
       "contract": "عقود واتفاقيات",
       "other": "أخرى"
-    }
+    },
+    "titleDocument": "قائمة المستندات",
+    "searchPlaceholder": "البحث في المستندات...",
+    "noDocumentsFound": "لا توجد مستندات",
+    "noMatchingDocuments": "لا توجد مستندات مطابقة لبحثك",
+    "confirmDelete": "تأكيد الحذف",
+    "deleteConfirmationMessage": "هل أنت متأكد من حذف المستند {{name}} ؟ لا يمكن التراجع عن هذا الإجراء.",
+    "validation": {
+      "documentTitleRequired": "عنوان المستند مطلوب",
+      "documentTypeRequired": "نوع المستند مطلوب"
+    },
+    "errors": {
+      "noFileSelected": "لم يتم اختيار ملف",
+      "uploadFailed": "فشل في رفع المستند",
+      "uploadError": "خطأ في رفع المستند"
+    },
+    "success": {
+      "uploadSuccess": "تم رفع المستند بنجاح"
+    },
+    "labels": {
+      "selectFile": "اختيار الملف",
+      "removeFile": "إزالة الملف",
+      "chooseFile": "اختر الملف",
+      "documentTitle": "عنوان المستند",
+      "documentType": "نوع المستند",
+      "uploadInstruction": "قم بسحب الملف هنا أو",
+      "linkToCaseOptional": "ربط بقضية (اختياري)",
+      "linkToClientOptional": "ربط بعميل (اختياري)"
+    },
+    "placeholders": {
+      "documentTitle": "عنوان المستند",
+      "selectDocumentType": "اختر نوع المستند",
+      "selectCase": "اختر القضية",
+      "selectClient": "اختر العميل"
+    },
+    "status": {
+      "uploading": "جاري الرفع...",
+      "uploadDocument": "رفع المستند"
+    },
+    "case_documents": "مستندات القضية",
+    "client_correspondence": "مراسلات العميل",
+    "court_documents": "أوراق المحكمة",
+    "contracts_agreements": "عقود واتفاقيات",
+    "other": "أخرى",
+    "link_to_case_optional": "ربط بقضية (اختياري)",
+    "select_case": "اختر القضية",
+    "link_to_client_optional": "ربط بعميل (اختياري)",
+    "select_client": "اختر العميل",
+    "uploading": "جاري الرفع...",
+    "upload_document": "رفع المستند"
   },
   "tasks": {
     "title": "إدارة المهام",
@@ -229,7 +307,6 @@
     "addForm": "نموذج إضافة مهمة جديدة",
     "editForm": "نموذج تعديل بيانات المهمة",
     "list": "قائمة المهام",
-
     "delete": "حذف المهمة",
     "view": "عرض تفاصيل المهمة",
     "taskTitle": "عنوان المهمة",
@@ -266,7 +343,23 @@
     "filters": {
       "allStatuses": "جميع الحالات",
       "allPriorities": "جميع الأولويات"
-    }
+    },
+    "searchTasksPlaceholder": "البحث في المهام...",
+    "all_statuses": "جميع الحالات",
+    "pending": "معلقة",
+    "in_progress": "قيد التنفيذ",
+    "completed": "مكتملة",
+    "cancelled": "ملغية",
+    "priority_filter": "تصفية الأولوية",
+    "allPriorities": "جميع الأولويات",
+    "low": "منخفضة",
+    "medium": "متوسطة",
+    "high": "عالية",
+    "urgent": "عاجلة",
+    "complete": "إكمال",
+    "noTasksFiltered": "لا توجد مهام مطابقة للفلاتر المحددة",
+    "deleteConfirmationTitle": "تأكيد الحذف",
+    "deleteConfirmationMessage": "هل أنت متأكدة من حذف المهمة {{name}}؟ لا يمكن التراجع عن هذا الإجراء."
   },
   "users": {
     "title": "المستخدمين",

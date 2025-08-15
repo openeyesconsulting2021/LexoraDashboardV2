@@ -91,7 +91,6 @@
     "editForm": "Edit case data form",
     "list": "Cases List",
     "add": "Add New Case",
-    "edit": "Edit Case",
     "delete": "Delete Case",
     "view": "View Case Details",
     "caseNumber": "Case Number",
@@ -113,6 +112,11 @@
     "addError": "Error adding case",
     "updateSuccess": "Case updated successfully",
     "updateError": "Error updating case",
+    "createSuccess": "Case created successfully",
+    "createError": "Error creating case",
+    "caseShortDescription": "Case description",
+    "caseDetailedDescription": "Detailed case description",
+    "caseTypePlaceholder": "Commercial dispute",
     "statuses": {
       "active": "Active",
       "pending": "Pending",
@@ -132,7 +136,30 @@
       "labor": "Labor",
       "family": "Family",
       "administrative": "Administrative"
-    }
+    },
+
+    "assignedToLawyer": "Select Lawyer",
+    "exemplecourt": "Commercial Court",
+    "judge": {
+      "label": "Judge",
+      "placeholder": "Judge Name"
+    },
+    "opponent": {
+      "label": "Opponent",
+      "placeholder": "Opponent Name"
+    },
+    "buttons": {
+      "saving": "Saving...",
+      "updateCase": "Update Case",
+      "createCase": "Create Case"
+    },
+    "titleCase": "Title",
+    "type": "Type",
+    "actions": "Actions",
+    "confirmDelete": "Confirm Delete",
+    "deleteConfirmationMessage": "Are you sure you want to delete the case {{name}}? This action cannot be undone.",
+    "selectClientPlaceholder": "Select Client",
+    "selectLawyerPlaceholder": "Select Lawyer"
   },
   "clients": {
     "title": "Client Management",
@@ -142,7 +169,6 @@
     "editForm": "Edit client data form",
     "list": "Clients List",
     "add": "Add New Client",
-    "edit": "Edit Client",
     "delete": "Delete Client",
     "view": "View Client Details",
     "name": "Client Name",
@@ -162,7 +188,10 @@
     "clientName": "Mohamed Ahmed Salem",
     "clientAddress": "Detailed client address",
     "notes": "Notes",
-    "notesPlaceholder": "Additional notes about the client"
+    "notesPlaceholder": "Additional notes about the client",
+    "id": " ID number",
+    "createSuccess": "Client created successfully",
+    "errorCreate": "Error creating client"
   },
   "clientList": {
     "id": "ID",
@@ -173,20 +202,19 @@
     "deleteConfirmationMessage": "Are you sure you want to delete the client {{name}}? This action cannot be undone."
   },
   "clientForm": {
-    "create": {
-      "success": "Client created successfully",
-      "error": "Error creating client"
-    },
-    "update": {
-      "success": "Client updated successfully",
-      "error": "Error updating client"
-    },
     "name": "Client name is required",
     "email": "Email is invalid",
     "phone": "Phone number is required",
     "saving": "Saving...",
     "updateClient": "Update Client",
     "createClient": "Create Client"
+  },
+  "caseForm": {
+    "caseNumber": "Case number is required",
+    "title": "Case title is required",
+    "caseType": "Case type is required",
+    "clientId": "Client is required",
+    "assignedLawyerId": "Assigned lawyer is required"
   },
   "documents": {
     "title": "Document Management",
@@ -214,13 +242,64 @@
     "uploadError": "Error uploading document",
     "deleteSuccess": "Document deleted successfully",
     "deleteError": "Error deleting document",
+    "deleteDocumentSuccess": "Document deleted successfully",
+    "deleteDocumentError": "Error deleting document",
     "types": {
       "case_file": "Case Files",
       "client_correspondence": "Client Correspondence",
       "court_document": "Court Documents",
       "contract": "Contracts and Agreements",
       "other": "Other"
-    }
+    },
+    "titleDocument": "Document List",
+    "searchPlaceholder": "Search in documents...",
+    "noDocumentsFound": "No documents",
+    "noMatchingDocuments": "No documents match your search",
+    "confirmDelete": "Confirm Delete",
+    "deleteConfirmationMessage": "Are you sure you want to delete the document {{name}}? This action cannot be undone.",
+    "validation": {
+      "documentTitleRequired": "Document title is required",
+      "documentTypeRequired": "Document type is required",
+      "uploadError": "Error uploading document"
+    },
+    "errors": {
+      "noFileSelected": "No file selected",
+      "uploadFailed": "Failed to upload document"
+    },
+    "success": {
+      "uploadSuccess": "Document uploaded successfully"
+    },
+    "labels": {
+      "selectFile": "Select file",
+      "removeFile": "Remove file",
+      "chooseFile": "Choose file",
+      "documentTitle": "Document title",
+      "documentType": "Document type",
+      "uploadInstruction": "Drag and drop the file here or",
+      "linkToCaseOptional": "Link to case (optional)",
+      "linkToClientOptional": "Link to client (optional)"
+    },
+    "placeholders": {
+      "documentTitle": "Document title",
+      "selectDocumentType": "Select document type",
+      "selectCase": "Select case",
+      "selectClient": "Select client"
+    },
+    "status": {
+      "uploading": "Uploading...",
+      "uploadDocument": "Upload document"
+    },
+    "case_documents": "Case Documents",
+    "client_correspondence": "Client Correspondence",
+    "court_documents": "Court Documents",
+    "contracts_agreements": "Contracts and Agreements",
+    "other": "Other",
+    "link_to_case_optional": "Link to case (optional)",
+    "select_case": "Select case",
+    "link_to_client_optional": "Link to client (optional)",
+    "select_client": "Select client",
+    "uploading": "Uploading...",
+    "upload_document": "Upload Document"
   },
   "tasks": {
     "title": "Task Management",
@@ -230,7 +309,7 @@
     "editForm": "Edit task data form",
     "list": "Tasks List",
     "add": "Add New Task",
-    "edit": "Edit Task",
+
     "delete": "Delete Task",
     "view": "View Task Details",
     "taskTitle": "Task Title",
@@ -267,7 +346,23 @@
     "filters": {
       "allStatuses": "All Statuses",
       "allPriorities": "All Priorities"
-    }
+    },
+    "searchTasksPlaceholder": "Search in tasks...",
+    "all_statuses": "All statuses",
+    "pending": "Pending",
+    "in_progress": "In progress",
+    "completed": "Completed",
+    "cancelled": "Cancelled",
+    "priority_filter": "Filter by priority",
+    "allPriorities": "All priorities",
+    "low": "Low",
+    "medium": "Medium",
+    "high": "High",
+    "urgent": "Urgent",
+    "complete": "Complete",
+
+    "deleteConfirmationTitle": "Delete Confirmation",
+    "deleteConfirmationMessage": "Are you sure you want to delete the task {{name}}? This action cannot be undone."
   },
   "users": {
     "title": "Users",

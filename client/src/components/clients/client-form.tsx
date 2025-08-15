@@ -65,12 +65,12 @@ export default function ClientForm({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/clients"] });
-      toast({ title: t("clientForm.create.success") });
+      toast({ title: t("clients.createSuccess") });
       onSuccess();
     },
     onError: () => {
       toast({
-        title: t("clientForm.create.error"),
+        title: t("clients.errorCreate"),
         variant: "destructive",
       });
     },
@@ -87,12 +87,12 @@ export default function ClientForm({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/clients"] });
-      toast({ title: t("clientForm.update.success") });
+      toast({ title: t("clients.updateSuccess") });
       onSuccess();
     },
     onError: () => {
       toast({
-        title: t("clientForm.update.error"),
+        title: t("clients.updateError"),
         variant: "destructive",
       });
     },

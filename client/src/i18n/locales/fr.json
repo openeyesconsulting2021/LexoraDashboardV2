@@ -91,7 +91,6 @@
     "editForm": "Formulaire de modification de dossier",
     "list": "Liste des dossiers",
     "add": "Ajouter un nouveau dossier",
-    "edit": "Modifier le dossier",
     "delete": "Supprimer le dossier",
     "view": "Voir les détails du dossier",
     "caseNumber": "Numéro du dossier",
@@ -113,6 +112,11 @@
     "addError": "Erreur lors de l'ajout du dossier",
     "updateSuccess": "Dossier mis à jour avec succès",
     "updateError": "Erreur lors de la mise à jour du dossier",
+    "createSuccess": "Affaire créée avec succès",
+    "createError": "Erreur lors de la création de l'affaire",
+    "caseShortDescription": "Description de l'affaire",
+    "caseDetailedDescription": "Description détaillée de l'affaire ",
+    "caseTypePlaceholder": "Litige commercial",
     "statuses": {
       "active": "Actif",
       "pending": "En attente",
@@ -132,7 +136,29 @@
       "labor": "Travail",
       "family": "Famille",
       "administrative": "Administratif"
-    }
+    },
+    "assignedToLawyer": "Choisir l'avocat",
+    "exemplecourt": "Tribunal commercial",
+    "judge": {
+      "label": "Juge",
+      "placeholder": "Nom du juge"
+    },
+    "opponent": {
+      "label": "Partie adverse",
+      "placeholder": "Nom de la partie adverse"
+    },
+    "buttons": {
+      "saving": "Enregistrement en cours...",
+      "updateCase": "Mettre à jour l'affaire",
+      "createCase": "Créer l'affaire"
+    },
+    "titleCase": "Titre",
+    "type": "Type",
+    "actions": "Actions",
+    "confirmDelete": "Confirmer la suppression",
+    "deleteConfirmationMessage": "Êtes-vous sûr de vouloir supprimer l'affaire {{name}} ? Cette action est irréversible.",
+    "selectClientPlaceholder": " Choisir le client",
+    "selectLawyerPlaceholder": "Choisir l'avocat"
   },
   "clients": {
     "title": "Gestion des Clients",
@@ -142,7 +168,6 @@
     "editForm": "Formulaire de modification de client",
     "list": "Liste des clients",
     "add": "Ajouter un nouveau client",
-    "edit": "Modifier le client",
     "delete": "Supprimer le client",
     "view": "Voir les détails du client",
     "name": "Nom du client",
@@ -162,7 +187,10 @@
     "clientName": "Mohamed Ahmed Salem",
     "clientAddress": "Adresse détaillée du client",
     "notes": "Notes",
-    "notesPlaceholder": "Notes supplémentaires sur le client"
+    "notesPlaceholder": "Notes supplémentaires sur le client",
+    "id": "Numéro d'identité",
+    "createSuccess": "Client créé avec succès",
+    "errorCreate": "Erreur lors de la création du client"
   },
   "clientList": {
     "id": "Identifiant",
@@ -173,17 +201,19 @@
     "deleteConfirmationMessage": "Êtes-vous sûr(e) de vouloir supprimer le client {{name}} ? Cette action est irréversible."
   },
   "clientForm": {
-    "create": {
-      "success": "Client créé avec succès",
-      "error": "Erreur lors de la création du client"
-    },
-    "update": {
-      "success": "Client mis à jour avec succès",
-      "error": "Erreur lors de la mise à jour du client"
-    },
     "name": "Le nom du client est requis",
     "email": "L'email est invalide",
-    "phone": "Le numéro de téléphone est requis"
+    "phone": "Le numéro de téléphone est requis",
+    "saving": "Enregistrement en cours...",
+    "updateClient": "Mettre à jour le client",
+    "createClient": "Créer le client"
+  },
+  "caseForm": {
+    "caseNumber": "Le numéro de la affaire est requis",
+    "title": "Le titre de l'affaire est requis",
+    "caseType": "Le type de l'affaire est requis",
+    "clientId": "Le client est requis",
+    "assignedLawyerId": "L'avocat responsable est requis"
   },
   "documents": {
     "title": "Gestion des Documents",
@@ -211,13 +241,64 @@
     "uploadError": "Erreur lors du téléchargement du document",
     "deleteSuccess": "Document supprimé avec succès",
     "deleteError": "Erreur lors de la suppression du document",
+    "deleteDocumentSuccess": "Document supprimé avec succès",
+    "deleteDocumentError": "Erreur lors de la suppression du document",
     "types": {
       "case_file": "Fichiers de dossier",
       "client_correspondence": "Correspondance client",
       "court_document": "Documents de tribunal",
       "contract": "Contrats et accords",
       "other": "Autre"
-    }
+    },
+    "titleDocument": "Liste des documents",
+    "searchPlaceholder": "Rechercher dans les documents...",
+    "noDocumentsFound": "Aucun document",
+    "noMatchingDocuments": "Aucun document ne correspond à votre recherche",
+    "confirmDelete": "Confirmer la suppression",
+    "deleteConfirmationMessage": "Êtes-vous sûr de vouloir supprimer le document {{name}} ? Cette action est irréversible.",
+    "validation": {
+      "documentTitleRequired": "Le titre du document est requis",
+      "documentTypeRequired": "Le type de document est requis"
+    },
+    "errors": {
+      "noFileSelected": "Aucun fichier sélectionné",
+      "uploadFailed": "Échec du téléchargement du document",
+      "uploadError": "Erreur lors du téléchargement du document"
+    },
+    "success": {
+      "uploadSuccess": "Document téléchargé avec succès"
+    },
+    "labels": {
+      "selectFile": "Sélectionner un fichier",
+      "removeFile": "Supprimer le fichier",
+      "chooseFile": "Choisir le fichier",
+      "documentTitle": "Titre du document",
+      "uploadInstruction": "Glissez et déposez le fichier ici ou",
+      "documentType": "Type de document",
+      "linkToCaseOptional": "Lier à une affaire (optionnel)",
+      "linkToClientOptional": "Lier à un client (optionnel)"
+    },
+    "placeholders": {
+      "documentTitle": "Titre du document",
+      "selectDocumentType": "Sélectionner le type de document",
+      "selectCase": "Sélectionner l'affaire",
+      "selectClient": "Sélectionner le client"
+    },
+    "status": {
+      "uploading": "Téléchargement en cours...",
+      "uploadDocument": "Télécharger le document"
+    },
+    "case_documents": "Documents de l'affaire",
+    "client_correspondence": "Correspondance client",
+    "court_documents": "Documents du tribunal",
+    "contracts_agreements": "Contrats et accords",
+    "other": "Autres",
+    "link_to_case_optional": "Lier à une affaire (optionnel)",
+    "select_case": "Sélectionner l'affaire",
+    "link_to_client_optional": "Lier à un client (optionnel)",
+    "select_client": "Sélectionner le client",
+    "uploading": "Téléchargement en cours...",
+    "upload_document": "Télécharger le document"
   },
   "tasks": {
     "title": "Gestion des Tâches",
@@ -227,7 +308,7 @@
     "editForm": "Formulaire de modification de tâche",
     "list": "Liste des tâches",
     "add": "Ajouter une nouvelle tâche",
-    "edit": "Modifier la tâche",
+
     "delete": "Supprimer la tâche",
     "view": "Voir les détails de la tâche",
     "taskTitle": "Titre de la tâche",
@@ -264,7 +345,23 @@
     "filters": {
       "allStatuses": "Tous les statuts",
       "allPriorities": "Toutes les priorités"
-    }
+    },
+
+    "searchtasksPlaceholder": "Rechercher dans les tâches...",
+    "all_statuses": "Tous les statuts",
+    "pending": "En attente",
+    "in_progress": "En cours",
+    "completed": "Terminée",
+    "cancelled": "Annulée",
+    "priority_filter": "Filtrer par priorité",
+    "allPriorities": "Toutes les priorités",
+    "low": "Basse",
+    "medium": "Moyenne",
+    "high": "Élevée",
+    "urgent": "Urgente",
+    "complete": "Terminer",
+    "deleteConfirmationTitle": "Confirmation de suppression",
+    "deleteConfirmationMessage": "Êtes-vous sûre de vouloir supprimer la tâche {{name}} ? Cette action est irréversible."
   },
   "users": {
     "title": "Utilisateurs",
