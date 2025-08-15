@@ -298,10 +298,10 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
                           </AlertDialogDescription>
                         </AlertDialogHeader>
                         <AlertDialogFooter>
-                          <AlertDialogCancel>إلغاء</AlertDialogCancel>
+                          <AlertDialogCancel className="bg-red-500 hover:bg-red-600 text-white">إلغاء</AlertDialogCancel>
                           <AlertDialogAction
                             onClick={() => deleteMutation.mutate(task.id)}
-                            className="bg-red-600 hover:bg-red-700"
+                            className="bg-primary-600 hover:bg-primary-700 text-white"
                           >
                             حذف
                           </AlertDialogAction>

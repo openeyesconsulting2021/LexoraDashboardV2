@@ -183,7 +183,9 @@
     },
     "name": "Le nom du client est requis",
     "email": "L'email est invalide",
-    "phone": "Le numéro de téléphone est requis"
+    "phone": "Le numéro de téléphone est requis",
+    "updateClient": "Modifier le client",
+    "createClient": "Créer le client"
   },
   "documents": {
     "title": "Gestion des Documents",

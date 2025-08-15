@@ -12,6 +12,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { X, Loader2, Upload, FileText } from "lucide-react";
 import { z } from "zod";
+import { useLanguage } from "@/contexts/language-context";
 
 const uploadFormSchema = z.object({
   title: z.string().min(1, "عنوان المستند مطلوب"),
@@ -30,7 +31,7 @@ export default function DocumentUpload({ onClose, onSuccess }: DocumentUploadPro
   const { user } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-
+  const { isRTL } = useLanguage();
   const { data: cases } = useQuery({
     queryKey: ["/api/cases"],
   }) as { data: any[] | undefined };
@@ -237,7 +238,8 @@ export default function DocumentUpload({ onClose, onSuccess }: DocumentUploadPro
               />
             </div>
 
-            <div className="flex justify-end space-x-2 space-x-reverse">
+            <div className={`flex justify-end space-x-2 ${isRTL ? 'space-x-reverse' : ''}`}>
+
               <Button type="button" onClick={onClose} data-testid="button-cancel" className="bg-red-500 hover:bg-red-600 text-white border-0 rounded-lg">
                 إلغاء
               </Button>

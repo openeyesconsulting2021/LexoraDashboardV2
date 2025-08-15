@@ -237,10 +237,10 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
                                 </AlertDialogDescription>
                               </AlertDialogHeader>
                               <AlertDialogFooter>
-                                <AlertDialogCancel>إلغاء</AlertDialogCancel>
+                                <AlertDialogCancel className="bg-red-500 hover:bg-red-600 text-white ml-2">إلغاء</AlertDialogCancel>
                                 <AlertDialogAction
                                   onClick={() => deleteMutation.mutate(caseItem.id)}
-                                  className="bg-red-600 hover:bg-red-700"
+                                  className="bg-primary-600 hover:bg-primary-700 text-white"
                                 >
                                   حذف
                                 </AlertDialogAction>
