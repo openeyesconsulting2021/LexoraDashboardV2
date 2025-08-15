@@ -34,10 +34,10 @@
       "totalDocuments": "Total des documents"
     },
     "underStats": {
-      "monthlyChange": "+12 % par rapport au mois précédent",
-      "weeklyChange": "+3 cette semaine",
-      "dueToday": "5 dues aujourd’hui",
-      "submittedToday": "15 soumises aujourd’hui"
+      "monthlyChange": "+{{value}} % par rapport au mois précédent",
+      "weeklyChange": "+{{value}} cette semaine",
+      "dueToday": "{{value}} dues aujourd’hui",
+      "submittedToday": "{{value}} soumises aujourd’hui"
     },
     "quickActions": "Actions rapides",
     "recentCases": "Dossiers récents",

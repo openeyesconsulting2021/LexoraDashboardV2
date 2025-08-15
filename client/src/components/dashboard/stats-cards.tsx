@@ -21,28 +21,36 @@ export default function StatsCards({ stats, isLoading }: StatsCardsProps) {
     {
       label: t("dashboard.stats.activeCases"),
       value: stats?.activeCases || 0,
-      change: t("dashboard.underStats.monthlyChange"),
+      change: t("dashboard.underStats.monthlyChange", {
+        value: (stats?.activeCases / stats?.activeCases) * 100 || 0,
+      }),
       icon: Briefcase,
       color: "bg-primary-100 text-primary-600",
     },
     {
       label: t("dashboard.stats.newClients"),
       value: stats?.newClients || 0,
-      change: t("dashboard.underStats.weeklyChange"),
+      change: t("dashboard.underStats.weeklyChange", {
+        value: stats?.newClients || 0,
+      }),
       icon: Users,
       color: "bg-emerald-100 text-emerald-600",
     },
     {
       label: t("dashboard.stats.pendingTasks"),
       value: stats?.pendingTasks || 0,
-      change: t("dashboard.underStats.dueToday"),
+      change: t("dashboard.underStats.dueToday", {
+        value: stats?.pendingTasks || 0,
+      }),
       icon: CheckSquare,
       color: "bg-amber-100 text-amber-600",
     },
     {
       label: t("dashboard.stats.totalDocuments"),
       value: stats?.recentDocuments || 0,
-      change: t("dashboard.underStats.submittedToday"),
+      change: t("dashboard.underStats.submittedToday", {
+        value: stats?.recentDocuments || 0,
+      }),
       icon: FileText,
       color: "bg-blue-100 text-blue-600",
     },

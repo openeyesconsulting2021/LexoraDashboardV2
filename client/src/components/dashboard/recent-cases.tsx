@@ -147,9 +147,9 @@ export default function RecentCases({ cases, isLoading }: RecentCasesProps) {
                   <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     {t("recentsCases.priority")}{" "}
                   </th>
-                  <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
+                  {/* <th className="px-6 py-3 text-right text-xs font-medium text-slate-500 dark:text-slate-400 uppercase tracking-wider">
                     {t("recentsCases.actions")}
-                  </th>
+                  </th> */}
                 </tr>
               </thead>
               <tbody className="bg-white dark:bg-gray-800 divide-y divide-slate-200 dark:divide-gray-700">

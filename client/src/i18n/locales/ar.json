@@ -34,9 +34,9 @@
       "totalDocuments": "إجمالي الوثائق"
     },
     "underStats": {
-      "monthlyChange": "+12% من الشهر السابق",
-      "weeklyChange": "+3 هذا الأسبوع",
-      "dueToday": "5 مستحقة اليوم",
+      "monthlyChange": "+{{value}}% من الشهر السابق",
+      "weeklyChange": "+{{value}} هذا الأسبوع",
+      "dueToday": "{{value}} مستحقة اليوم",
       "submittedToday": "تم رفع 15 اليوم"
     },
 

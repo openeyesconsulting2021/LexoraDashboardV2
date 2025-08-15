@@ -198,7 +198,7 @@ export default function Sidebar() {
                       )}
                       data-testid={`nav-${item.href.slice(1)}`}
                     >
-                      <Icon className={`${isRTL ? "mr-3" : "ml-3"} w-4 h-4`} />
+                      <Icon className={`${isRTL ? "ml-3" : "mr-3"} w-4 h-4`} />
                       {item.name}
                     </div>
                   </Link>
