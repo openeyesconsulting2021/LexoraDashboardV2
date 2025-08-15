@@ -54,7 +54,7 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
   const [priorityFilter, setPriorityFilter] = useState("all");
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       await apiRequest("DELETE", `/api/tasks/${id}`);
@@ -155,7 +155,7 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
           <div className="flex space-x-4 space-x-reverse">
             <div className="relative w-80">
               <Input
-                placeholder="البحث في المهام..."
+                placeholder={t("tasks.search")}
                 disabled
                 className="pl-10 bg-white border-0 shadow-md"
               />
@@ -205,7 +205,7 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
         <div className="flex space-x-4 space-x-reverse">
           <div className="relative w-80">
             <Input
-              placeholder={t("tasks.searchTasksPlaceholder")}
+              placeholder={t("tasks.search")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 bg-white border-0 shadow-md"
@@ -218,13 +218,15 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
 
       <Card className="bg-white shadow-md border-0">
         <CardContent className="p-6">
-          <div className="flex space-x-4 space-x-reverse mb-6">
+          <div
+            className={`flex space-x-4 ${isRTL ? "space-x-reverse" : ""} mb-6`}
+          >
             <Select value={statusFilter} onValueChange={setStatusFilter}>
               <SelectTrigger
                 className="w-40 bg-white border border-gray-200 focus:border-primary-300 transition-all"
                 data-testid="select-filter-status"
               >
-                <SelectValue placeholder="تصفية الحالة" />
+                <SelectValue placeholder={t("tasks.filterStatus")} />
               </SelectTrigger>
               <SelectContent className="bg-white border border-gray-200 shadow-lg">
                 <SelectItem
@@ -237,25 +239,25 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
                   value="pending"
                   className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                 >
-                  {t("tasks.pending")}{" "}
+                  {t("tasks.statuses.pending")}{" "}
                 </SelectItem>
                 <SelectItem
                   value="in_progress"
                   className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                 >
-                  {t("tasks.in_progress")}{" "}
+                  {t("tasks.statuses.in_progress")}{" "}
                 </SelectItem>
                 <SelectItem
                   value="completed"
                   className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                 >
-                  {t("tasks.completed")}{" "}
+                  {t("tasks.statuses.completed")}{" "}
                 </SelectItem>
                 <SelectItem
                   value="cancelled"
                   className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                 >
-                  {t("tasks.cancelled")}{" "}
+                  {t("tasks.statuses.cancelled")}{" "}
                 </SelectItem>
               </SelectContent>
             </Select>
@@ -265,7 +267,7 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
                 className="w-40 bg-white border border-gray-200 focus:border-primary-300 transition-all"
                 data-testid="select-filter-priority"
               >
-                <SelectValue placeholder="تصفية الأولوية" />
+                <SelectValue placeholder={t("tasks.filterPriority")} />
               </SelectTrigger>
               <SelectContent className="bg-white border border-gray-200 shadow-lg">
                 <SelectItem
@@ -278,25 +280,25 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
                   value="low"
                   className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                 >
-                  {t("tasks.low")}{" "}
+                  {t("tasks.priorities.low")}{" "}
                 </SelectItem>
                 <SelectItem
                   value="medium"
                   className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                 >
-                  {t("tasks.medium")}{" "}
+                  {t("tasks.priorities.medium")}{" "}
                 </SelectItem>
                 <SelectItem
                   value="high"
                   className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                 >
-                  {t("tasks.high")}{" "}
+                  {t("tasks.priorities.high")}{" "}
                 </SelectItem>
                 <SelectItem
                   value="urgent"
                   className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                 >
-                  {t("tasks.urgent")}{" "}
+                  {t("tasks.priorities.urgent")}{" "}
                 </SelectItem>
               </SelectContent>
             </Select>
@@ -363,7 +365,7 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
                           data-testid={`button-complete-task-${task.id}`}
                         >
                           <CheckCircle className="w-4 h-4 ml-1" />
-                          {t("tasks.complete")}{" "}
+                          {t("tasks.statuses.completed")}{" "}
                         </Button>
                       )}
                       <Button

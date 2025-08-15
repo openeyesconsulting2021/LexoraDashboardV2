@@ -21,7 +21,28 @@
     "description": "Système complet de gestion des dossiers, clients et documents",
     "loginFailed": "Échec de la connexion",
     "registerFailed": "Échec de la création du compte",
-    "logoutFailed": "Échec de la déconnexion"
+    "logoutFailed": "Échec de la déconnexion",
+    "loginSuccess": "Connexion réussie",
+    "loginDescription": "Bienvenue {{name}}",
+    "loginErrorTitle": "Erreur de connexion",
+    "loginErrorDescription": "Vérifiez votre email et votre mot de passe",
+    "registerSuccess": "Compte créé avec succès",
+    "registerErrorTitle": "Erreur de création du compte",
+    "logoutSuccess": "Déconnexion réussie",
+    "logoutErrorTitle": "Erreur lors de la déconnexion",
+    "logoutErrorDescription": "{{message}}",
+    "systemName": "Système de gestion du cabinet juridique",
+    "registerDescription": "Créez un nouveau compte pour accéder au système",
+    "welcomeHero": "Bienvenue dans le système Lexora",
+    "heroDescription": "Système complet de gestion des cabinets juridiques",
+    "feature1": "Gestion des affaires et des clients",
+    "feature2": "Suivi des tâches et des rendez-vous",
+    "feature3": "Gestion des documents",
+    "feature4": "Rapports et statistiques complets",
+    "loggingIn": "Connexion en cours...",
+    "registering": "Création du compte en cours...",
+    "createAccount": "Créer le compte",
+    "fullNamePlaceholder": "Ahmed Mohamed Salem"
   },
   "dashboard": {
     "title": "Tableau de bord",
@@ -310,7 +331,6 @@
     "editForm": "Formulaire de modification de tâche",
     "list": "Liste des tâches",
     "add": "Ajouter une nouvelle tâche",
-
     "delete": "Supprimer la tâche",
     "view": "Voir les détails de la tâche",
     "taskTitle": "Titre de la tâche",
@@ -348,7 +368,6 @@
       "allStatuses": "Tous les statuts",
       "allPriorities": "Toutes les priorités"
     },
-
     "searchtasksPlaceholder": "Rechercher dans les tâches...",
     "all_statuses": "Tous les statuts",
     "pending": "En attente",
@@ -363,8 +382,29 @@
     "urgent": "Urgente",
     "complete": "Terminer",
     "deleteConfirmationTitle": "Confirmation de suppression",
-    "deleteConfirmationMessage": "Êtes-vous sûre de vouloir supprimer la tâche {{name}} ? Cette action est irréversible."
+    "deleteConfirmationMessage": "Êtes-vous sûre de vouloir supprimer la tâche {{name}} ? Cette action est irréversible.",
+    "titleTasks": "Titre de la tâche",
+    "titleRequired": "Le titre de la tâche est obligatoire",
+    "descriptionTasks": "Description de la tâche",
+    "descriptionPlaceholder": "Description détaillée de la tâche",
+    "assignedToo": "Assigné à",
+    "assignedTooo": "La personne assignée ",
+    "assignedToPlaceholder": "Choisir la personne assignée",
+    "case": "Associer à une affaire (optionnel)",
+    "casePlaceholder": "Choisir l’affaire",
+    "placeholder": "Révision des documents de l'affaire",
+    "cancelButton": "Annuler",
+    "saveButton": "Créer la tâche",
+    "updateButton": "Mettre à jour la tâche",
+    "saving": "Enregistrement...",
+    "toast": {
+      "createSuccess": "Tâche créée avec succès",
+      "createError": "Erreur lors de la création de la tâche",
+      "updateSuccess": "Tâche mise à jour avec succès",
+      "updateError": "Erreur lors de la mise à jour de la tâche"
+    }
   },
+
   "users": {
     "title": "Utilisateurs",
     "list": "Liste des utilisateurs",
@@ -410,7 +450,22 @@
       "UPDATE": "Mettre à jour",
       "DELETE": "Supprimer",
       "LOGIN": "Connexion",
-      "LOGOUT": "Déconnexion"
+      "LOGOUT": "Déconnexion",
+      "client_created": "Créer",
+      "client_updated": "Mettre à jour",
+      "client_deleted": "Supprimer",
+      "case_created": "Créer",
+      "case_updated": "Mettre à jour",
+      "case_deleted": "Supprimer",
+      "task_created": "Créer",
+      "task_updated": "Mettre à jour",
+      "task_deleted": "Supprimer",
+      "document_uploaded": "Upload",
+      "document_deleted": "Supprimer",
+      "user_updated": "Mettre à jour",
+      "user_logout": "Déconnexion",
+      "user_login": "Connexion",
+      "user_registered": "Créer"
     }
   },
   "common": {

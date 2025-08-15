@@ -21,7 +21,18 @@
     "description": "Comprehensive system for managing cases, clients and documents",
     "loginFailed": "Login failed",
     "registerFailed": "Registration failed",
-    "logoutFailed": "Logout failed"
+    "logoutFailed": "Logout failed",
+    "loginSuccess": "Logged in successfully",
+    "loginDescription": "Welcome {{name}}",
+    "loginErrorTitle": "Login error",
+    "loginErrorDescription": "Check your email and password",
+    "registerSuccess": "Account created successfully",
+    "registerDescription": "Welcome {{name}}",
+    "registerErrorTitle": "Account creation error",
+    "logoutSuccess": "Logged out successfully",
+    "logoutErrorTitle": "Logout error",
+    "logoutErrorDescription": "{{message}}",
+    "fullNamePlaceholder": "Ahmed Mohamed Salem"
   },
   "dashboard": {
     "title": "Dashboard",
@@ -360,9 +371,28 @@
     "high": "High",
     "urgent": "Urgent",
     "complete": "Complete",
-
     "deleteConfirmationTitle": "Delete Confirmation",
-    "deleteConfirmationMessage": "Are you sure you want to delete the task {{name}}? This action cannot be undone."
+    "deleteConfirmationMessage": "Are you sure you want to delete the task {{name}}? This action cannot be undone.",
+    "titleTasks": "Task Title",
+    "titleRequired": "Task title is required",
+    "descriptionTasks": "Task Description",
+    "descriptionPlaceholder": "Detailed description of the task",
+    "assignedToo": "Assigned To",
+    "assignedTooo": "Assignee ",
+    "assignedToPlaceholder": "Select assignee",
+    "case": "Link to Case (optional)",
+    "casePlaceholder": "Select case",
+    "cancelButton": "Cancel",
+    "saveButton": "Create Task",
+    "updateButton": "Update Task",
+    "placeholder": "Review case documents",
+    "saving": "Saving...",
+    "toast": {
+      "createSuccess": "Task created successfully",
+      "createError": "Error creating task",
+      "updateSuccess": "Task updated successfully",
+      "updateError": "Error updating task"
+    }
   },
   "users": {
     "title": "Users",
@@ -409,7 +439,22 @@
       "UPDATE": "Update",
       "DELETE": "Delete",
       "LOGIN": "Login",
-      "LOGOUT": "Logout"
+      "LOGOUT": "Logout",
+      "client_created": "Create",
+      "client_updated": "Update",
+      "client_deleted": "Delete",
+      "case_created": "Create",
+      "case_updated": "Update",
+      "case_deleted": "Delete",
+      "task_created": "Create",
+      "task_updated": "Update",
+      "task_deleted": "Delete",
+      "document_uploaded": "Upload",
+      "document_deleted": "Delete",
+      "user_updated": "Update",
+      "user_logout": "Logout",
+      "user_login": "Login",
+      "user_registered": "Create"
     }
   },
   "common": {

@@ -47,7 +47,7 @@ export default function ClientList({
   const [searchQuery, setSearchQuery] = useState("");
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
 
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
@@ -159,13 +159,17 @@ export default function ClientList({
                   <div className="space-y-2">
                     {client.phone && (
                       <div className="flex items-center text-sm text-slate-600">
-                        <Phone className="w-4 h-4 ml-2" />
+                        <Phone
+                          className={`w-4 h-4 ${isRTL ? "ml-2" : "mr-2"}`}
+                        />
                         {client.phone}
                       </div>
                     )}
                     {client.email && (
                       <div className="flex items-center text-sm text-slate-600">
-                        <Mail className="w-4 h-4 ml-2" />
+                        <Mail
+                          className={`w-4 h-4 ${isRTL ? "ml-2" : "mr-2"}`}
+                        />
                         {client.email}
                       </div>
                     )}
