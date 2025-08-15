@@ -28,12 +28,6 @@ import { X, Loader2, Calendar } from "lucide-react";
 import { z } from "zod";
 import { useLanguage } from "@/contexts/language-context";
 
-const taskFormSchema = insertTaskSchema.extend({
-  title: z.string().min(1, "عنوان المهمة مطلوب"),
-  assignedToId: z.string().min(1, "المكلف بالمهمة مطلوب"),
-  dueDate: z.string().optional(),
-});
-
 interface TaskFormProps {
   task?: any;
   onClose: () => void;
@@ -49,7 +43,7 @@ export default function TaskForm({
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { isRTL } = useLanguage();
-
+  const { t } = useLanguage();
   const { data: cases } = useQuery({
     queryKey: ["/api/cases"],
   }) as { data: any[] | undefined };
@@ -63,7 +57,11 @@ export default function TaskForm({
   }) as { data: any[] | undefined };
 
   console.log("Users:", users);
-
+  const taskFormSchema = insertTaskSchema.extend({
+    title: z.string().min(1, t("tasks.titleRequired")),
+    assignedToId: z.string().min(1, t("tasks.assignedToo")),
+    dueDate: z.string().optional(),
+  });
   const form = useForm({
     resolver: zodResolver(taskFormSchema),
     defaultValues: {
@@ -91,11 +89,11 @@ export default function TaskForm({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/tasks"] });
-      toast({ title: "تم إنشاء المهمة بنجاح" });
+      toast({ title: t("tasks.toast.createSuccess") });
       onSuccess();
     },
     onError: () => {
-      toast({ title: "خطأ في إنشاء المهمة", variant: "destructive" });
+      toast({ title: t("tasks.toast.createError"), variant: "destructive" });
     },
   });
 
@@ -114,11 +112,11 @@ export default function TaskForm({
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["/api/tasks"] });
-      toast({ title: "تم تحديث المهمة بنجاح" });
+      toast({ title: t("tasks.toast.updateSuccess") });
       onSuccess();
     },
     onError: () => {
-      toast({ title: "خطأ في تحديث المهمة", variant: "destructive" });
+      toast({ title: t("tasks.toast.updateError"), variant: "destructive" });
     },
   });
 
@@ -140,10 +138,10 @@ export default function TaskForm({
           name="title"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>عنوان المهمة</FormLabel>
+              <FormLabel> {t("tasks.titleTasks")}</FormLabel>
               <FormControl>
                 <Input
-                  placeholder="مراجعة مستندات القضية"
+                  placeholder={t("tasks.placeholder")}
                   {...field}
                   data-testid="input-task-title"
                   className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
@@ -159,10 +157,10 @@ export default function TaskForm({
           name="description"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>وصف المهمة</FormLabel>
+              <FormLabel> {t("tasks.descriptionTasks")}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="وصف تفصيلي للمهمة"
+                  placeholder={t("tasks.descriptionPlaceholder")}
                   rows={3}
                   {...field}
                   data-testid="textarea-task-description"
@@ -180,7 +178,7 @@ export default function TaskForm({
             name="status"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>الحالة</FormLabel>
+                <FormLabel>{t("tasks.status")}</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -198,25 +196,25 @@ export default function TaskForm({
                       value="pending"
                       className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                     >
-                      معلقة
+                      {t("tasks.statuses.pending")}{" "}
                     </SelectItem>
                     <SelectItem
                       value="in_progress"
                       className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                     >
-                      قيد التنفيذ
+                      {t("tasks.statuses.in_progress")}{" "}
                     </SelectItem>
                     <SelectItem
                       value="completed"
                       className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                     >
-                      مكتملة
+                      {t("tasks.statuses.completed")}{" "}
                     </SelectItem>
                     <SelectItem
                       value="cancelled"
                       className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                     >
-                      ملغية
+                      {t("tasks.statuses.cancelled")}{" "}
                     </SelectItem>
                   </SelectContent>
                 </Select>
@@ -230,7 +228,7 @@ export default function TaskForm({
             name="priority"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>الأولوية</FormLabel>
+                <FormLabel> {t("tasks.priority")} </FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -248,25 +246,25 @@ export default function TaskForm({
                       value="low"
                       className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                     >
-                      منخفضة
+                      {t("tasks.low")}{" "}
                     </SelectItem>
                     <SelectItem
                       value="medium"
                       className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                     >
-                      متوسطة
+                      {t("tasks.medium")}{" "}
                     </SelectItem>
                     <SelectItem
                       value="high"
                       className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                     >
-                      عالية
+                      {t("tasks.high")}
                     </SelectItem>
                     <SelectItem
                       value="urgent"
                       className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                     >
-                      عاجلة
+                      {t("tasks.urgent")}
                     </SelectItem>
                   </SelectContent>
                 </Select>
@@ -280,7 +278,7 @@ export default function TaskForm({
             name="dueDate"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>تاريخ الاستحقاق</FormLabel>
+                <FormLabel> {t("tasks.dueDate")}</FormLabel>
                 <FormControl>
                   <div className="relative">
                     <Input
@@ -304,7 +302,7 @@ export default function TaskForm({
             name="assignedToId"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>المكلف بالمهمة</FormLabel>
+                <FormLabel>{t("tasks.assignedTooo")}</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -314,7 +312,9 @@ export default function TaskForm({
                       data-testid="select-assigned-to"
                       className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                     >
-                      <SelectValue placeholder="اختر المكلف" />
+                      <SelectValue
+                        placeholder={t("tasks.assignedToPlaceholder")}
+                      />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="bg-white border border-gray-200 shadow-lg">
@@ -324,13 +324,7 @@ export default function TaskForm({
                         value={user.id}
                         className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                       >
-                        {user.fullName} (
-                        {user.role === "admin"
-                          ? "مدير"
-                          : user.role === "lawyer"
-                          ? "محامي"
-                          : "سكرتير"}
-                        )
+                        {user.fullName} ({t(`users.roles.${user.role}`)})
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -345,7 +339,7 @@ export default function TaskForm({
             name="caseId"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>ربط بقضية (اختياري)</FormLabel>
+                <FormLabel>{t("tasks.case")}</FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -355,7 +349,7 @@ export default function TaskForm({
                       data-testid="select-case"
                       className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                     >
-                      <SelectValue placeholder="اختر القضية" />
+                      <SelectValue placeholder={t("tasks.casePlaceholder")} />
                     </SelectTrigger>
                   </FormControl>
                   <SelectContent className="bg-white border border-gray-200 shadow-lg">
@@ -387,7 +381,7 @@ export default function TaskForm({
             data-testid="button-cancel"
             className="bg-red-500 hover:bg-red-600 text-white border-0 rounded-lg"
           >
-            إلغاء
+            {t("common.cancel")}{" "}
           </Button>
           <Button
             type="submit"
@@ -398,12 +392,12 @@ export default function TaskForm({
             {isLoading ? (
               <>
                 <Loader2 className="ml-2 h-4 w-4 animate-spin text-white" />
-                جاري الحفظ...
+                {t("tasks.saving")}{" "}
               </>
             ) : editTask ? (
-              "تحديث المهمة"
+              t("tasks.updateButton")
             ) : (
-              "إنشاء المهمة"
+              t("tasks.saveButton")
             )}
           </Button>
         </div>

@@ -360,9 +360,28 @@
     "high": "High",
     "urgent": "Urgent",
     "complete": "Complete",
-
     "deleteConfirmationTitle": "Delete Confirmation",
-    "deleteConfirmationMessage": "Are you sure you want to delete the task {{name}}? This action cannot be undone."
+    "deleteConfirmationMessage": "Are you sure you want to delete the task {{name}}? This action cannot be undone.",
+    "titleTasks": "Task Title",
+    "titleRequired": "Task title is required",
+    "descriptionTasks": "Task Description",
+    "descriptionPlaceholder": "Detailed description of the task",
+    "assignedToo": "Assigned To",
+    "assignedTooo": "Assignee ",
+    "assignedToPlaceholder": "Select assignee",
+    "case": "Link to Case (optional)",
+    "casePlaceholder": "Select case",
+    "cancelButton": "Cancel",
+    "saveButton": "Create Task",
+    "updateButton": "Update Task",
+    "placeholder": "Review case documents",
+    "saving": "Saving...",
+    "toast": {
+      "createSuccess": "Task created successfully",
+      "createError": "Error creating task",
+      "updateSuccess": "Task updated successfully",
+      "updateError": "Error updating task"
+    }
   },
   "users": {
     "title": "Users",

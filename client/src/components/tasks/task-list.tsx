@@ -155,7 +155,7 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
           <div className="flex space-x-4 space-x-reverse">
             <div className="relative w-80">
               <Input
-                placeholder="البحث في المهام..."
+                placeholder={t("tasks.search")}
                 disabled
                 className="pl-10 bg-white border-0 shadow-md"
               />
@@ -205,7 +205,7 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
         <div className="flex space-x-4 space-x-reverse">
           <div className="relative w-80">
             <Input
-              placeholder={t("tasks.searchTasksPlaceholder")}
+              placeholder={t("tasks.search")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="pl-10 bg-white border-0 shadow-md"
@@ -224,7 +224,7 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
                 className="w-40 bg-white border border-gray-200 focus:border-primary-300 transition-all"
                 data-testid="select-filter-status"
               >
-                <SelectValue placeholder="تصفية الحالة" />
+                <SelectValue placeholder={t("tasks.filterStatus")} />
               </SelectTrigger>
               <SelectContent className="bg-white border border-gray-200 shadow-lg">
                 <SelectItem
@@ -265,7 +265,7 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
                 className="w-40 bg-white border border-gray-200 focus:border-primary-300 transition-all"
                 data-testid="select-filter-priority"
               >
-                <SelectValue placeholder="تصفية الأولوية" />
+                <SelectValue placeholder={t("tasks.filterPriority")} />
               </SelectTrigger>
               <SelectContent className="bg-white border border-gray-200 shadow-lg">
                 <SelectItem

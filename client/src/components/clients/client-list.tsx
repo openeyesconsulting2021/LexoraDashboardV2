@@ -35,12 +35,14 @@ interface ClientListProps {
   clients: Client[] | undefined;
   isLoading: boolean;
   onEdit: (clientData: Client) => void;
+  onShow: (clientData: Client) => void;
 }
 
 export default function ClientList({
   clients,
   isLoading,
   onEdit,
+  onShow,
 }: ClientListProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const { toast } = useToast();
@@ -191,6 +193,7 @@ export default function ClientList({
                     <Button
                       variant="ghost"
                       size="sm"
+                      onClick={() => onShow(client)}
                       data-testid={`button-view-client-${client.id}`}
                     >
                       <Eye className="w-4 h-4 ml-1" />
