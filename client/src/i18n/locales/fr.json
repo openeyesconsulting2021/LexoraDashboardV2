@@ -310,7 +310,6 @@
     "editForm": "Formulaire de modification de tâche",
     "list": "Liste des tâches",
     "add": "Ajouter une nouvelle tâche",
-
     "delete": "Supprimer la tâche",
     "view": "Voir les détails de la tâche",
     "taskTitle": "Titre de la tâche",
@@ -348,7 +347,6 @@
       "allStatuses": "Tous les statuts",
       "allPriorities": "Toutes les priorités"
     },
-
     "searchtasksPlaceholder": "Rechercher dans les tâches...",
     "all_statuses": "Tous les statuts",
     "pending": "En attente",
@@ -363,8 +361,29 @@
     "urgent": "Urgente",
     "complete": "Terminer",
     "deleteConfirmationTitle": "Confirmation de suppression",
-    "deleteConfirmationMessage": "Êtes-vous sûre de vouloir supprimer la tâche {{name}} ? Cette action est irréversible."
+    "deleteConfirmationMessage": "Êtes-vous sûre de vouloir supprimer la tâche {{name}} ? Cette action est irréversible.",
+    "titleTasks": "Titre de la tâche",
+    "titleRequired": "Le titre de la tâche est obligatoire",
+    "descriptionTasks": "Description de la tâche",
+    "descriptionPlaceholder": "Description détaillée de la tâche",
+    "assignedToo": "Assigné à",
+    "assignedTooo": "La personne assignée ",
+    "assignedToPlaceholder": "Choisir la personne assignée",
+    "case": "Associer à une affaire (optionnel)",
+    "casePlaceholder": "Choisir l’affaire",
+    "placeholder": "Révision des documents de l'affaire",
+    "cancelButton": "Annuler",
+    "saveButton": "Créer la tâche",
+    "updateButton": "Mettre à jour la tâche",
+    "saving": "Enregistrement...",
+    "toast": {
+      "createSuccess": "Tâche créée avec succès",
+      "createError": "Erreur lors de la création de la tâche",
+      "updateSuccess": "Tâche mise à jour avec succès",
+      "updateError": "Erreur lors de la mise à jour de la tâche"
+    }
   },
+
   "users": {
     "title": "Utilisateurs",
     "list": "Liste des utilisateurs",
