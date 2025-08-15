@@ -33,9 +33,31 @@
       "pendingTasks": "Pending Tasks",
       "totalDocuments": "Total Documents"
     },
+    "underStats": {
+      "monthlyChange": "+12% from last month",
+      "weeklyChange": "+3 this week",
+      "dueToday": "5 due today",
+      "submittedToday": "15 submitted today"
+    },
     "quickActions": "Quick Actions",
     "recentCases": "Recent Cases",
-    "upcomingTasks": "Upcoming Tasks"
+    "upcomingTasks": "Upcoming Tasks",
+    "newCases": "There are recent cases"
+  },
+  "recentsCases": {
+    "ShowAll": "Show all",
+    "newCases": "There are recent cases",
+    "caseNumber": "Case number",
+    "title": "Title",
+    "status": "Status",
+    "priority": "Priority",
+    "actions": "Actions",
+    "view": "View",
+    "edit": "Edit"
+  },
+  "tasksSidebar": {
+    "noPendingTasks": "There are no pending tasks",
+    "viewAllTasks": "View all tasks"
   },
   "quickActions": {
     "title": "Quick Actions",
@@ -136,7 +158,35 @@
     "addSuccess": "Client added successfully",
     "addError": "Error adding client",
     "updateSuccess": "Client updated successfully",
-    "updateError": "Error updating client"
+    "updateError": "Error updating client",
+    "clientName": "Mohamed Ahmed Salem",
+    "clientAddress": "Detailed client address",
+    "notes": "Notes",
+    "notesPlaceholder": "Additional notes about the client"
+  },
+  "clientList": {
+    "id": "ID",
+    "view": "View",
+    "edit": "Edit",
+    "delete": "Delete",
+    "confirmDelete": "Confirm Delete",
+    "deleteConfirmationMessage": "Are you sure you want to delete the client {{name}}? This action cannot be undone."
+  },
+  "clientForm": {
+    "create": {
+      "success": "Client created successfully",
+      "error": "Error creating client"
+    },
+    "update": {
+      "success": "Client updated successfully",
+      "error": "Error updating client"
+    },
+    "name": "Client name is required",
+    "email": "Email is invalid",
+    "phone": "Phone number is required",
+    "saving": "Saving...",
+    "updateClient": "Update Client",
+    "createClient": "Create Client"
   },
   "documents": {
     "title": "Document Management",
