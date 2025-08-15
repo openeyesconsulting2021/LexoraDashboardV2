@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام إدارة المكتب القانوني - Lexora Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe', 
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8'
+                        },
+                        slate: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            500: '#64748b',
+                            700: '#334155',
+                            800: '#1e293b',
+                            900: '#0f172a'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        [dir="rtl"] .rtl-flip {
+            transform: scaleX(-1);
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-900" dir="rtl">
+    
+    <!-- @COMPONENT: AppLayout [Main application layout with sidebar and header] -->
+    <div class="flex h-screen overflow-hidden">
+        
+        <!-- @COMPONENT: Sidebar [Navigation sidebar with role-based menu items] -->
+        <div class="hidden md:flex md:w-64 md:flex-col">
+            <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-white border-l border-slate-200">
+                <!-- Logo and Brand -->
+                <div class="flex items-center px-6 pb-4">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-balance-scale text-white text-sm"></i>
+                        </div>
+                        <div class="mr-3">
+                            <h1 class="text-lg font-bold text-slate-900">Lexora</h1>
+                            <p class="text-xs text-slate-500">نظام إدارة قانوني</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Profile -->
+                <!-- @STATE: currentUser:User object with role, name, avatar -->
+                <div class="px-6 pb-4 border-b border-slate-100">
+                    <div class="flex items-center">
+                        <!-- Professional lawyer headshot -->
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=150&h=150" 
+                             alt="صورة المحامي أحمد الخطيب" 
+                             class="w-10 h-10 rounded-full object-cover" 
+                             data-mock="true">
+                        <div class="mr-3">
+                            <p class="text-sm font-medium text-slate-900" data-bind="user.name">أحمد الخطيب</p>
+                            <p class="text-xs text-slate-500" data-bind="user.role">محامي أول</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Menu -->
+                <nav class="flex-1 px-4 py-4 space-y-1">
+                    <!-- @MAP: navigationItems.map(item => ( -->
+                    <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium text-white bg-primary-600 rounded-lg" data-event="click:navigateTo">
+                        <i class="fas fa-tachometer-alt ml-3 text-sm"></i>
+                        لوحة التحكم
+                    </a>
+                    
+                    <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" data-event="click:navigateTo">
+                        <i class="fas fa-briefcase ml-3 text-sm"></i>
+                        القضايا
+                        <span class="mr-auto bg-primary-100 text-primary-600 text-xs font-medium px-2 py-0.5 rounded-full" data-bind="cases.activeCount">12</span>
+                    </a>
+                    
+                    <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" data-event="click:navigateTo">
+                        <i class="fas fa-users ml-3 text-sm"></i>
+                        العملاء
+                    </a>
+                    
+                    <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" data-event="click:navigateTo">
+                        <i class="fas fa-file-alt ml-3 text-sm"></i>
+                        المستندات
+                    </a>
+                    
+                    <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" data-event="click:navigateTo">
+                        <i class="fas fa-tasks ml-3 text-sm"></i>
+                        المهام
+                        <span class="mr-auto bg-amber-100 text-amber-600 text-xs font-medium px-2 py-0.5 rounded-full" data-bind="tasks.pendingCount">5</span>
+                    </a>
+                    
+                    <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" data-event="click:navigateTo">
+                        <i class="fas fa-chart-bar ml-3 text-sm"></i>
+                        التقارير
+                    </a>
+                    
+                    <!-- Admin Only Navigation -->
+                    <div class="pt-4 border-t border-slate-100" data-role-access="admin">
+                        <p class="px-3 text-xs font-semibold text-slate-500 uppercase tracking-wider">الإدارة</p>
+                        <a href="#" class="group flex items-center px-3 py-2 mt-2 text-sm font-medium text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" data-event="click:navigateTo">
+                            <i class="fas fa-user-shield ml-3 text-sm"></i>
+                            المستخدمين
+                        </a>
+                        <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" data-event="click:navigateTo">
+                            <i class="fas fa-history ml-3 text-sm"></i>
+                            سجل الأنشطة
+                        </a>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </nav>
+
+                <!-- Settings and Logout -->
+                <div class="px-4 py-4 border-t border-slate-100">
+                    <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium text-slate-700 rounded-lg hover:bg-slate-100 hover:text-slate-900" data-event="click:openSettings">
+                        <i class="fas fa-cog ml-3 text-sm"></i>
+                        الإعدادات
+                    </a>
+                    <a href="#" class="group flex items-center px-3 py-2 text-sm font-medium text-red-600 rounded-lg hover:bg-red-50" data-event="click:logout">
+                        <i class="fas fa-sign-out-alt ml-3 text-sm"></i>
+                        تسجيل الخروج
+                    </a>
+                </div>
+            </div>
+        </div>
+        <!-- @END_COMPONENT: Sidebar -->
+
+        <!-- @COMPONENT: MainContent [Main content area with header and dashboard] -->
+        <div class="flex flex-col flex-1 overflow-hidden">
+            
+            <!-- @COMPONENT: TopHeader [Top navigation bar with breadcrumbs and actions] -->
+            <header class="bg-white border-b border-slate-200 px-6 py-4">
+                <div class="flex items-center justify-between">
+                    <!-- Mobile menu button -->
+                    <button class="md:hidden text-slate-500 hover:text-slate-700" data-event="click:toggleMobileMenu">
+                        <i class="fas fa-bars text-lg"></i>
+                    </button>
+
+                    <!-- Breadcrumbs -->
+                    <div class="hidden md:flex items-center space-x-2 space-x-reverse">
+                        <span class="text-sm text-slate-500">لوحة التحكم</span>
+                    </div>
+
+                    <!-- Header Actions -->
+                    <div class="flex items-center space-x-4 space-x-reverse">
+                        <!-- Search -->
+                        <div class="relative">
+                            <input type="text" placeholder="البحث في القضايا والعملاء..." 
+                                   class="w-80 pl-10 pr-4 py-2 text-sm border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                                   data-functionality="Global search across cases, clients, documents">
+                            <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 text-sm"></i>
+                        </div>
+
+                        <!-- Notifications -->
+                        <button class="relative p-2 text-slate-500 hover:text-slate-700" data-event="click:openNotifications">
+                            <i class="fas fa-bell text-lg"></i>
+                            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full" data-bind="notifications.hasUnread"></span>
+                        </button>
+
+                        <!-- Quick Actions -->
+                        <button class="bg-primary-600 hover:bg-primary-700 text-white px-4 py-2 rounded-lg text-sm font-medium flex items-center" data-event="click:openQuickActions">
+                            <i class="fas fa-plus ml-2 text-sm"></i>
+                            إجراء سريع
+                        </button>
+                    </div>
+                </div>
+            </header>
+            <!-- @END_COMPONENT: TopHeader -->
+
+            <!-- @COMPONENT: DashboardContent [Main dashboard content with stats and widgets] -->
+            <main class="flex-1 overflow-y-auto p-6">
+                
+                <!-- Dashboard Header -->
+                <div class="mb-8">
+                    <h2 class="text-2xl font-bold text-slate-900">مرحباً، أحمد الخطيب</h2>
+                    <p class="text-slate-600 mt-1">إليك نظرة عامة على نشاط مكتبك القانوني اليوم</p>
+                </div>
+
+                <!-- Stats Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- @MAP: dashboardStats.map(stat => ( -->
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-slate-600" data-bind="stat.label">القضايا النشطة</p>
+                                <p class="text-3xl font-bold text-slate-900 mt-2" data-bind="stat.value">24</p>
+                                <p class="text-sm text-emerald-600 mt-1" data-bind="stat.change">+12% من الشهر السابق</p>
+                            </div>
+                            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-briefcase text-primary-600 text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-slate-600">العملاء الجدد</p>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">8</p>
+                                <p class="text-sm text-emerald-600 mt-1">+3 هذا الأسبوع</p>
+                            </div>
+                            <div class="w-12 h-12 bg-emerald-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-users text-emerald-600 text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-slate-600">المهام المعلقة</p>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">12</p>
+                                <p class="text-sm text-amber-600 mt-1">5 مستحقة اليوم</p>
+                            </div>
+                            <div class="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-tasks text-amber-600 text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-sm border border-slate-200 p-6">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm font-medium text-slate-600">المستندات الجديدة</p>
+                                <p class="text-3xl font-bold text-slate-900 mt-2">45</p>
+                                <p class="text-sm text-primary-600 mt-1">تم رفع 15 اليوم</p>
+                            </div>
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                                <i class="fas fa-file-alt text-blue-600 text-lg"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_MAP )) -->
+                </div>
+
+                <!-- Content Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- @COMPONENT: RecentCases [Recent cases widget with quick actions] -->
+                    <div class="lg:col-span-2">
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+                            <div class="p-6 border-b border-slate-200">
+                                <div class="flex items-center justify-between">
+                                    <h3 class="text-lg font-semibold text-slate-900">القضايا الحديثة</h3>
+                                    <button class="text-primary-600 hover:text-primary-700 text-sm font-medium" data-event="click:viewAllCases">
+                                        عرض الكل
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="overflow-x-auto">
+                                <table class="w-full">
+                                    <thead class="bg-slate-50">
+                                        <tr>
+                                            <th class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">رقم القضية</th>
+                                            <th class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">العميل</th>
+                                            <th class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">النوع</th>
+                                            <th class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">الحالة</th>
+                                            <th class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">الأولوية</th>
+                                            <th class="px-6 py-3 text-right text-xs font-medium text-slate-500 uppercase tracking-wider">إجراءات</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="bg-white divide-y divide-slate-200">
+                                        <!-- @MAP: recentCases.map(case => ( -->
+                                        <tr class="hover:bg-slate-50" data-mock="true">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900" data-bind="case.number">C-2024-001</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-700" data-bind="case.client.name">شركة النور للتجارة</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-700" data-bind="case.type">نزاع تجاري</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-medium bg-emerald-100 text-emerald-800 rounded-full" data-bind="case.status">نشطة</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-medium bg-red-100 text-red-800 rounded-full" data-bind="case.priority">عالية</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                                                <button class="text-primary-600 hover:text-primary-700 ml-3" data-event="click:viewCase">عرض</button>
+                                                <button class="text-slate-400 hover:text-slate-500" data-event="click:editCase">تعديل</button>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr class="hover:bg-slate-50" data-mock="true">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">C-2024-002</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-700">محمد عبدالله السالم</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-700">قضية أحوال شخصية</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">معلقة</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-medium bg-amber-100 text-amber-800 rounded-full">متوسطة</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                                                <button class="text-primary-600 hover:text-primary-700 ml-3" data-event="click:viewCase">عرض</button>
+                                                <button class="text-slate-400 hover:text-slate-500" data-event="click:editCase">تعديل</button>
+                                            </td>
+                                        </tr>
+                                        
+                                        <tr class="hover:bg-slate-50" data-mock="true">
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-slate-900">C-2024-003</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-700">مؤسسة الفجر العقارية</td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-700">نزاع عقاري</td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-medium bg-emerald-100 text-emerald-800 rounded-full">نشطة</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap">
+                                                <span class="inline-flex px-2 py-1 text-xs font-medium bg-emerald-100 text-emerald-800 rounded-full">منخفضة</span>
+                                            </td>
+                                            <td class="px-6 py-4 whitespace-nowrap text-sm text-slate-500">
+                                                <button class="text-primary-600 hover:text-primary-700 ml-3" data-event="click:viewCase">عرض</button>
+                                                <button class="text-slate-400 hover:text-slate-500" data-event="click:editCase">تعديل</button>
+                                            </td>
+                                        </tr>
+                                        <!-- @END_MAP )) -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: RecentCases -->
+
+                    <!-- @COMPONENT: TasksAndNotifications [Tasks and notifications sidebar] -->
+                    <div class="space-y-6">
+                        
+                        <!-- Upcoming Tasks -->
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+                            <div class="p-6 border-b border-slate-200">
+                                <h3 class="text-lg font-semibold text-slate-900">المهام القادمة</h3>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <!-- @MAP: upcomingTasks.map(task => ( -->
+                                <div class="flex items-start space-x-3 space-x-reverse" data-mock="true">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mt-2 flex-shrink-0"></div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-slate-900" data-bind="task.title">مراجعة مستندات القضية C-2024-001</p>
+                                        <p class="text-xs text-slate-500 mt-1" data-bind="task.dueDate">مستحقة اليوم - 2:00 م</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-3 space-x-reverse" data-mock="true">
+                                    <div class="w-2 h-2 bg-amber-500 rounded-full mt-2 flex-shrink-0"></div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-slate-900">اجتماع مع العميل محمد السالم</p>
+                                        <p class="text-xs text-slate-500 mt-1">غداً - 10:00 ص</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-3 space-x-reverse" data-mock="true">
+                                    <div class="w-2 h-2 bg-primary-500 rounded-full mt-2 flex-shrink-0"></div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm font-medium text-slate-900">إعداد لائحة دعوى</p>
+                                        <p class="text-xs text-slate-500 mt-1">15 نوفمبر - 5:00 م</p>
+                                    </div>
+                                </div>
+                                <!-- @END_MAP )) -->
+                                
+                                <button class="w-full text-center text-sm text-primary-600 hover:text-primary-700 font-medium pt-4 border-t border-slate-100" data-event="click:viewAllTasks">
+                                    عرض جميع المهام
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Recent Activity -->
+                        <div class="bg-white rounded-xl shadow-sm border border-slate-200">
+                            <div class="p-6 border-b border-slate-200">
+                                <h3 class="text-lg font-semibold text-slate-900">النشاط الأخير</h3>
+                            </div>
+                            <div class="p-6 space-y-4">
+                                <!-- @MAP: recentActivity.map(activity => ( -->
+                                <div class="flex items-start space-x-3 space-x-reverse" data-mock="true">
+                                    <div class="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-file-upload text-primary-600 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm text-slate-900" data-bind="activity.description">تم رفع مستند جديد للقضية C-2024-001</p>
+                                        <p class="text-xs text-slate-500 mt-1" data-bind="activity.timestamp">منذ 30 دقيقة</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-3 space-x-reverse" data-mock="true">
+                                    <div class="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-user-plus text-emerald-600 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm text-slate-900">تم إضافة عميل جديد: فاطمة الزهراني</p>
+                                        <p class="text-xs text-slate-500 mt-1">منذ ساعة</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="flex items-start space-x-3 space-x-reverse" data-mock="true">
+                                    <div class="w-8 h-8 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
+                                        <i class="fas fa-edit text-amber-600 text-xs"></i>
+                                    </div>
+                                    <div class="flex-1 min-w-0">
+                                        <p class="text-sm text-slate-900">تم تحديث معلومات القضية C-2024-002</p>
+                                        <p class="text-xs text-slate-500 mt-1">منذ 3 ساعات</p>
+                                    </div>
+                                </div>
+                                <!-- @END_MAP )) -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- @END_COMPONENT: TasksAndNotifications -->
+                </div>
+
+                <!-- Quick Actions Modal Trigger -->
+                <!-- @FUNCTIONALITY: This modal should provide quick access to common actions like adding cases, clients, documents -->
+                <div id="quickActionsModal" class="hidden fixed inset-0 bg-slate-900 bg-opacity-50 flex items-center justify-center z-50" data-event="click:closeModal">
+                    <div class="bg-white rounded-xl shadow-xl max-w-md w-full mx-4" onclick="event.stopPropagation()">
+                        <div class="p-6 border-b border-slate-200">
+                            <h3 class="text-lg font-semibold text-slate-900">الإجراءات السريعة</h3>
+                        </div>
+                        <div class="p-6 grid grid-cols-2 gap-4">
+                            <button class="flex flex-col items-center p-4 border border-slate-200 rounded-lg hover:bg-slate-50" data-event="click:addCase">
+                                <i class="fas fa-briefcase text-primary-600 text-2xl mb-2"></i>
+                                <span class="text-sm font-medium text-slate-900">إضافة قضية</span>
+                            </button>
+                            <button class="flex flex-col items-center p-4 border border-slate-200 rounded-lg hover:bg-slate-50" data-event="click:addClient">
+                                <i class="fas fa-user-plus text-emerald-600 text-2xl mb-2"></i>
+                                <span class="text-sm font-medium text-slate-900">إضافة عميل</span>
+                            </button>
+                            <button class="flex flex-col items-center p-4 border border-slate-200 rounded-lg hover:bg-slate-50" data-event="click:uploadDocument">
+                                <i class="fas fa-cloud-upload-alt text-blue-600 text-2xl mb-2"></i>
+                                <span class="text-sm font-medium text-slate-900">رفع مستند</span>
+                            </button>
+                            <button class="flex flex-col items-center p-4 border border-slate-200 rounded-lg hover:bg-slate-50" data-event="click:createTask">
+                                <i class="fas fa-plus-circle text-amber-600 text-2xl mb-2"></i>
+                                <span class="text-sm font-medium text-slate-900">إنشاء مهمة</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Document Upload Modal -->
+                <!-- @FUNCTIONALITY: This modal implements file upload with progress, validation, and categorization -->
+                <div id="documentUploadModal" class="hidden fixed inset-0 bg-slate-900 bg-opacity-50 flex items-center justify-center z-50" data-implementation="Use ObjectUploader component here">
+                    <div class="bg-white rounded-xl shadow-xl max-w-lg w-full mx-4" onclick="event.stopPropagation()">
+                        <div class="p-6 border-b border-slate-200">
+                            <h3 class="text-lg font-semibold text-slate-900">رفع مستند جديد</h3>
+                        </div>
+                        <div class="p-6">
+                            <div class="border-2 border-dashed border-slate-300 rounded-lg p-8 text-center hover:border-primary-400 transition-colors">
+                                <i class="fas fa-cloud-upload-alt text-4xl text-slate-400 mb-4"></i>
+                                <p class="text-slate-600 mb-2">اسحب وأفلت الملفات هنا أو</p>
+                                <button class="text-primary-600 hover:text-primary-700 font-medium" data-event="click:selectFiles">
+                                    اختر الملفات
+                                </button>
+                                <p class="text-xs text-slate-500 mt-2">PDF, DOC, DOCX حتى 10MB</p>
+                            </div>
+                            
+                            <div class="mt-6 space-y-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">تصنيف المستند</label>
+                                    <select class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                        <option>اختر التصنيف</option>
+                                        <option>مستندات القضية</option>
+                                        <option>مراسلات العميل</option>
+                                        <option>أوراق المحكمة</option>
+                                        <option>عقود واتفاقيات</option>
+                                    </select>
+                                </div>
+                                
+                                <div>
+                                    <label class="block text-sm font-medium text-slate-700 mb-2">ربط بالقضية (اختياري)</label>
+                                    <select class="w-full border border-slate-300 rounded-lg px-3 py-2 focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                        <option>اختر القضية</option>
+                                        <option>C-2024-001 - شركة النور للتجارة</option>
+                                        <option>C-2024-002 - محمد عبدالله السالم</option>
+                                        <option>C-2024-003 - مؤسسة الفجر العقارية</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-6 flex justify-end space-x-3 space-x-reverse">
+                                <button class="px-4 py-2 text-sm font-medium text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg" data-event="click:closeUploadModal">
+                                    إلغاء
+                                </button>
+                                <button class="px-4 py-2 text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 rounded-lg" data-event="click:uploadFiles">
+                                    رفع المستندات
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </main>
+            <!-- @END_COMPONENT: DashboardContent -->
+        </div>
+        <!-- @END_COMPONENT: MainContent -->
+    </div>
+    <!-- @END_COMPONENT: AppLayout -->
+
+    <script>
+        (function() {
+            // TODO: Implement business logic, API calls, and state management
+            
+            // Modal functionality
+            function toggleModal(modalId, show = null) {
+                const modal = document.getElementById(modalId);
+                if (modal) {
+                    if (show === null) {
+                        modal.classList.toggle('hidden');
+                    } else {
+                        modal.classList.toggle('hidden', !show);
+                    }
+                }
+            }
+
+            // Quick actions modal
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('[data-event="click:openQuickActions"]')) {
+                    toggleModal('quickActionsModal', true);
+                }
+                
+                if (e.target.closest('[data-event="click:closeModal"]') || 
+                    e.target.closest('[data-event="click:closeUploadModal"]')) {
+                    toggleModal('quickActionsModal', false);
+                    toggleModal('documentUploadModal', false);
+                }
+                
+                if (e.target.closest('[data-event="click:uploadDocument"]')) {
+                    toggleModal('quickActionsModal', false);
+                    toggleModal('documentUploadModal', true);
+                }
+            });
+
+            // Mobile menu toggle
+            let mobileMenuOpen = false;
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('[data-event="click:toggleMobileMenu"]')) {
+                    mobileMenuOpen = !mobileMenuOpen;
+                    // TODO: Implement mobile menu sliding animation
+                }
+            });
+
+            // Search functionality
+            document.querySelector('input[placeholder*="البحث"]')?.addEventListener('input', function(e) {
+                // TODO: Implement real-time search with debouncing
+                console.log('Search query:', e.target.value);
+            });
+
+            // Notification system
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('[data-event="click:openNotifications"]')) {
+                    // TODO: Implement notifications dropdown
+                    console.log('Opening notifications');
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
