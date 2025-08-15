@@ -48,6 +48,7 @@ export default function DocumentList({
   const queryClient = useQueryClient();
   const { t } = useLanguage();
   const { isRTL } = useLanguage();
+
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       await apiRequest("DELETE", `/api/documents/${id}`);
@@ -227,7 +228,11 @@ export default function DocumentList({
                     </p>
                   </div>
 
-                  <div className="flex justify-end space-x-2 space-x-reverse">
+                  <div
+                    className={`flex justify-end space-x-2 ${
+                      isRTL ? "space-x-reverse" : ""
+                    }`}
+                  >
                     <Button
                       variant="ghost"
                       size="sm"
