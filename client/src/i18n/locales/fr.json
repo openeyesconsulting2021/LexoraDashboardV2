@@ -450,7 +450,22 @@
       "UPDATE": "Mettre à jour",
       "DELETE": "Supprimer",
       "LOGIN": "Connexion",
-      "LOGOUT": "Déconnexion"
+      "LOGOUT": "Déconnexion",
+      "client_created": "Créer",
+      "client_updated": "Mettre à jour",
+      "client_deleted": "Supprimer",
+      "case_created": "Créer",
+      "case_updated": "Mettre à jour",
+      "case_deleted": "Supprimer",
+      "task_created": "Créer",
+      "task_updated": "Mettre à jour",
+      "task_deleted": "Supprimer",
+      "document_uploaded": "Upload",
+      "document_deleted": "Supprimer",
+      "user_updated": "Mettre à jour",
+      "user_logout": "Déconnexion",
+      "user_login": "Connexion",
+      "user_registered": "Créer"
     }
   },
   "common": {

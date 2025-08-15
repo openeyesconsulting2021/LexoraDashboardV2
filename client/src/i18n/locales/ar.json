@@ -439,7 +439,22 @@
       "UPDATE": "تحديث",
       "DELETE": "حذف",
       "LOGIN": "تسجيل دخول",
-      "LOGOUT": "تسجيل خروج"
+      "LOGOUT": "تسجيل خروج",
+      "client_created": "إنشاء",
+      "client_updated": "تحديث",
+      "client_deleted": "حذف",
+      "case_created": "إنشاء",
+      "case_updated": "تحديث",
+      "case_deleted": "حذف",
+      "task_created": "إنشاء",
+      "task_updated": "تحديث",
+      "task_deleted": "حذف",
+      "document_uploaded": "إنشاء",
+      "document_deleted": "حذف",
+      "user_updated": "تحديث",
+      "user_logout": "تسجيل خروج",
+      "user_login": "تسجيل دخول",
+      "user_registered": "إنشاء"
     }
   },
   "common": {

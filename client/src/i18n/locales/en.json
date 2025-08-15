@@ -439,7 +439,22 @@
       "UPDATE": "Update",
       "DELETE": "Delete",
       "LOGIN": "Login",
-      "LOGOUT": "Logout"
+      "LOGOUT": "Logout",
+      "client_created": "Create",
+      "client_updated": "Update",
+      "client_deleted": "Delete",
+      "case_created": "Create",
+      "case_updated": "Update",
+      "case_deleted": "Delete",
+      "task_created": "Create",
+      "task_updated": "Update",
+      "task_deleted": "Delete",
+      "document_uploaded": "Upload",
+      "document_deleted": "Delete",
+      "user_updated": "Update",
+      "user_logout": "Logout",
+      "user_login": "Login",
+      "user_registered": "Create"
     }
   },
   "common": {

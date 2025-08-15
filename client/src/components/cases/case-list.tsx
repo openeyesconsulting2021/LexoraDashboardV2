@@ -39,9 +39,15 @@ interface CaseListProps {
   cases: Case[] | undefined;
   isLoading: boolean;
   onEdit: (caseData: Case) => void;
+  onShow: (caseData: Case) => void;
 }
 
-export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
+export default function CaseList({
+  cases,
+  isLoading,
+  onEdit,
+  onShow,
+}: CaseListProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -243,6 +249,7 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
                           <Button
                             variant="ghost"
                             size="sm"
+                            onClick={() => onShow(caseItem)}
                             data-testid={`button-view-case-${caseItem.id}`}
                           >
                             <Eye className="w-4 h-4 ml-1" />

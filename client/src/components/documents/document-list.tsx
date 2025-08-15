@@ -48,6 +48,7 @@ export default function DocumentList({
   const queryClient = useQueryClient();
   const { t } = useLanguage();
   const { isRTL } = useLanguage();
+
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       await apiRequest("DELETE", `/api/documents/${id}`);
