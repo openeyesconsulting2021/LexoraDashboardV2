@@ -17,8 +17,8 @@ if (!DATABASE_URL) {
   );
 }
 
+export const pool = new PGPool({ connectionString: DATABASE_URL });
 //export const pool = new PGPool({ connectionString: DATABASE_URL });
-export const pool = new Pool({ connectionString: DATABASE_URL });
 
 pool
   .connect()

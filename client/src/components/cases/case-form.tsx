@@ -44,6 +44,7 @@ export default function CaseForm({
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { t } = useLanguage();
+  const { isRTL } = useLanguage();
   const { data: clients } = useQuery({
     queryKey: ["/api/clients"],
   }) as { data: any[] | undefined };

@@ -41,6 +41,7 @@ export default function DocumentUpload({
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { t } = useLanguage();
+  const { isRTL } = useLanguage();
   const { data: cases } = useQuery({
     queryKey: ["/api/cases"],
   }) as { data: any[] | undefined };

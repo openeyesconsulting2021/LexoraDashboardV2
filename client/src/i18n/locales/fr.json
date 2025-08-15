@@ -34,10 +34,10 @@
       "totalDocuments": "Total des documents"
     },
     "underStats": {
-      "monthlyChange": "+12 % par rapport au mois précédent",
-      "weeklyChange": "+3 cette semaine",
-      "dueToday": "5 dues aujourd’hui",
-      "submittedToday": "15 soumises aujourd’hui"
+      "monthlyChange": "+{{value}} % par rapport au mois précédent",
+      "weeklyChange": "+{{value}} cette semaine",
+      "dueToday": "{{value}} dues aujourd’hui",
+      "submittedToday": "{{value}} soumises aujourd’hui"
     },
     "quickActions": "Actions rapides",
     "recentCases": "Dossiers récents",
@@ -213,7 +213,9 @@
     "title": "Le titre de l'affaire est requis",
     "caseType": "Le type de l'affaire est requis",
     "clientId": "Le client est requis",
-    "assignedLawyerId": "L'avocat responsable est requis"
+    "assignedLawyerId": "L'avocat responsable est requis",
+    "updateClient": "Modifier le client",
+    "createClient": "Créer le client"
   },
   "documents": {
     "title": "Gestion des Documents",
@@ -443,5 +445,9 @@
     "ar": "العربية",
     "fr": "Français",
     "en": "English"
+  },
+  "pageConstruction": {
+    "title": "Page en construction",
+    "description": "Cette page sera bientôt disponible"
   }
 }

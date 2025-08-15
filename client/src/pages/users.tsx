@@ -31,7 +31,10 @@ export default function Users() {
   });
 
   const getRoleBadge = (role: string) => {
-    const variants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
+    const variants: Record<
+      string,
+      "default" | "secondary" | "destructive" | "outline"
+    > = {
       admin: "destructive",
       lawyer: "default",
       secretary: "secondary",
@@ -44,7 +47,10 @@ export default function Users() {
     };
 
     return (
-      <Badge variant={variants[role] || "outline"} className="flex items-center">
+      <Badge
+        variant={variants[role] || "outline"}
+        className="flex items-center"
+      >
         {icons[role]}
         {t(`users.roles.${role}`)}
       </Badge>
@@ -59,28 +65,34 @@ export default function Users() {
     );
   };
 
-  const filteredUsers = users?.filter(user =>
-    user.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    user.username.toLowerCase().includes(searchQuery.toLowerCase())
-  ) || [];
+  const filteredUsers =
+    users?.filter(
+      (user) =>
+        user.fullName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.email.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        user.username.toLowerCase().includes(searchQuery.toLowerCase())
+    ) || [];
 
   return (
     <MainLayout>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between px-6 py-10">
         <h1 className="text-2xl font-bold text-slate-900">
           {t("users.title")}
         </h1>
       </div>
 
-      <Card>
+      <Card className="bg-white shadow-md border-0">
         <CardHeader>
           <CardTitle>{t("users.list")}</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="mb-6">
             <div className="relative">
-              <Search className={`absolute top-3 ${isRTL ? "right-3" : "left-3"} h-4 w-4 text-muted-foreground`} />
+              <Search
+                className={`absolute top-3 ${
+                  isRTL ? "right-3" : "left-3"
+                } h-4 w-4 text-muted-foreground`}
+              />
               <Input
                 placeholder={t("users.search")}
                 value={searchQuery}
@@ -94,15 +106,26 @@ export default function Users() {
           {isLoading ? (
             <div className="space-y-4">
               {[...Array(5)].map((_, i) => (
-                <div key={i} className={`flex items-center justify-between p-4 border border-slate-100 rounded-lg`}>
-                  <div className={`flex items-center ${isRTL ? "space-x-reverse space-x-4" : "space-x-4"}`}>
+                <div
+                  key={i}
+                  className={`flex items-center justify-between p-4 border border-slate-100 rounded-lg`}
+                >
+                  <div
+                    className={`flex items-center ${
+                      isRTL ? "space-x-reverse space-x-4" : "space-x-4"
+                    }`}
+                  >
                     <Skeleton className="h-12 w-12 rounded-full" />
                     <div className="space-y-2">
                       <Skeleton className="h-4 w-32" />
                       <Skeleton className="h-3 w-48" />
                     </div>
                   </div>
-                  <div className={`flex ${isRTL ? "space-x-reverse space-x-2" : "space-x-2"}`}>
+                  <div
+                    className={`flex ${
+                      isRTL ? "space-x-reverse space-x-2" : "space-x-2"
+                    }`}
+                  >
                     <Skeleton className="h-6 w-16" />
                     <Skeleton className="h-6 w-16" />
                   </div>
@@ -116,8 +139,15 @@ export default function Users() {
           ) : (
             <div className="space-y-4">
               {filteredUsers.map((user) => (
-                <div key={user.id} className={`flex items-center justify-between p-4 border border-slate-100 rounded-lg hover:bg-slate-50 transition-colors`}>
-                  <div className={`flex items-center ${isRTL ? "space-x-reverse space-x-4" : "space-x-4"}`}>
+                <div
+                  key={user.id}
+                  className={`flex items-center justify-between p-4 border border-slate-100 rounded-lg hover:bg-slate-50 transition-colors`}
+                >
+                  <div
+                    className={`flex items-center ${
+                      isRTL ? "space-x-reverse space-x-4" : "space-x-4"
+                    }`}
+                  >
                     <div className="flex-shrink-0">
                       <div className="h-12 w-12 bg-slate-200 rounded-full flex items-center justify-center">
                         {user.fullName.charAt(0).toUpperCase()}
@@ -127,17 +157,29 @@ export default function Users() {
                       <p className="text-sm font-medium text-slate-900 truncate">
                         {user.fullName}
                       </p>
-                      <p className="text-sm text-slate-500 truncate">{user.email}</p>
+                      <p className="text-sm text-slate-500 truncate">
+                        {user.email}
+                      </p>
                       <p className="text-xs text-slate-400">@{user.username}</p>
                     </div>
                   </div>
-                  <div className={`flex items-center ${isRTL ? "space-x-reverse space-x-3" : "space-x-3"}`}>
+                  <div
+                    className={`flex items-center ${
+                      isRTL ? "space-x-reverse space-x-3" : "space-x-3"
+                    }`}
+                  >
                     {getRoleBadge(user.role)}
                     {getStatusBadge(user.isActive)}
                     <div className="text-xs text-slate-400">
-                      {format(new Date(user.createdAt), "dd/MM/yyyy", { locale: ar })}
+                      {format(new Date(user.createdAt), "dd/MM/yyyy", {
+                        locale: ar,
+                      })}
                     </div>
-                    <Button variant="ghost" size="sm" data-testid={`button-edit-user-${user.id}`}>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      data-testid={`button-edit-user-${user.id}`}
+                    >
                       <Edit className="h-4 w-4" />
                     </Button>
                   </div>

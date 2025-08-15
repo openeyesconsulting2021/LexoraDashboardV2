@@ -34,7 +34,7 @@ export default function ClientForm({
   const { user } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
-  const { t } = useLanguage();
+  const { t, isRTL } = useLanguage();
   const clientFormSchema = insertClientSchema.extend({
     name: z.string().min(1, t("clientForm.name" as any)),
     email: z
@@ -232,7 +232,11 @@ export default function ClientForm({
           )}
         />
 
-        <div className="flex justify-end space-x-2 space-x-reverse">
+        <div
+          className={`flex justify-end space-x-2 ${
+            isRTL ? "space-x-reverse" : ""
+          }`}
+        >
           <Button
             type="button"
             onClick={onClose}

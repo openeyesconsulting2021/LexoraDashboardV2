@@ -22,7 +22,6 @@ import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";
 import { useLanguage } from "@/contexts/language-context";
-
 interface Document {
   id: string;
   title: string;
@@ -48,6 +47,7 @@ export default function DocumentList({
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const { t } = useLanguage();
+  const { isRTL } = useLanguage();
   const deleteMutation = useMutation({
     mutationFn: async (id: string) => {
       await apiRequest("DELETE", `/api/documents/${id}`);

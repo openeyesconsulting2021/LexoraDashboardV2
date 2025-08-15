@@ -34,9 +34,9 @@
       "totalDocuments": "Total Documents"
     },
     "underStats": {
-      "monthlyChange": "+12% from last month",
-      "weeklyChange": "+3 this week",
-      "dueToday": "5 due today",
+      "monthlyChange": "+{{value}}% from last month",
+      "weeklyChange": "+{{value}} this week",
+      "dueToday": "{{value}} due today",
       "submittedToday": "15 submitted today"
     },
     "quickActions": "Quick Actions",
@@ -444,5 +444,9 @@
     "ar": "العربية",
     "fr": "Français",
     "en": "English"
+  },
+  "pageConstruction": {
+    "title": "Page under construction",
+    "description": "This page will be available soon"
   }
 }
