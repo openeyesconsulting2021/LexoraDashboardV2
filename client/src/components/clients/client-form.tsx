@@ -241,7 +241,7 @@ export default function ClientForm({
             type="button"
             onClick={onClose}
             data-testid="button-cancel"
-            className="bg-red-500 hover:bg-red-600 text-white border-0 rounded-lg"
+            className="bg-red-500 hover:bg-red-600 text-white border-0 rounded-lg "
           >
             {t("common.cancel")}
           </Button>

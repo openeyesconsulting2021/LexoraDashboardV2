@@ -269,7 +269,7 @@ export default function CaseList({
                               <Button
                                 variant="ghost"
                                 size="sm"
-                                className="text-red-600 hover:text-red-700 hover:bg-red-50"
+                                className="text-red-600 hover:text-red-700 hover:bg-red-50 ml-2"
                                 data-testid={`button-delete-case-${caseItem.id}`}
                               >
                                 <Trash2 className="w-4 h-4 ml-1" />
