@@ -94,10 +94,10 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
     };
 
     const labels: Record<string, string> = {
-      pending: "معلقة",
-      in_progress: "قيد التنفيذ",
-      completed: "مكتملة",
-      cancelled: "ملغية",
+      pending: t("tasks.statuses.pending"),
+      in_progress: t("tasks.statuses.in_progress"),
+      completed: t("tasks.statuses.completed"),
+      cancelled: t("tasks.statuses.cancelled"),
     };
 
     return (
@@ -119,10 +119,10 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
     };
 
     const labels: Record<string, string> = {
-      high: "عالية",
-      medium: "متوسطة",
-      low: "منخفضة",
-      urgent: "عاجلة",
+      high: t("tasks.priorities.low"),
+      medium: t("tasks.priorities.medium"),
+      low: t("tasks.priorities.high"),
+      urgent: t("tasks.priorities.urgent"),
     };
 
     return (
@@ -401,13 +401,13 @@ export default function TaskList({ tasks, isLoading, onEdit }: TaskListProps) {
                           </AlertDialogHeader>
                           <AlertDialogFooter>
                             <AlertDialogCancel>
-                              {t("tasks.cancel")}{" "}
+                              {t("common.cancel")}{" "}
                             </AlertDialogCancel>
                             <AlertDialogAction
                               onClick={() => deleteMutation.mutate(task.id)}
                               className="bg-red-600 hover:bg-red-700"
                             >
-                              {t("tasks.delete")}{" "}
+                              {t("common.delete")}{" "}
                             </AlertDialogAction>
                           </AlertDialogFooter>
                         </AlertDialogContent>

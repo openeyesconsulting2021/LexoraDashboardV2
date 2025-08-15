@@ -71,10 +71,10 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
     };
 
     const labels: Record<string, string> = {
-      active: "نشطة",
-      pending: "معلقة",
-      closed: "مغلقة",
-      archived: "مؤرشفة",
+      active: t("cases.statuses.active"),
+      pending: t("cases.statuses.pending"),
+      closed: t("cases.statuses.closed"),
+      archived: t("cases.statuses.closed"),
     };
 
     return (
@@ -96,10 +96,10 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
     };
 
     const labels: Record<string, string> = {
-      high: "عالية",
-      medium: "متوسطة",
-      low: "منخفضة",
-      urgent: "عاجلة",
+      high: t("cases.priorities.low"),
+      medium: t("cases.priorities.medium"),
+      low: t("cases.priorities.high"),
+      urgent: t("cases.priorities.urgent"),
     };
 
     return (
@@ -284,7 +284,7 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
                               <AlertDialogFooter>
                                 <AlertDialogCancel>
                                   {" "}
-                                  {t("cases.cancel")}
+                                  {t("common.cancel")}
                                 </AlertDialogCancel>
                                 <AlertDialogAction
                                   onClick={() =>
@@ -292,7 +292,7 @@ export default function CaseList({ cases, isLoading, onEdit }: CaseListProps) {
                                   }
                                   className="bg-red-600 hover:bg-red-700"
                                 >
-                                  {t("cases.delete")}{" "}
+                                  {t("common.delete")}{" "}
                                 </AlertDialogAction>
                               </AlertDialogFooter>
                             </AlertDialogContent>
