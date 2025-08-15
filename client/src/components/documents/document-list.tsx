@@ -203,7 +203,11 @@ export default function DocumentList({
                   className="border border-slate-200 rounded-lg p-6 space-y-4 hover:shadow-md transition-shadow"
                   data-testid={`document-card-${document.id}`}
                 >
-                  <div className="flex items-start space-x-3 space-x-reverse">
+                  <div
+                    className={`flex items-start space-x-3 ${
+                      isRTL ? "space-x-reverse" : ""
+                    }`}
+                  >
                     {getFileIcon(document.mimeType)}
                     <div className="flex-1 min-w-0">
                       <h3 className="text-sm font-semibold text-slate-900 truncate">
@@ -220,14 +224,22 @@ export default function DocumentList({
 
                   <div className="space-y-2">
                     {getDocumentTypeBadge(document.documentType)}
-                    <p className="text-xs text-slate-500">
+                    <p
+                      className={`text-xs text-slate-500 ${
+                        isRTL ? "mr-2" : "ml-2"
+                      }`}
+                    >
                       {format(new Date(document.createdAt), "PPP", {
                         locale: ar,
                       })}
                     </p>
                   </div>
 
-                  <div className="flex justify-end space-x-2 space-x-reverse">
+                  <div
+                    className={`flex justify-end space-x-2 ${
+                      isRTL ? "space-x-reverse" : ""
+                    }`}
+                  >
                     <Button
                       variant="ghost"
                       size="sm"
