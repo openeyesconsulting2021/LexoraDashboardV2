@@ -21,7 +21,18 @@
     "description": "Comprehensive system for managing cases, clients and documents",
     "loginFailed": "Login failed",
     "registerFailed": "Registration failed",
-    "logoutFailed": "Logout failed"
+    "logoutFailed": "Logout failed",
+    "loginSuccess": "Logged in successfully",
+    "loginDescription": "Welcome {{name}}",
+    "loginErrorTitle": "Login error",
+    "loginErrorDescription": "Check your email and password",
+    "registerSuccess": "Account created successfully",
+    "registerDescription": "Welcome {{name}}",
+    "registerErrorTitle": "Account creation error",
+    "logoutSuccess": "Logged out successfully",
+    "logoutErrorTitle": "Logout error",
+    "logoutErrorDescription": "{{message}}",
+    "fullNamePlaceholder": "Ahmed Mohamed Salem"
   },
   "dashboard": {
     "title": "Dashboard",
