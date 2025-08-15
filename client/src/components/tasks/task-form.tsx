@@ -246,25 +246,25 @@ export default function TaskForm({
                       value="low"
                       className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                     >
-                      {t("tasks.low")}{" "}
+                      {t("tasks.priorities.low")}{" "}
                     </SelectItem>
                     <SelectItem
                       value="medium"
                       className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                     >
-                      {t("tasks.medium")}{" "}
+                      {t("tasks.priorities.medium")}{" "}
                     </SelectItem>
                     <SelectItem
                       value="high"
                       className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                     >
-                      {t("tasks.high")}
+                      {t("tasks.priorities.high")}
                     </SelectItem>
                     <SelectItem
                       value="urgent"
                       className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
                     >
-                      {t("tasks.urgent")}
+                      {t("tasks.priorities.urgent")}
                     </SelectItem>
                   </SelectContent>
                 </Select>

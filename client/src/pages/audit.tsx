@@ -5,7 +5,15 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useState } from "react";
-import { Search, Activity, User, FileText, Briefcase, Users, Calendar } from "lucide-react";
+import {
+  Search,
+  Activity,
+  User,
+  FileText,
+  Briefcase,
+  Users,
+  Calendar,
+} from "lucide-react";
 import { format } from "date-fns";
 import { ar } from "date-fns/locale";
 import { useLanguage } from "@/contexts/language-context";
@@ -32,7 +40,10 @@ export default function Audit() {
   });
 
   const getActionBadge = (action: string) => {
-    const variants: Record<string, "default" | "secondary" | "destructive" | "outline"> = {
+    const variants: Record<
+      string,
+      "default" | "secondary" | "destructive" | "outline"
+    > = {
       CREATE: "default",
       UPDATE: "secondary",
       DELETE: "destructive",
@@ -59,15 +70,17 @@ export default function Audit() {
     return icons[tableName] || <Activity className="w-4 h-4" />;
   };
 
-  const filteredLogs = auditLogs?.filter(log =>
-    log.action.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    log.tableName.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    log.ipAddress?.includes(searchQuery)
-  ) || [];
+  const filteredLogs =
+    auditLogs?.filter(
+      (log) =>
+        log.action.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        log.tableName.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        log.ipAddress?.includes(searchQuery)
+    ) || [];
 
   return (
     <MainLayout>
-      <div className="flex items-center justify-between mb-6">
+      <div className="flex items-center justify-between mb-6 mt-6 px-6">
         <h1 className="text-2xl font-bold text-slate-900">
           {t("audit.title")}
         </h1>
@@ -80,7 +93,11 @@ export default function Audit() {
         <CardContent>
           <div className="mb-6">
             <div className="relative">
-              <Search className={`absolute top-3 ${isRTL ? "right-3" : "left-3"} h-4 w-4 text-muted-foreground`} />
+              <Search
+                className={`absolute top-3 ${
+                  isRTL ? "right-3" : "left-3"
+                } h-4 w-4 text-muted-foreground`}
+              />
               <Input
                 placeholder={t("audit.search")}
                 value={searchQuery}
@@ -94,8 +111,15 @@ export default function Audit() {
           {isLoading ? (
             <div className="space-y-4">
               {[...Array(10)].map((_, i) => (
-                <div key={i} className={`flex items-center justify-between p-4 border border-slate-100 rounded-lg`}>
-                  <div className={`flex items-center ${isRTL ? "space-x-reverse space-x-3" : "space-x-3"}`}>
+                <div
+                  key={i}
+                  className={`flex items-center justify-between p-4 border border-slate-100 rounded-lg`}
+                >
+                  <div
+                    className={`flex items-center ${
+                      isRTL ? "space-x-reverse space-x-3" : "space-x-3"
+                    }`}
+                  >
                     <Skeleton className="h-8 w-8 rounded-full" />
                     <div className="space-y-2">
                       <Skeleton className="h-4 w-48" />
@@ -121,35 +145,49 @@ export default function Audit() {
                   className={`flex items-center justify-between p-4 border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors`}
                   data-testid={`audit-log-${log.id}`}
                 >
-                  <div className={`flex items-center ${isRTL ? "space-x-reverse space-x-3" : "space-x-3"}`}>
+                  <div
+                    className={`flex items-center ${
+                      isRTL ? "space-x-reverse space-x-3" : "space-x-3"
+                    }`}
+                  >
                     <div className="w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center">
                       {getTableIcon(log.tableName)}
                     </div>
                     <div>
-                      <div className={`flex items-center ${isRTL ? "space-x-reverse space-x-2" : "space-x-2"} mb-1`}>
+                      <div
+                        className={`flex items-center ${
+                          isRTL ? "space-x-reverse space-x-2" : "space-x-2"
+                        } mb-1`}
+                      >
                         {getActionBadge(log.action)}
                         <span className="text-sm text-slate-600">
                           {t("audit.entityType")}: {log.tableName}
                         </span>
                       </div>
-                      <div className={`flex items-center ${isRTL ? "space-x-reverse space-x-2" : "space-x-2"} text-xs text-slate-500`}>
-                        {log.ipAddress && (
-                          <span>IP: {log.ipAddress}</span>
-                        )}
-                        {log.recordId && (
-                          <span>ID: {log.recordId}</span>
-                        )}
+                      <div
+                        className={`flex items-center ${
+                          isRTL ? "space-x-reverse space-x-2" : "space-x-2"
+                        } text-xs text-slate-500`}
+                      >
+                        {log.ipAddress && <span>IP: {log.ipAddress}</span>}
+                        {log.recordId && <span>ID: {log.recordId}</span>}
                       </div>
                     </div>
                   </div>
-                  
+
                   <div className="flex flex-col items-end text-xs text-slate-500">
                     <div className={`flex items-center mb-1`}>
-                      <Calendar className={`w-3 h-3 ${isRTL ? "ml-1" : "mr-1"}`} />
-                      {format(new Date(log.createdAt), "dd/MM/yyyy HH:mm", { locale: ar })}
+                      <Calendar
+                        className={`w-3 h-3 ${isRTL ? "ml-1" : "mr-1"}`}
+                      />
+                      {format(new Date(log.createdAt), "dd/MM/yyyy HH:mm", {
+                        locale: ar,
+                      })}
                     </div>
                     {log.userId && (
-                      <span>{t("audit.userId")}: {log.userId}</span>
+                      <span>
+                        {t("audit.userId")}: {log.userId}
+                      </span>
                     )}
                   </div>
                 </div>
