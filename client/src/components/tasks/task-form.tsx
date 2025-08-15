@@ -9,8 +9,21 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import { X, Loader2, Calendar } from "lucide-react";
 import { z } from "zod";
 
@@ -26,7 +39,11 @@ interface TaskFormProps {
   onSuccess: () => void;
 }
 
-export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFormProps) {
+export default function TaskForm({
+  task: editTask,
+  onClose,
+  onSuccess,
+}: TaskFormProps) {
   const { user } = useAuth();
   const { toast } = useToast();
   const queryClient = useQueryClient();
@@ -37,10 +54,13 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
 
   const { data: users } = useQuery({
     queryKey: ["/api/users"],
-    queryFn: () => fetch("/api/users").then(res => res.json()).then(users => 
-      users.filter((u: any) => u.isActive)
-    ),
+    queryFn: () =>
+      fetch("/api/users")
+        .then((res) => res.json())
+        .then((users) => users.filter((u: any) => u.isActive)),
   }) as { data: any[] | undefined };
+
+  console.log("Users:", users);
 
   const form = useForm({
     resolver: zodResolver(taskFormSchema),
@@ -49,7 +69,9 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
       description: editTask?.description || "",
       status: editTask?.status || "pending",
       priority: editTask?.priority || "medium",
-      dueDate: editTask?.dueDate ? new Date(editTask.dueDate).toISOString().split('T')[0] : "",
+      dueDate: editTask?.dueDate
+        ? new Date(editTask.dueDate).toISOString().split("T")[0]
+        : "",
       caseId: editTask?.caseId || "",
       assignedToId: editTask?.assignedToId || "",
       createdBy: user?.id || "",
@@ -60,7 +82,7 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
     mutationFn: async (data: z.infer<typeof taskFormSchema>) => {
       const taskData = {
         ...data,
-        dueDate: data.dueDate ? new Date(data.dueDate).toISOString() : null,
+        dueDate: data.dueDate ? new Date(data.dueDate) : null,
       };
       const res = await apiRequest("POST", "/api/tasks", taskData);
       return res.json();
@@ -81,7 +103,11 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
         ...data,
         dueDate: data.dueDate ? new Date(data.dueDate).toISOString() : null,
       };
-      const res = await apiRequest("PUT", `/api/tasks/${editTask.id}`, taskData);
+      const res = await apiRequest(
+        "PUT",
+        `/api/tasks/${editTask.id}`,
+        taskData
+      );
       return res.json();
     },
     onSuccess: () => {
@@ -105,183 +131,277 @@ export default function TaskForm({ task: editTask, onClose, onSuccess }: TaskFor
   const isLoading = createMutation.isPending || updateMutation.isPending;
 
   return (
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-            <FormField
-              control={form.control}
-              name="title"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>عنوان المهمة</FormLabel>
-                  <FormControl>
-                    <Input placeholder="مراجعة مستندات القضية" {...field} data-testid="input-task-title" className="bg-white border border-gray-200 focus:border-primary-300 transition-all" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <FormField
+          control={form.control}
+          name="title"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>عنوان المهمة</FormLabel>
+              <FormControl>
+                <Input
+                  placeholder="مراجعة مستندات القضية"
+                  {...field}
+                  data-testid="input-task-title"
+                  className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
 
-            <FormField
-              control={form.control}
-              name="description"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>وصف المهمة</FormLabel>
+        <FormField
+          control={form.control}
+          name="description"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>وصف المهمة</FormLabel>
+              <FormControl>
+                <Textarea
+                  placeholder="وصف تفصيلي للمهمة"
+                  rows={3}
+                  {...field}
+                  data-testid="textarea-task-description"
+                  className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <FormField
+            control={form.control}
+            name="status"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>الحالة</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
                   <FormControl>
-                    <Textarea 
-                      placeholder="وصف تفصيلي للمهمة"
-                      rows={3}
-                      {...field} 
-                      data-testid="textarea-task-description"
+                    <SelectTrigger
+                      data-testid="select-status"
+                      className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
+                    >
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                    <SelectItem
+                      value="pending"
+                      className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                    >
+                      معلقة
+                    </SelectItem>
+                    <SelectItem
+                      value="in_progress"
+                      className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                    >
+                      قيد التنفيذ
+                    </SelectItem>
+                    <SelectItem
+                      value="completed"
+                      className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                    >
+                      مكتملة
+                    </SelectItem>
+                    <SelectItem
+                      value="cancelled"
+                      className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                    >
+                      ملغية
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="priority"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>الأولوية</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      data-testid="select-priority"
+                      className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
+                    >
+                      <SelectValue />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                    <SelectItem
+                      value="low"
+                      className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                    >
+                      منخفضة
+                    </SelectItem>
+                    <SelectItem
+                      value="medium"
+                      className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                    >
+                      متوسطة
+                    </SelectItem>
+                    <SelectItem
+                      value="high"
+                      className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                    >
+                      عالية
+                    </SelectItem>
+                    <SelectItem
+                      value="urgent"
+                      className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                    >
+                      عاجلة
+                    </SelectItem>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="dueDate"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>تاريخ الاستحقاق</FormLabel>
+                <FormControl>
+                  <div className="relative">
+                    <Input
+                      type="date"
+                      {...field}
+                      data-testid="input-due-date"
                       className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
                     />
+                    <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none" />
+                  </div>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <FormField
+            control={form.control}
+            name="assignedToId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>المكلف بالمهمة</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      data-testid="select-assigned-to"
+                      className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
+                    >
+                      <SelectValue placeholder="اختر المكلف" />
+                    </SelectTrigger>
                   </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                  <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                    {users?.map((user: any) => (
+                      <SelectItem
+                        key={user.id}
+                        value={user.id}
+                        className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                      >
+                        {user.fullName} (
+                        {user.role === "admin"
+                          ? "مدير"
+                          : user.role === "lawyer"
+                          ? "محامي"
+                          : "سكرتير"}
+                        )
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <FormField
-                control={form.control}
-                name="status"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>الحالة</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger data-testid="select-status" className="bg-white border border-gray-200 focus:border-primary-300 transition-all">
-                          <SelectValue />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
-                        <SelectItem value="pending" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">معلقة</SelectItem>
-                        <SelectItem value="in_progress" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">قيد التنفيذ</SelectItem>
-                        <SelectItem value="completed" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">مكتملة</SelectItem>
-                        <SelectItem value="cancelled" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">ملغية</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+          <FormField
+            control={form.control}
+            name="caseId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>ربط بقضية (اختياري)</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      data-testid="select-case"
+                      className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
+                    >
+                      <SelectValue placeholder="اختر القضية" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent className="bg-white border border-gray-200 shadow-lg">
+                    {cases?.map((caseItem: any) => (
+                      <SelectItem
+                        key={caseItem.id}
+                        value={caseItem.id}
+                        className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800"
+                      >
+                        {caseItem.caseNumber} - {caseItem.title}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
 
-              <FormField
-                control={form.control}
-                name="priority"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>الأولوية</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger data-testid="select-priority" className="bg-white border border-gray-200 focus:border-primary-300 transition-all">
-                          <SelectValue />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
-                        <SelectItem value="low" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">منخفضة</SelectItem>
-                        <SelectItem value="medium" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">متوسطة</SelectItem>
-                        <SelectItem value="high" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">عالية</SelectItem>
-                        <SelectItem value="urgent" className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">عاجلة</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="dueDate"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>تاريخ الاستحقاق</FormLabel>
-                    <FormControl>
-                      <div className="relative">
-                        <Input 
-                          type="date"
-                          {...field} 
-                          data-testid="input-due-date"
-                          className="bg-white border border-gray-200 focus:border-primary-300 transition-all"
-                        />
-                        <Calendar className="absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400 w-4 h-4 pointer-events-none" />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormField
-                control={form.control}
-                name="assignedToId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>المكلف بالمهمة</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger data-testid="select-assigned-to" className="bg-white border border-gray-200 focus:border-primary-300 transition-all">
-                          <SelectValue placeholder="اختر المكلف" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
-                        {users?.map((user: any) => (
-                          <SelectItem key={user.id} value={user.id} className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">
-                            {user.fullName} ({user.role === "admin" ? "مدير" : 
-                             user.role === "lawyer" ? "محامي" : "سكرتير"})
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="caseId"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>ربط بقضية (اختياري)</FormLabel>
-                    <Select onValueChange={field.onChange} defaultValue={field.value}>
-                      <FormControl>
-                        <SelectTrigger data-testid="select-case" className="bg-white border border-gray-200 focus:border-primary-300 transition-all">
-                          <SelectValue placeholder="اختر القضية" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent className="bg-white border border-gray-200 shadow-lg">
-                        {cases?.map((caseItem: any) => (
-                          <SelectItem key={caseItem.id} value={caseItem.id} className="focus:bg-primary-50 focus:text-primary-700 data-[highlighted]:bg-primary-100 data-[highlighted]:text-primary-800">
-                            {caseItem.caseNumber} - {caseItem.title}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="flex justify-end space-x-2 space-x-reverse">
-              <Button type="button" onClick={onClose} data-testid="button-cancel" className="bg-red-500 hover:bg-red-600 text-white border-0 rounded-lg">
-                إلغاء
-              </Button>
-              <Button type="submit" disabled={isLoading} data-testid="button-save-task" className="bg-primary-600 hover:bg-primary-700 text-white rounded-lg">
-                {isLoading ? (
-                  <>
-                    <Loader2 className="ml-2 h-4 w-4 animate-spin text-white" />
-                    جاري الحفظ...
-                  </>
-                ) : (
-                  editTask ? "تحديث المهمة" : "إنشاء المهمة"
-                )}
-              </Button>
-            </div>
-          </form>
-        </Form>
+        <div className="flex justify-end space-x-2 space-x-reverse">
+          <Button
+            type="button"
+            onClick={onClose}
+            data-testid="button-cancel"
+            className="bg-red-500 hover:bg-red-600 text-white border-0 rounded-lg"
+          >
+            إلغاء
+          </Button>
+          <Button
+            type="submit"
+            disabled={isLoading}
+            data-testid="button-save-task"
+            className="bg-primary-600 hover:bg-primary-700 text-white rounded-lg"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="ml-2 h-4 w-4 animate-spin text-white" />
+                جاري الحفظ...
+              </>
+            ) : editTask ? (
+              "تحديث المهمة"
+            ) : (
+              "إنشاء المهمة"
+            )}
+          </Button>
+        </div>
+      </form>
+    </Form>
   );
 }

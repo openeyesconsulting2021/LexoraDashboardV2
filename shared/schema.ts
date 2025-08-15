@@ -1,47 +1,102 @@
 import { sql } from "drizzle-orm";
-import { pgTable, text, varchar, timestamp, integer, pgEnum, boolean, uuid } from "drizzle-orm/pg-core";
+import {
+  pgTable,
+  text,
+  varchar,
+  timestamp,
+  integer,
+  pgEnum,
+  boolean,
+  uuid,
+} from "drizzle-orm/pg-core";
 import { relations } from "drizzle-orm";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 
 // Enums
-export const userRoleEnum = pgEnum("user_role", ["admin", "lawyer", "secretary"]);
-export const caseStatusEnum = pgEnum("case_status", ["active", "pending", "closed", "archived"]);
-export const casePriorityEnum = pgEnum("case_priority", ["low", "medium", "high", "urgent"]);
-export const taskStatusEnum = pgEnum("task_status", ["pending", "in_progress", "completed", "cancelled"]);
-export const taskPriorityEnum = pgEnum("task_priority", ["low", "medium", "high", "urgent"]);
-export const documentTypeEnum = pgEnum("document_type", ["case_file", "client_correspondence", "court_document", "contract", "other"]);
+export const userRoleEnum = pgEnum("user_role", [
+  "admin",
+  "lawyer",
+  "secretary",
+]);
+export const caseStatusEnum = pgEnum("case_status", [
+  "active",
+  "pending",
+  "closed",
+  "archived",
+]);
+export const casePriorityEnum = pgEnum("case_priority", [
+  "low",
+  "medium",
+  "high",
+  "urgent",
+]);
+export const taskStatusEnum = pgEnum("task_status", [
+  "pending",
+  "in_progress",
+  "completed",
+  "cancelled",
+]);
+export const taskPriorityEnum = pgEnum("task_priority", [
+  "low",
+  "medium",
+  "high",
+  "urgent",
+]);
+export const documentTypeEnum = pgEnum("document_type", [
+  "case_file",
+  "client_correspondence",
+  "court_document",
+  "contract",
+  "other",
+]);
 
 // Users table
 export const users = pgTable("users", {
-  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: uuid("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   username: text("username").notNull().unique(),
   email: text("email").notNull().unique(),
   password: text("password").notNull(),
   fullName: text("full_name").notNull(),
   role: userRoleEnum("role").notNull().default("secretary"),
   isActive: boolean("is_active").notNull().default(true),
-  createdAt: timestamp("created_at").notNull().default(sql`now()`),
-  updatedAt: timestamp("updated_at").notNull().default(sql`now()`),
+  createdAt: timestamp("created_at")
+    .notNull()
+    .default(sql`now()`),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .default(sql`now()`),
 });
 
 // Clients table
 export const clients = pgTable("clients", {
-  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: uuid("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
   email: text("email"),
   phone: text("phone"),
   address: text("address"),
   nationalId: text("national_id"),
   notes: text("notes"),
-  createdAt: timestamp("created_at").notNull().default(sql`now()`),
-  updatedAt: timestamp("updated_at").notNull().default(sql`now()`),
-  createdBy: uuid("created_by").notNull().references(() => users.id),
+  createdAt: timestamp("created_at")
+    .notNull()
+    .default(sql`now()`),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .default(sql`now()`),
+  createdBy: uuid("created_by")
+    .notNull()
+    .references(() => users.id),
 });
 
 // Cases table
 export const cases = pgTable("cases", {
-  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: uuid("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   caseNumber: text("case_number").notNull().unique(),
   title: text("title").notNull(),
   description: text("description"),
@@ -51,31 +106,53 @@ export const cases = pgTable("cases", {
   court: text("court"),
   judge: text("judge"),
   opposingParty: text("opposing_party"),
-  clientId: uuid("client_id").notNull().references(() => clients.id),
-  assignedLawyerId: uuid("assigned_lawyer_id").notNull().references(() => users.id),
-  createdAt: timestamp("created_at").notNull().default(sql`now()`),
-  updatedAt: timestamp("updated_at").notNull().default(sql`now()`),
-  createdBy: uuid("created_by").notNull().references(() => users.id),
+  clientId: uuid("client_id")
+    .notNull()
+    .references(() => clients.id),
+  assignedLawyerId: uuid("assigned_lawyer_id")
+    .notNull()
+    .references(() => users.id),
+  createdAt: timestamp("created_at")
+    .notNull()
+    .default(sql`now()`),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .default(sql`now()`),
+  createdBy: uuid("created_by")
+    .notNull()
+    .references(() => users.id),
 });
 
 // Tasks table
 export const tasks = pgTable("tasks", {
-  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: uuid("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   title: text("title").notNull(),
   description: text("description"),
   status: taskStatusEnum("status").notNull().default("pending"),
   priority: taskPriorityEnum("priority").notNull().default("medium"),
   dueDate: timestamp("due_date"),
   caseId: uuid("case_id").references(() => cases.id),
-  assignedToId: uuid("assigned_to_id").notNull().references(() => users.id),
-  createdAt: timestamp("created_at").notNull().default(sql`now()`),
-  updatedAt: timestamp("updated_at").notNull().default(sql`now()`),
-  createdBy: uuid("created_by").notNull().references(() => users.id),
+  assignedToId: uuid("assigned_to_id")
+    .notNull()
+    .references(() => users.id),
+  createdAt: timestamp("created_at")
+    .notNull()
+    .default(sql`now()`),
+  updatedAt: timestamp("updated_at")
+    .notNull()
+    .default(sql`now()`),
+  createdBy: uuid("created_by")
+    .notNull()
+    .references(() => users.id),
 });
 
 // Documents table
 export const documents = pgTable("documents", {
-  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: uuid("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   title: text("title").notNull(),
   filename: text("filename").notNull(),
   fileSize: integer("file_size").notNull(),
@@ -84,13 +161,19 @@ export const documents = pgTable("documents", {
   documentType: documentTypeEnum("document_type").notNull().default("other"),
   caseId: uuid("case_id").references(() => cases.id),
   clientId: uuid("client_id").references(() => clients.id),
-  createdAt: timestamp("created_at").notNull().default(sql`now()`),
-  uploadedBy: uuid("uploaded_by").notNull().references(() => users.id),
+  createdAt: timestamp("created_at")
+    .notNull()
+    .default(sql`now()`),
+  uploadedBy: uuid("uploaded_by")
+    .notNull()
+    .references(() => users.id),
 });
 
 // Audit logs table
 export const auditLogs = pgTable("audit_logs", {
-  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
+  id: uuid("id")
+    .primaryKey()
+    .default(sql`gen_random_uuid()`),
   userId: uuid("user_id").references(() => users.id),
   action: text("action").notNull(),
   tableName: text("table_name").notNull(),
@@ -99,7 +182,9 @@ export const auditLogs = pgTable("audit_logs", {
   newValues: text("new_values"),
   ipAddress: text("ip_address"),
   userAgent: text("user_agent"),
-  createdAt: timestamp("created_at").notNull().default(sql`now()`),
+  createdAt: timestamp("created_at")
+    .notNull()
+    .default(sql`now()`),
 });
 
 // Relations

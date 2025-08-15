@@ -123,7 +123,7 @@ export default function RecentCases({ cases, isLoading }: RecentCasesProps) {
         </div>
       </CardHeader>
 
-      {recentCases.length === 0 ? (
+      {recentCases?.length === 0 ? (
         <CardContent className="p-6">
           <div className="text-center py-8">
             <p className="text-slate-500"> {t("recentsCases.newCases")}</p>
@@ -171,7 +171,7 @@ export default function RecentCases({ cases, isLoading }: RecentCasesProps) {
                     <td className="px-6 py-4 whitespace-nowrap">
                       {getPriorityBadge(caseItem.priority)}
                     </td>
-                    <td className="px-6 py-4 whitespace-nowrap text-sm">
+                    {/* <td className="px-6 py-4 whitespace-nowrap text-sm">
                       <div className="flex space-x-2 space-x-reverse">
                         <Button
                           variant="ghost"
@@ -190,7 +190,7 @@ export default function RecentCases({ cases, isLoading }: RecentCasesProps) {
                           {t("recentsCases.edit")}{" "}
                         </Button>
                       </div>
-                    </td>
+                    </td> */}
                   </tr>
                 ))}
               </tbody>
