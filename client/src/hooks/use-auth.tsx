@@ -7,6 +7,7 @@ import {
 import { User as SelectUser } from "@shared/schema";
 import { getQueryFn, apiRequest, queryClient } from "../lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useLanguage } from "@/contexts/language-context";
 
 type AuthContextType = {
   user: SelectUser | null;
@@ -34,6 +35,7 @@ export const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const { toast } = useToast();
+  const { t } = useLanguage();
   const {
     data: user,
     error,
@@ -51,14 +53,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     onSuccess: (user: SelectUser) => {
       queryClient.setQueryData(["/api/user"], user);
       toast({
-        title: "تم تسجيل الدخول بنجاح",
-        description: `مرحباً ${user.fullName}`,
+        title: t("auth.loginSuccess"),
+        description: t("auth.loginDescription", { name: user.fullName }),
       });
     },
     onError: (error: Error) => {
       toast({
-        title: "خطأ في تسجيل الدخول",
-        description: "تأكد من البريد الإلكتروني وكلمة المرور",
+        title: t("auth.loginErrorTitle"),
+        description: t("auth.loginErrorDescription"),
         variant: "destructive",
       });
     },
@@ -72,13 +74,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     onSuccess: (user: SelectUser) => {
       queryClient.setQueryData(["/api/user"], user);
       toast({
-        title: "تم إنشاء الحساب بنجاح",
-        description: `مرحباً ${user.fullName}`,
+        title: t("auth.registerSuccess"),
+        description: t("auth.registerDescription", { name: user.fullName }),
       });
     },
     onError: (error: Error) => {
       toast({
-        title: "خطأ في إنشاء الحساب",
+        title: t("auth.registerErrorTitle"),
         description: error.message,
         variant: "destructive",
       });
@@ -92,12 +94,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     onSuccess: () => {
       queryClient.setQueryData(["/api/user"], null);
       toast({
-        title: "تم تسجيل الخروج بنجاح",
+        title: t("auth.logoutSuccess"),
       });
     },
     onError: (error: Error) => {
       toast({
-        title: "خطأ في تسجيل الخروج",
+        title: t("auth.logoutErrorTitle"),
         description: error.message,
         variant: "destructive",
       });
