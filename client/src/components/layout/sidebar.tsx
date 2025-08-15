@@ -104,7 +104,7 @@ export default function Sidebar() {
         {/* Logo and Brand */}
         <div className="flex items-center px-6 pb-4">
           <div className="flex items-center">
-            <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 bg-primary-600 rounded-lg flex items-center justify-center px-2">
               <Scale className="text-white w-4 h-4" />
             </div>
             <div className={isRTL ? "mr-3" : "ml-3"}>
